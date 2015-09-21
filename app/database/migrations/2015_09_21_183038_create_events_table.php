@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration {
 			$table->string('venue_site');
 			$table->string('zip_code');
 			$table->string('city');
-			$table->string('img');
+			// $table->string('img');
 
 			$table->timestamps();
 		});

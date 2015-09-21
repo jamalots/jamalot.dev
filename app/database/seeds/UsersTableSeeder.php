@@ -53,7 +53,7 @@ class UsersTableSeeder extends Seeder {
 	protected function createFakerUser()
 	{
 		$faker = Faker::create();
-        for($i=1; $i<=9; $i++)
+        for($i=1; $i<=20; $i++)
         {
             $user = new User();
             $user->user_name = $faker->sentence($nbWords = 2);
@@ -70,7 +70,7 @@ class UsersTableSeeder extends Seeder {
 			$user->password = $password;
 			
 			$user->genre = $faker->word;
-			$user->img = $faker->imageUrl($width = 640, $height = 480);
+			// $user->img = $faker->imageUrl($width = 640, $height = 480);
 			$user->about = $faker->realText;
 			$user->save();
         }
