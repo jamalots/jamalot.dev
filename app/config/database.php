@@ -53,6 +53,7 @@ return array(
 		),
 
 		'mysql' => array(
+
 		    'driver'    => 'mysql',
 		    'host'      => $_ENV['DB_HOST'],
 		    'database'  => $_ENV['DB_NAME'],
@@ -61,6 +62,7 @@ return array(
 		    'charset'   => 'utf8',
 		    'collation' => 'utf8_unicode_ci',
 		    'prefix'    => '',
+
 		),
 
 		'pgsql' => array(
