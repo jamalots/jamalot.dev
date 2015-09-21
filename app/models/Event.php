@@ -1,5 +1,6 @@
 <?php
 
+// use \Esensi\Model\Model;
 class Event extends \Eloquent {
 
 	// Add your validation rules here

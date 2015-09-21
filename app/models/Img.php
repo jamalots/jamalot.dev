@@ -1,5 +1,7 @@
 <?php
 
+
+// use \Esensi\Model\Model;
 class Img extends \Eloquent {
 
 	// Add your validation rules here
