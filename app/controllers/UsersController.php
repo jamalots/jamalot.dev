@@ -14,6 +14,20 @@ class UsersController extends \BaseController {
 		return View::make('users.index', compact('users'));
 	}
 
+	public function musicians()
+	{
+		$users = User::all()->where();
+
+		return View::make('users.index', compact('users')) ;
+	}
+
+	public function bands()
+	{
+		$users = User::all();
+
+		return View::make('users.index', compact('users'));
+	}
+
 	/**
 	 * Show the form for creating a new user
 	 *
