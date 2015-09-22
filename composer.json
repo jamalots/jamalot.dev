@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.*",
 		"laracasts/commander": "~1.0",
 		"fzaninotto/faker": "^1.5",
-		"laracasts/validation": "~1.1"
+		"laracasts/validation": "~1.1",
+		"smalldogs/html5inputs": "2.*"
 	},
 	"require-dev":{
 		"way/generators": "~2.0",

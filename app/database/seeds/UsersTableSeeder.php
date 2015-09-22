@@ -70,7 +70,7 @@ class UsersTableSeeder extends Seeder {
 			$user->password = $password;
 			
 			$user->genre = $faker->word;
-			// $user->img = $faker->imageUrl($width = 640, $height = 480);
+			$user->img = $faker->imageUrl($width = 640, $height = 480);
 			$user->about = $faker->realText;
 			$user->save();
         }
