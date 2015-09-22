@@ -38,3 +38,4 @@ Route::resource('users', 'UsersController');
 
 Route::resource('events', 'EventsController');
 
+
