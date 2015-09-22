@@ -33,9 +33,8 @@ Route::post('register', [
 
 ]);
 
-<<<<<<< HEAD
+
 Route::resource('users', 'UsersController');
 
 Route::resource('events', 'EventsController');
-=======
->>>>>>> 41ec2c1dec39bb5f32e57e9c5c49960ed9e5b14e
+
