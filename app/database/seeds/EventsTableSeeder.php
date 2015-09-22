@@ -34,7 +34,7 @@ class EventsTableSeeder extends Seeder {
             $event->zip_code = "78212";
             $event->city = "San Antonio";
             // $event->img = $faker->imageUrl($width = 640, $height = 480); // 'http://lorempixel.com/640/480/'
-            // $event->user_id = User::all()->random(1)->id;
+            $event->user_id = User::all()->random(1)->id;
             
             $event->save();
         }

@@ -10,6 +10,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
+	protected $fillable = ['user_name','email','password'];
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -23,5 +25,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
+
+	public function events()
+	{
+		return $this->hasMany('Event');
+	}
 
 }

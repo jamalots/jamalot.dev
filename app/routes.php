@@ -12,5 +12,24 @@
 */
 
 
+
 Route::get('/', 'PagesController@home');
 Route::resource('events', 'EventsController');
+
+Route::get('/', [ 
+	'as' => 'home',
+	'uses' => 'PagesController@home'
+]);
+
+Route::get('register', [
+	'as' => 'register_path',
+	'uses' => 'RegistrationController@create'
+
+]);
+
+Route::post('register', [
+	'as' => 'register_path',
+	'uses' => 'RegistrationController@store'
+
+]);
+

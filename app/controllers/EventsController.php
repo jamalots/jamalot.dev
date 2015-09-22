@@ -52,7 +52,7 @@ class EventsController extends \BaseController {
             $event->venue_site = Input::get('venue_site');
             $event->zip_code = Input::get('zip_code');
             $event->city = Input::get('city');
-            $event->user_id = Auth::id();
+            $event->user_id = 1;
             
             // if (Input::hasFile('img')) {
             //     $event->img = $image->move($directory);
@@ -60,7 +60,7 @@ class EventsController extends \BaseController {
             $event->save();
             Log::info("Event successfully saved.", Input::all());
             Session::flash('successMessage', 'You created ' . $event->title . ' event successfully');
-            return Redirect::action('EventsController@index');
+            return Redirect::action('hello');
 	}
 
 	
