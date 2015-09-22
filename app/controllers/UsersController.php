@@ -18,7 +18,7 @@ class UsersController extends \BaseController {
 	{
 		$users = User::all()->where();
 
-		return View::make('users.index', compact('users'));
+		return View::make('users.index', compact('users')) ;
 	}
 
 	public function bands()
