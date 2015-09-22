@@ -28,3 +28,7 @@ Route::post('register', [
 	'uses' => 'RegistrationController@store'
 
 ]);
+
+Route::resource('users', 'UsersController');
+
+Route::resource('events', 'EventsController');
