@@ -28,8 +28,7 @@ class RegistrationController extends \BaseController {
 		$this->registrationForm->validate(Input::all());
 
 		$user = User::create(
-			Input::only('user_name','first_name','last_name','email','location','instrument',
-				'fb_link','level','original','industry-role', 'genre','about','password')
+			Input::only('user_name','email','password')
 
 		);
 
