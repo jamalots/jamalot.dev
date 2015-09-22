@@ -16,7 +16,7 @@ class UsersController extends \BaseController {
 
 	public function musicians()
 	{
-		$users = User::all()->where();
+		$users = User::all();
 
 		return View::make('users.index', compact('users')) ;
 	}
