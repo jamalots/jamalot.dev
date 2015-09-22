@@ -68,7 +68,11 @@ class UsersTableSeeder extends Seeder {
 			$user->industry_role = $faker->word;
 			$password = $faker->password;
 			$user->password = $password;
-			
+			if($i%2 == 0){
+				$user->user_type = 'band';
+			}else{
+				$user->user_type = 'musician';
+			}
 			$user->genre = $faker->word;
 			$user->img = $faker->imageUrl($width = 640, $height = 480);
 			$user->about = $faker->realText;
