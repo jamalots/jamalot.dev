@@ -31,17 +31,39 @@ class EventsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), Event::$rules);
+		// $validator = Validator::make($data = Input::all(), Event::$rules);
 
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
+		// if ($validator->fails())
+		// {
+		// 	return Redirect::back()->withErrors($validator)->withInput();
+		// }
 
-		Event::create($data);
+		// Event::create($data);
 
-		return Redirect::route('events.index');
+		// return Redirect::route('events.index');
+
+		 	// $directory = 'img/uploads/';
+    //         $image = Input::file('img');
+            $event = new Event;
+            
+            $event->date = Input::get('date');
+            $event->start_time = Input::get('start_time');
+            $event->venue = Input::get('venue');
+            $event->venue_site = Input::get('venue_site');
+            $event->zip_code = Input::get('zip_code');
+            $event->city = Input::get('city');
+            $event->user_id = 1;
+            
+            // if (Input::hasFile('img')) {
+            //     $event->img = $image->move($directory);
+            // }
+            $event->save();
+            Log::info("Event successfully saved.", Input::all());
+            Session::flash('successMessage', 'You created ' . $event->title . ' event successfully');
+            return Redirect::action('hello');
 	}
+
+	
 
 	/**
 	 * Display the specified event.

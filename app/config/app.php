@@ -123,7 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Commander\CommanderServiceProvider',
-		'Laracasts\Validation\ValidationServiceProvider'
+		'Laracasts\Validation\ValidationServiceProvider',
+		'Smalldogs\Html5inputs\Html5InputsServiceProvider'
 
 	),
 
@@ -165,9 +166,10 @@ return array(
 		'Crypt'             => 'Illuminate\Support\Facades\Crypt',
 		'DB'                => 'Illuminate\Support\Facades\DB',
 		'Eloquent'          => 'Illuminate\Database\Eloquent\Model',
-		'Events'             => 'Illuminate\Support\Facades\Event',
+		'Events'            => 'Illuminate\Support\Facades\Event',
 		'File'              => 'Illuminate\Support\Facades\File',
-		'Form'              => 'Illuminate\Support\Facades\Form',
+		'Form'            	=> 'Smalldogs\Html5inputs\Html5InputsFacade',
+		// 'Form'              => 'Illuminate\Support\Facades\Form',
 		'Hash'              => 'Illuminate\Support\Facades\Hash',
 		'HTML'              => 'Illuminate\Support\Facades\HTML',
 		'Input'             => 'Illuminate\Support\Facades\Input',
