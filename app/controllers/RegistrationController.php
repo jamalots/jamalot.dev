@@ -1,6 +1,17 @@
 <?php
 
+use Jamalot\Forms\RegistrationForm;
+
 class RegistrationController extends \BaseController {
+	protected $registrationForm;
+
+	function __construct(RegistrationForm $registrationForm)
+	{
+
+		$this->registrationForm = $registrationForm;
+
+	}
+
 
 	/**
 	 * Show a form to register the user
@@ -14,8 +25,11 @@ class RegistrationController extends \BaseController {
 
 	public function store()
 	{
+		$this->registrationForm->validate(Input::all());
+
 		$user = User::create(
-			Input::only('user_name','email','password')
+			Input::only('user_name','first_name','last_name','email','location','instrument',
+				'fb_link','level','original','industry-role', 'genre','about','password')
 
 		);
 

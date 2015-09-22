@@ -4,6 +4,17 @@
 
 <h1>Register! This doesn't Work Yet</h1>
 
+@if($errors->any())
+	<div class="alert alert-danger">
+		<ul>
+			@foreach($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
+
+		</ul>
+	</div>
+@endif
+
 {{ Form::open(['route' => 'register_path'])}}
 	<div class="form-group">
 
