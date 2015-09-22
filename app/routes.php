@@ -11,9 +11,5 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
 
-//Rout::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home');
