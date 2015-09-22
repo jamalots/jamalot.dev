@@ -63,13 +63,13 @@ body {
           transform-style: preserve-3d;
 }
 .slider3d__item:nth-child(1) {
-  background-image: url("http://i.imgur.com/3pu2X8D.jpg");
+  background-image: url("/img/castle3.jpg");
 }
 .slider3d__item:nth-child(2) {
-  background-image: url("http://i.imgur.com/YAdjqmQ.jpg");
+  background-image: url("/img/castle.jpg");
 }
 .slider3d__item:nth-child(3) {
-  background-image: url("http://i.imgur.com/1HeKcko.jpg");
+  background-image: url("/img/starburst.jpg");
 }
 .slider3d__item:nth-child(4) {
   background-image: url("http://i.imgur.com/njcLNVE.jpg");

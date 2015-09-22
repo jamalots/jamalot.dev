@@ -14,6 +14,7 @@ class EventsController extends \BaseController {
 		return View::make('events.index', compact('events'));
 	}
 
+
 	/**
 	 * Show the form for creating a new event
 	 *
