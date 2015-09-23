@@ -6,6 +6,10 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 // use Eloquent;
+<<<<<<< HEAD
+=======
+// had to comment out 'use Eloquent' for db migration to run successfully
+>>>>>>> 13e8384cbb09422ce49359b9f178bab6bbf47dbb
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
