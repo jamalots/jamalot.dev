@@ -51,7 +51,10 @@
               </ul>
             </li>
             @else
-            <li><a href="/login">Log In</a></li>
+
+            <li>{{ link_to_route('register_path', 'Register') }}</li>
+            <li>{{ link_to_route('login_path', 'Log In') }}</li>
+            
             @endif
           </ul>
         </div><!-- /.navbar-collapse -->

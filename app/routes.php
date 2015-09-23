@@ -29,6 +29,34 @@ Route::post('register', [
 
 ]);
 
+Route::get('login',[
+	'as' => 'login_path',
+	'uses' => 'SessionsController@create'
+]);
+
+Route::post('login',[
+	'as' => 'login_path',
+	'uses' => 'SessionsController@store'
+]);
+
+Route::get('logout', [
+	'as' => 'logout_path',
+	'uses' => 'SessionsController@destroy'
+
+]);
+
+Route::get('statuses',[
+	'as' => 'statuses_path',
+	'uses' => 'StatusController@index'
+]);
+
+Route::post('statuses',[
+	'as' => 'statuses_path',
+	'uses' => 'StatusController@store'
+]);
+
+
+
 Route::get('users/musicians', 'UsersController@musicians');
 
 Route::get('users/bands', 'UsersController@bands');
