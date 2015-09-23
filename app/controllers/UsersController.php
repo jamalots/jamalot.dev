@@ -9,25 +9,30 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = User::all();
+		$query = User::with('events');
+
+		$users = $query->get();
 
 		return View::make('users.index', compact('users'));
 	}
 
 	public function musicians()
 	{
-		$users = User::all();
+		$query = User::with('events')->where('user_type', 'musician');
 
-		return View::make('users.index', compact('users')) ;
+		$users = $query->get();
+
+		return View::make('users.musicians')->with(array('users' => $users));
 	}
 
 	public function bands()
 	{
-		$users = User::all();
+		$query = User::with('events')->where('user_type', 'band');
 
-		return View::make('users.index', compact('users'));
+		$users = $query->get();
+		
+		return View::make('users.bands')->with(array('users' => $users));
 	}
-
 	/**
 	 * Show the form for creating a new user
 	 *
@@ -65,10 +70,11 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$user = User::findOrFail($id);
+		$user = User::find($id);
 
 		return View::make('users.show', compact('user'));
 	}
+
 
 	/**
 	 * Show the form for editing the specified user.
@@ -91,7 +97,7 @@ class UsersController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$user = User::findOrFail($id);
+		$user = User::find($id);
 
 		$validator = Validator::make($data = Input::all(), User::$rules);
 

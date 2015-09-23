@@ -60,11 +60,23 @@ class UsersTableSeeder extends Seeder {
 			$user->first_name = $faker->firstName;
 			$user->last_name = $faker->lastName;
 			$user->email = $faker->email;
-			$user->location = $faker->word;
+			$user->location = $faker->state;
 			$user->instrument = $faker->word;
 			$user->fb_link = $faker->url;
-			$user->level = $faker->word;
-			$user->original = $faker->word;
+			if($i%3 == 0){
+				$user->level = 'professional';
+			}else if ($i%2 == 0){
+				$user->level = 'novice';
+			} else {
+				$user->level = 'intermediate';
+			}
+			if($i%5 == 0){
+				$user->original = 'both';
+			}else if ($i%4 == 0){
+				$user->original = 'originals';
+			} else {
+				$user->original = 'covers';
+			}
 			$user->industry_role = $faker->word;
 			$password = $faker->password;
 			$user->password = $password;
