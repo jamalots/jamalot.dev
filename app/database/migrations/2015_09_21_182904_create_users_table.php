@@ -16,19 +16,19 @@ class CreateUsersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('user_name');
-			$table->string('first_name');
-			$table->string('last_name');
+			$table->string('first_name')->nullable();
+			$table->string('last_name')->nullable();
 			$table->string('email')->unique();
-			$table->string('location');
-			$table->string('instrument');
-			$table->string('fb_link');
-			$table->string('level');
-			$table->string('original');
-			$table->string('industry_role');
+			$table->string('location')->nullable();
+			$table->string('instrument')->nullable();
+			$table->string('fb_link')->nullable();
+			$table->string('level')->nullable();
+			$table->string('original')->nullable();
+			$table->string('industry_role')->nullable();
 			$table->string('password');
-			$table->string('genre')->nullable;
-			$table->string('img')->nullable;
-			$table->string('about')->nullable;
+			$table->string('genre')->nullable();
+			$table->string('img')->nullable();
+			$table->string('about')->nullable();
 
 
 			$table->rememberToken();
