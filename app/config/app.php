@@ -124,7 +124,8 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Commander\CommanderServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
-		'Smalldogs\Html5inputs\Html5InputsServiceProvider'
+		'Smalldogs\Html5inputs\Html5InputsServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider'
 
 	),
 
@@ -193,6 +194,7 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+		'Flash' 			=> 'Laracasts\Flash\Flash',
 
 	),
 

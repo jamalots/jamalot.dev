@@ -33,9 +33,11 @@
   @include('layouts.partials.nav')
     
     <div class="container">
+      @include('flash::message')
       @yield('content')
     </div>
 
+    <script>$('#flash-overlay-modal').modal();</script>
 </body>
 
 </html>

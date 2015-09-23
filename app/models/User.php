@@ -6,12 +6,14 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Laracasts\Commander\Events\EventGenerator;
 use Illuminate\Support\Facades\Hash;
+use Jamalot\Registration\Events\UserRegistered;
 
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait;
+	use UserTrait, RemindableTrait,EventGenerator;
 
 	protected $fillable = ['user_name','email','password'];
 
@@ -36,7 +38,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static function register($user_name, $email, $password)
 	{
-		return $user = new static(compact('user_name', 'email','password'));
+		$user = new static(compact('user_name', 'email','password'));
+
+		$user->raise(new UserRegistered($user));
+
+		return $user;
 
 	}
 

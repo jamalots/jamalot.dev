@@ -6,10 +6,13 @@ use Laracasts\Commander\CommandHandler;
 use Jamalot\Users\UserRepository;
 //check above
 use User;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 
 
 class RegisterUserCommandHandler implements CommandHandler {
+
+	use DispatchableTrait;
 
 	protected $repository;
 
@@ -27,6 +30,7 @@ class RegisterUserCommandHandler implements CommandHandler {
 
 		$this->repository->save($user);
 
+		$this->dispatchEventsFor($user);
 
 		return $user;
 
