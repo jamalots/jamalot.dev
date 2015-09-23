@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Register! This doesn't Work Yet</h1>
+<h1>Register! It Works!!</h1>
 
 @include('layouts.partials.errors')
 
