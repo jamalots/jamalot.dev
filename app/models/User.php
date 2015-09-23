@@ -8,6 +8,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 use Eloquent;
 use Hash;
 
+
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
