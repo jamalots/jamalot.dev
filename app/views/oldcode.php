@@ -27,3 +27,15 @@
 </div>
 
 <!-- END CODE TO DISPLAY GRID -->
+
+<!-- JQUERY CODE TO RENDER IN DISPLAY WINDOW -->
+var fullView = '<div class="media-view"> <div class="media-thump"><img src="'+ image +'"/></div> <div class="media-info"><h2>'+ title +'</h2><table class="table table-bordered table-hover"><tr><td>Location:</td><td>' + location + '</td></tr><tr><td>Instrument:</td><td>' + instrument + '</td></tr><tr><td>Playing Level:</td><td>' + level + '</td></tr><tr><td>Genre:</td><td>' + genre + '</td></tr><tr><td>About:</td><td>' + about + '</td></tr><tr><td><btn class="btn btn-primary">View Band Page</btn></td><td><btn class="btn btn-primary">Follow</btn></td></tr></table></div><span class="close">&times</span></div>';
+
+<!-- END JQUERY CODE -->
+
+
+
+
+
+
+
