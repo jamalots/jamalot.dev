@@ -1,14 +1,20 @@
 <?php
 
 use Jamalot\Forms\RegistrationForm;
+use Jamalot\Registration\RegisterUserCommand;
+use Laracasts\Commander\CommandBus;
 
 class RegistrationController extends \BaseController {
-	protected $registrationForm;
 
-	function __construct(RegistrationForm $registrationForm)
+	private $commandBus;
+
+	private $registrationForm;
+
+	function __construct(CommandBus $commandBus, RegistrationForm $registrationForm)
 	{
 
 		$this->registrationForm = $registrationForm;
+		$this->commandBus = $commandBus;
 
 	}
 
@@ -27,10 +33,13 @@ class RegistrationController extends \BaseController {
 	{
 		$this->registrationForm->validate(Input::all());
 
-		$user = User::create(
-			Input::only('user_name','email','password')
+		extract(Input::only('user_name','email','password'));
 
+
+		$user = $this->commandBus->execute(
+			new RegisterUserCommand($user_name,$email,$password)
 		);
+
 
 		Auth::login($user);
 
