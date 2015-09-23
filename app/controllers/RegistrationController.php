@@ -2,19 +2,20 @@
 
 use Jamalot\Forms\RegistrationForm;
 use Jamalot\Registration\RegisterUserCommand;
-use Laracasts\Commander\CommandBus;
+use Jamalot\Core\CommandBus;
 
-class RegistrationController extends \BaseController {
+class RegistrationController extends BaseController {
 
-	private $commandBus;
+	use CommandBus;
 
 	private $registrationForm;
 
-	function __construct(CommandBus $commandBus, RegistrationForm $registrationForm)
+	function __construct(RegistrationForm $registrationForm)
 	{
 
 		$this->registrationForm = $registrationForm;
-		$this->commandBus = $commandBus;
+
+		$this->beforeFilter('guest');
 
 	}
 
@@ -36,12 +37,13 @@ class RegistrationController extends \BaseController {
 		extract(Input::only('user_name','email','password'));
 
 
-		$user = $this->commandBus->execute(
+		$user = $this->execute(
 			new RegisterUserCommand($user_name,$email,$password)
 		);
 
-
 		Auth::login($user);
+
+		Flash::overlay('Welcome to Jamalot! Where We Jam Lots!');
 
 		return Redirect::home();	
 	}
