@@ -5,6 +5,7 @@ namespace Jamalot\Statuses;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
+use Status;
 
 class PublishStatusCommandHandler implements CommandHandler {
 

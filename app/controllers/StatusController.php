@@ -1,7 +1,8 @@
 <?php
 
-use Jamalot\Core\CommandBus;
 use Jamalot\Statuses\StatusRepository;
+use Jamalot\Statuses\PublishStatusCommand;
+use Jamalot\Core\CommandBus;
 
 class StatusController extends \BaseController {
 
