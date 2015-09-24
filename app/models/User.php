@@ -55,7 +55,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function statuses()
 	{
-		$this->hasMany('Jamalot\Statuses\Status');
+		return $this->hasMany('Status');
 
 
 	}

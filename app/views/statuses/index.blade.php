@@ -8,8 +8,8 @@
 
 	<div class="form-group">
 
-		{{ Form::label('Body', 'Status:') }}
-		{{ Form::textarea('Body',null, ['class' => 'form-control']) }}
+		{{ Form::label('body', 'Status:') }}
+		{{ Form::textarea('body',null, ['class' => 'form-control']) }}
 
 	</div>
 
@@ -21,7 +21,7 @@
 
 	<h2>Statuses</h2>
 
-	@foreach($statuese as $status)
+	@foreach($statuses as $status)
 		<article>
 				
 			{{ $status->body }}
