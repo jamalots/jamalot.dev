@@ -3,6 +3,7 @@
 use Jamalot\Statuses\StatusRepository;
 use Jamalot\Statuses\PublishStatusCommand;
 use Jamalot\Core\CommandBus;
+use Jamalot\Forms\PublishStatusForm;
 
 class StatusController extends \BaseController {
 
@@ -10,9 +11,12 @@ class StatusController extends \BaseController {
 
 	protected $statusRepository;
 
-	function __construct(StatusRepository $statusRepository)
+	protected $publishStatusForm;
+
+	function __construct(PublishStatusForm $publishStatusForm, StatusRepository $statusRepository)
 	{
 		$this->statusRepository = $statusRepository;
+		$this->publishStatusForm = $publishStatusForm;
 
 	}
 
@@ -47,6 +51,7 @@ class StatusController extends \BaseController {
 	 */
 	public function store()
 	{
+		$this->publishStatusForm->validate(Input::only('body'));
 
 		$this->execute( 
 

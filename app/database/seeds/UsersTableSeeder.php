@@ -53,10 +53,10 @@ class UsersTableSeeder extends Seeder {
 	protected function createFakerUser()
 	{
 		$faker = Faker::create();
-        for($i=1; $i<=20; $i++)
+        for($i=1; $i<=50; $i++)
         {
             $user = new User();
-            $user->user_name = $faker->sentence($nbWords = 2);
+            $user->user_name = $faker->sentence($nbWords = 2) ;
 			$user->first_name = $faker->firstName;
 			$user->last_name = $faker->lastName;
 			$user->email = $faker->email;
@@ -78,7 +78,7 @@ class UsersTableSeeder extends Seeder {
 				$user->original = 'covers';
 			}
 			$user->industry_role = $faker->word;
-			$password = $faker->password;
+			$password = 'password';
 			$user->password = $password;
 			if($i%2 == 0){
 				$user->user_type = 'band';
