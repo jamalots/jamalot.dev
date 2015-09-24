@@ -7,16 +7,48 @@ class DatabaseSeeder extends Seeder {
 	 *
 	 * @return void
 	 */
+
+	protected $tables = [
+
+		'users', 'statuses', 'events'
+		// 'imgs'
+
+	];
+
+	protected $seeders = [
+		'UsersTableSeeder','StatusesTableSeeder','EventsTableSeeder'
+		// 'ImgsTableSeeder'
+
+	];
+
 	public function run()
 	{
 		Eloquent::unguard();
-		DB::table('events')->delete();
-		DB::table('users')->delete();
-		// DB::table('imgs')->delete();
-		$this->call('UsersTableSeeder');
-		$this->call('EventsTableSeeder');
-		// $this->call('ImgsTableSeeder');
-		// $this->call('UserTableSeeder');
+
+		$this->cleanDatabase();
+
+		foreach($this->seeders as $seedClass)
+		{
+			$this->call($seedClass);
+
+
+		}
+		
 	}
+
+	private function cleanDatabase ()
+	{
+		DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+		foreach($this->tables as $table)
+		{
+			DB::table($table)->truncate();
+
+		}
+
+		DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+	}
+
 
 }
