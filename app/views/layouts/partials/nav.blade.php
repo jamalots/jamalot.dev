@@ -40,6 +40,8 @@
             <li>{{ link_to_route('register_path','Sign Up',null,['class' => 'btn btn-lg btn-primary'])}}</li>
             @endif
             @if ($currentUser)
+              <!-- change css for gravatar -->
+              <!-- <img class="nav-gravatar" src="//www.gravatar.com/avatar {{ md5($currentUser->emai) }}?s=30" alt=" {{$currentUser->user_name}} "> -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -47,7 +49,7 @@
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li>{{ link_to_route('logout_path', 'Log Out')}}</li>
               </ul>
             </li>
             @else

@@ -19,6 +19,35 @@
       body{
         padding-top: 85px;
       }
+
+      .status-post{
+        background: white;
+        margin-bottom: 3em;
+        padding: 0px;
+
+      }
+      .mainpost {
+        border: 1px solid lightgrey;
+        margin-bottom: 0px;
+      }
+      .status-post-submit {
+        padding: .5em .5em;
+        padding-top:0px;
+        overflow: hidden;
+
+      }
+      .status-post-submit .btn {
+        float:right;
+        margin-top: 0px;
+      }
+
+      .status-media {
+        border: 1px solid lightgrey;
+        background: white;
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
     </style>
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>

@@ -31,5 +31,6 @@
     @endforeach
 </div>
 
+
 <script src="/js/index.js"></script>
 @stop
