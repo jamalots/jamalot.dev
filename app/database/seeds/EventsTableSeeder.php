@@ -24,7 +24,7 @@ class EventsTableSeeder extends Seeder {
     public function run()
     {
         $faker = Faker::create();
-        for($i=1; $i<=10; $i++)
+        for($i=1; $i<=20; $i++)
         {
             $event = new Event();
             $event->date = $faker->dateTimeBetween($startDate = 'now', $endDate = '3 months');
@@ -35,7 +35,8 @@ class EventsTableSeeder extends Seeder {
             $event->venue_site = "flatsisback.com";
             $event->zip_code = "78212";
             $event->city = "San Antonio";
-            // $event->img = $faker->imageUrl($width = 640, $height = 480); // 'http://lorempixel.com/640/480/'
+            $event->img = $faker->imageUrl($width = 640, $height = 480); // 'http://lorempixel.com/640/480/'
+            $event->cover_img = $faker->imageUrl($width = 1103, $height = 363);
             $event->user_id = User::all()->random(1)->id;
             
             $event->save();
