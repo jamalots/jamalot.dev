@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->string('genre')->nullable();
 			$table->string('img')->nullable();
+			$table->string('cover_img')->nullable();
+			$table->text('music')->nullable();
 			$table->string('about')->nullable();
 
 
