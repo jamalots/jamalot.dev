@@ -40,7 +40,9 @@ class UsersController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('users.create');
+		$user = Auth::user();
+
+		return View::make('users.create')->with(array('user' => $user));
 	}
 
 	/**
@@ -99,17 +101,32 @@ class UsersController extends \BaseController {
 	public function update($id)
 	{
 		$user = User::find($id);
-
-		$validator = Validator::make($data = Input::all(), User::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-
-		$user->update($data);
-
-		return Redirect::route('users.index');
+        $directory = 'img/uploads/';
+        $image = Input::file('img');
+    
+        $user->first_name = Input::get('first_name');
+        $user->last_name = Input::get('last_name');
+        $user->instrument = Input::get('instrument');
+        $user->location = Input::get('location');
+        $user->genre = Input::get('genre');
+        $user->about = Input::get('about');
+        $user->level = Input::get('level');
+        $user->user_type = Input::get('user_type');
+        if (Input::hasFile('img')) {
+            $user->img = $image->move($directory);
+        } else {
+        	$user->img = '/img/monty.jpg';
+        }
+        $user->cover_img = '/img/table.jpg';
+        if ($user->save()) {
+            Session::flash('successMessage', 'You edited ' . $user->user_name . '\'s account successfully');
+            return Redirect::action('UsersController@show', $id);
+        } else {
+            Session::flash('errorMessage', 'Could not save user.');
+            dd($user->getErrors()->toArray());
+            return Redirect::action('UsersController@index')
+                    ->withInput()->withErrors($user->getErrors());
+        }
 	}
 
 	/**
