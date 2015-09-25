@@ -2,12 +2,11 @@
 
 use Jamalot\Statuses\StatusRepository;
 use Jamalot\Statuses\PublishStatusCommand;
-use Jamalot\Core\CommandBus;
 use Jamalot\Forms\PublishStatusForm;
 
 class StatusController extends \BaseController {
 
-	use CommandBus;
+	// use CommanderTrait;
 
 	protected $statusRepository;
 
@@ -27,7 +26,7 @@ class StatusController extends \BaseController {
 	 */
 	public function index()
 	{
-		$statuses = $this->statusRepository->getAllForUser(Auth::user());
+		$statuses = $this->statusRepository->getFeedForUser(Auth::user());
 
 		return View::make('statuses.index',compact('statuses'));
 	}
@@ -51,13 +50,16 @@ class StatusController extends \BaseController {
 	 */
 	public function store()
 	{
-		$this->publishStatusForm->validate(Input::only('body'));
 
-		$this->execute( 
+		$input = Input::get();
 
-			new PublishStatusCommand(Input::get('body'), Auth::user()->id)
+		$input['userId'] = Auth::id();
 
-		);
+		$this->publishStatusForm->validate($input);
+
+
+
+		$this->execute(PublishStatusCommand::class, $input);
 
 		Flash::message('Your Is Status Updated!!');
 

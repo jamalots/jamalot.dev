@@ -2,11 +2,11 @@
 
 use Jamalot\Forms\RegistrationForm;
 use Jamalot\Registration\RegisterUserCommand;
-use Jamalot\Core\CommandBus;
+
 
 class RegistrationController extends BaseController {
 
-	use CommandBus;
+	// use CommanderTrait;
 
 	private $registrationForm;
 
@@ -34,12 +34,7 @@ class RegistrationController extends BaseController {
 	{
 		$this->registrationForm->validate(Input::all());
 
-		extract(Input::only('user_name','email','password'));
-
-
-		$user = $this->execute(
-			new RegisterUserCommand($user_name,$email,$password)
-		);
+		$user = $this->execute(RegisterUserCommand::class);
 
 		Auth::login($user);
 

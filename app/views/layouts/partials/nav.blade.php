@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="{{ action('PagesController@home') }}">Jam A Lot</a>
+          <a class="navbar-brand" href="{{ Auth::check() ? route('statuses_path') : route('home') }}">Jam A Lot</a>
 
         </div>
 
@@ -45,8 +45,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <!-- fix link -->
-                <li>{{ link_to_route('profile_path', 'Your Profile','$currentUser->user_name') }}</li>
+                <li>{{ link_to_route('profile_path', 'Your Profile',$currentUser->user_name) }}</li>
                 <li role="separator" class="divider"></li>
                 <li>{{ link_to_route('logout_path', 'Log Out')}}</li>
               </ul>

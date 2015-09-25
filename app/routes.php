@@ -57,8 +57,19 @@ Route::post('statuses',[
 
 Route::get('/@{user_name}', [
 	'as' => 'profile_path',
-	'uses' => 'UsersController2@show'
+	'uses' => 'ProfileController@show'
 
+]);
+
+Route::post('follows', [
+
+	'as' => 'follows_path',
+	'uses' => 'FollowsController@store'
+]);
+Route::delete('follows/{id}', [
+
+	'as' => 'follow_path',
+	'uses' => 'FollowsController@destroy'
 ]);
 
 
