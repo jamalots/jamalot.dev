@@ -22,6 +22,7 @@
 		        	<p id="level">{{ $user->level }}</p>
 		        	<p id="genre">{{ $user->genre }}</p>
 		        	<p id="about">{{ $user->about }}</p>
+		        	<p id="userid">{{ $user->id }}</p>
 		        </div>
 		      </div>
 		    </div>

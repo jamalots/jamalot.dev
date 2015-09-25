@@ -9,9 +9,11 @@ class EventsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$events = Event::all();
+		$query = Event::with('user');
 
-		return View::make('events.index', compact('events'));
+		$events = $query->orderBy('date')->get();
+
+		return View::make('events.index')->with(array('events' => $events));
 	}
 
 

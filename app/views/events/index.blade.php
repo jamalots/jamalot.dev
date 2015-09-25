@@ -6,6 +6,19 @@
 </head>
 
 @section('content')
+<style>
+.table{
+  color: rgba(255, 255, 255, 0.85);
+}
+
+h1{
+  color: rgba(255, 255, 255, 0.85);
+}
+
+a{
+  color: #33B7AD;
+}
+</style>
 
   <div class="container">
     <h1>Upcoming Events</h1>
@@ -15,23 +28,27 @@
       <button class="timeline-toggle">+ expand all</button>
 
       <br class="clear">
-      @foreach($events as $event)
       <div class="timeline-wrapper">
         <h2 class="timeline-time"><span>2015</span></h2>
+      @foreach($events as $event)
         <dl class="timeline-series">
           <span class="tick tick-before"></span>
-          <dt id="robots" class="timeline-event"><a>{{ date('F d, Y ', strtotime($event->date)) }} {{ date('g:i a ', strtotime($event->time)) }} {{ $event->user->first_name }} {{ $event->user->last_name }} plays at {{ $event->location }}</a></dt>
+          <dt id="event{{ $event->id }}" class="timeline-event"><a>{{ date('n/d/Y ', strtotime($event->date)) }} {{ date('g:i a ', strtotime($event->start_time)) }} {{ $event->user->first_name }} {{ $event->user->last_name }} at {{ $event->venue }}</a></dt>
           <span class="tick tick-after"></span>
-          <dd class="timeline-event-content" id="robotsEX">
+          <dd class="timeline-event-content" id="event{{ $event->id }}EX">
             <div class="media">
-              <a class="venobox" data-overlay="rgba(0,0,0,0.5)"><img src="{{ $event->user->img }}" alt="singing robots"></a>
+              <a class="venobox" data-overlay="rgba(0,0,0,0.5)"><img src="{{ $event->user->img }}" alt="some kickass image"></a>
               <p><a href="http://youtu.be/hUnibKe_o18" class="venobox" data-type="youtube" data-overlay="rgba(0,0,0,0.5)">Listen</a></p>
             </div><!-- /.media -->
-              <div>
+              <div class="col-md-7 displayTable">
                 <table class="table">
                   <tr>
+                    <td>Band:</td>
+                    <td>{{ $event->user->first_name }} {{ $event->user->last_name }}</td>
+                  </tr>
+                  <tr>
                     <td>Location:</td>
-                    <td>{{ $event->venue }}<span><a href="{{event->venue_site}}">Visit the venue page</a></span></td>
+                    <td>{{ $event->venue }}<span><a href="http://{{ $event->venue_site}}">  Visit the venue website.</a></span></td>
                   </tr>
                   <tr>
                     <td>Address:</td>
@@ -51,7 +68,7 @@
                   </tr>
                   <tr>
                     <td>Time:</td>
-                    <td>{{ $event->start_time }}</td>
+                    <td>{{ date('g:i a ', strtotime($event->start_time)) }}</td>
                   </tr>
                   <tr>
                     <td>Cover:</td>
@@ -66,7 +83,7 @@
                     <td>{{ $event->description }}</td>
                   </tr>
                   <tr>
-                    <td><btn class="btn btn-primary">View Band Page</btn></td>
+                    <td><a class="btn btn-primary" href="{{{ action('UsersController@show', $event->user->id) }}}" role="button">Visit Band Profile</a></td>
                     <td><btn class="btn btn-primary">Follow</btn></td>
                   </tr>
                 </table>
@@ -77,8 +94,8 @@
 
 
         </dl><!-- /.timeline-series -->
+      @endforeach
       </div><!-- /.timeline-wrapper -->
-
       <button class="timeline-toggle">+ expand all</button>
 
       <br class="clear">

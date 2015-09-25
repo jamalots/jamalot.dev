@@ -66,16 +66,16 @@ body {
   background-image: url("/img/castle3.jpg");
 }
 .slider3d__item:nth-child(2) {
-  background-image: url("/img/castle.jpg");
+  background-image: url("/img/monty.jpg");
 }
 .slider3d__item:nth-child(3) {
-  background-image: url("/img/starburst.jpg");
+  background-image: url("/img/castle2.jpg");
 }
 .slider3d__item:nth-child(4) {
-  background-image: url("http://i.imgur.com/njcLNVE.jpg");
+  background-image: url("/img/castle6.jpg");
 }
 .slider3d__item:nth-child(5) {
-  background-image: url("http://i.imgur.com/UP7fWfg.jpg");
+  background-image: url("/img/sword.gif");
 }
 .slider3d__heading {
   position: absolute;
@@ -241,6 +241,12 @@ body {
 </style>
 
 @section('content')
+
+<style>
+body {
+  background: black;
+}
+</style>
 
 	<div class="slider3d first">
 	  <div class="slider3d__wrapper">
