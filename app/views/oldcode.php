@@ -1,3 +1,10 @@
+@if(!$currentUser)
+            <li>{{ link_to_route('register_path','Sign Up',null,['class' => 'btn btn-lg btn-primary'])}}</li>
+            @endif
+            @if ($currentUser)
+
+
+
 <!-- CODE TO DISPLAY GRID.  FUNCTIONAL -->
 
 <div class="media">
@@ -54,7 +61,7 @@ var fullView = '<div class="media-view"> <div class="media-thump"><img src="'+ i
       <br class="clear">
 
       <div class="timeline-wrapper">
-        <h2 class="timeline-time"><span>2015</span></h2>
+        <h2 class="timeline-time"><span>20</span></h2>
         <dl class="timeline-series">
           <span class="tick tick-before"></span>
           <dt id="robots" class="timeline-event"><a>Robots</a></dt>

@@ -33,8 +33,10 @@ class EventsTableSeeder extends Seeder {
             $event->start_time = $faker->time($format = 'H:i:s', $min = 'now');
             $event->venue = "Tycoon Flats";
             $event->venue_site = "flatsisback.com";
-            $event->zip_code = "78212";
+            $event->address = "2926 N. St. Marys Street";
             $event->city = "San Antonio";
+            $event->state = "TX";
+            $event->zip = "78212";
             $event->img = $faker->imageUrl($width = 640, $height = 480); // 'http://lorempixel.com/640/480/'
             $event->cover_img = $faker->imageUrl($width = 1103, $height = 363);
             $event->user_id = User::all()->random(1)->id;
