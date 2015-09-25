@@ -6,7 +6,12 @@
 <div class="row">
 	<div class="col-md-3">
 		<h1>{{ $user->user_name}}</h1>
-		<img src="" alt="Profile pic here">
+		<img src="{{ $user->img }}" alt="Profile pic here">
+
+		@unless($user->is($currentUser))
+			@include('users.follow-form')
+		@endif
+
 	</div>
 
 	<div class="col-md-6">

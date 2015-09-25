@@ -60,9 +60,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	}
 
-	public function is(User $user)
+	public function is($user)
 	{
+
+		if(is_null($user)) return false;
+
 		return $this->user_name == $user->user_name;
+
+	}
+
+	public function follows()
+	{
+
+
+		return $this->belongsToMany(self::class,'follows', 'follower_id', 'followed_id')->withTimestamps();
+	}
+	public function isFollowedBy(User $otherUser)
+	{
+		$idsOfFollowers = $otherUser->follows()->lists('followed_id');
+
+		return in_array($this->id, $idsOfFollowers);
 
 	}
 

@@ -2,7 +2,7 @@
 //integrate into main UsersController
 use Jamalot\Users\UserRepository;
 
-class UsersController2 extends \BaseController {
+class ProfileController extends \BaseController {
 
 	
 	protected $userRepository;

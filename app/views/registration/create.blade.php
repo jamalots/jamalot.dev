@@ -6,44 +6,46 @@
 
 @include('layouts.partials.errors')
 
-<div class="col-md-6">
-	{{ Form::open(['route' => 'register_path'])}}
-		<div class="form-group">
+<div class="row">
+	<div class="col-md-6">
+		{{ Form::open(['route' => 'register_path'])}}
+			<div class="form-group">
 
-			{{ Form::label('user_name', 'Username:') }}
-			{{ Form::text('user_name',null, ['class' => 'form-control']) }}
+				{{ Form::label('user_name', 'Username:') }}
+				{{ Form::text('user_name',null, ['class' => 'form-control']) }}
 
-		</div>
+			</div>
 
-		<div class="form-group">
+			<div class="form-group">
 
-			{{ Form::label('email', 'Email:') }}
-			{{ Form::text('email',null, [ 'class' => 'form-control']) }}
+				{{ Form::label('email', 'Email:') }}
+				{{ Form::text('email',null, [ 'class' => 'form-control']) }}
 
-		</div>
+			</div>
 
-		<div class="form-group">
+			<div class="form-group">
 
-			{{ Form::label('password', 'Password:') }}
-			{{ Form::password('password',[ 'class' => 'form-control']) }}
+				{{ Form::label('password', 'Password:') }}
+				{{ Form::password('password',[ 'class' => 'form-control']) }}
 
-		</div>
+			</div>
 
-		<div class="form-group">
+			<div class="form-group">
 
-			{{ Form::label('password_confirmation', 'Password Confirmation:') }}
-			{{ Form::password('password_confirmation',[ 'class' => 'form-control']) }}
+				{{ Form::label('password_confirmation', 'Password Confirmation:') }}
+				{{ Form::password('password_confirmation',[ 'class' => 'form-control']) }}
 
-		</div>
+			</div>
 
-		<div class="form-group">
+			<div class="form-group">
 
-			{{ Form::submit('Sign Up', [ 'class' => 'btn btn-primary']) }}
+				{{ Form::submit('Sign Up', [ 'class' => 'btn btn-primary']) }}
 
-		</div>
+			</div>
 
 
-	{{ Form::close()}}
+		{{ Form::close()}}
+	</div>
 </div>
 
 @stop

@@ -19,6 +19,7 @@
             <h2>{{ $user->first_name }} {{ $user->last_name}}</h2>
             @else
             <h2>{{ $user->user_name }}</h2>
+            <p>{{ link_to_route('profile_path', $user->user_name, $user->user_name)}}<p>
             @endif
 
             <p>{{ $user->location }}</p><span class="zoom-btn"></span>
