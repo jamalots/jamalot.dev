@@ -48,6 +48,11 @@ label{
             </div>
 
             <div class="form-group">
+                {{ Form::label('price', 'Price') }}
+                {{ Form::text('price', null, ['class' => 'form-control']) }}
+            </div>
+
+            <div class="form-group">
                 {{ Form::label('venue', 'Venue') }}
                 {{ Form::text('venue', null, ['class' => 'form-control']) }}
             </div>
@@ -62,11 +67,55 @@ label{
                 {{ Form::text('city', null, ['class' => 'form-control']) }}
             </div>
 
+            <div class="form-group">
+                {{ Form::label('address', 'Address') }}
+                {{ Form::text('address', null, ['class' => 'form-control']) }}
+            </div>
+
+            <div class="form-group">
+                {{ Form::label('state', 'State') }}
+                {{ Form::text('state', null, ['class' => 'form-control']) }}
+            </div>
 
             <div class="form-group">
                 {{ Form::label('zip_code', 'Zip Code') }}
                 {{ Form::text('zip_code', null, ['class' => 'form-control']) }}
             </div>
+
+             <div class="form-group">
+                {{-- <div class="col-md-6"> --}}
+                    {{ Form::label('img', 'Add Event Photo') }}
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-info btn-file">Upload Image 
+                            {{ Form::file('img') }}
+                            </span>
+                        </span>
+                        {{ Form::text('img', null, ['class' => 'form-control', 'readonly']) }}
+                    </div>
+                {{-- </div> --}}
+            </div>
+
+            <div class="form-group">
+                {{-- <div class="col-md-6"> --}}
+                    {{ Form::label('cover_img', 'Add Cover Photo for Eventx') }}
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-info btn-file">Upload Image 
+                            {{ Form::file('cover_img') }}
+                            </span>
+                        </span>
+                        {{ Form::text('cover_img', null, ['class' => 'form-control', 'readonly']) }}
+                    </div>
+                {{-- </div> --}}
+            </div>
+
+             <div class="form-group">
+                {{ Form::label('description', 'Description') }}
+                {{ Form::textarea('description', null, ['class' => 'form-control']) }}
+            </div>
+
+
 
             <!-- <div class="form-group">
                 {{-- <div class="col-md-6"> --}}

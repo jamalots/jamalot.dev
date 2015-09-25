@@ -5,6 +5,8 @@
 body
 {
     font-family: 'Open Sans', sans-serif;
+    background-color:#040404;
+    color:#B09A9A;
 }
 
 #prof
@@ -50,6 +52,10 @@ body
 
 }
 }
+
+#map-canvas {
+    height: 360px;
+}
 </style>
 @section('content')
 
@@ -78,6 +84,54 @@ body
 	
 </div> -->
 
+<div id="map-canvas"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhRMZMvQrojZ4l73J2OCrxEuvCjm88l9I"></script>
+
+ <script type="text/javascript">
+ (function() {
+        "use strict";
+
+        // Set our map options
+        var address = "{{$event->address}}, {{$event->city}}, {{$event->state}}, {{$event->zip_code}}";
+        var mapOptions = {
+            // Set the zoom level
+            zoom: 10,
+
+        };
+
+        var geocoder = new google.maps.Geocoder();
+
+        // Geocode our address
+        geocoder.geocode({ "address": address }, function(results, status) {
+
+        // Check for a successful result
+            if (status == google.maps.GeocoderStatus.OK) {
+
+               // Recenter the map over the address
+               map.setCenter(results[0].geometry.location);
+           } else {
+
+               // Show an error message with the status if our request fails
+               alert("Geocoding was not successful - STATUS: " + status);
+           }
+
+        });
+        var marker = new google.maps.Marker({
+            position: address,
+             map: map
+        });
+        // Create a new infoWindow object with content
+        var infowindow = new google.maps.InfoWindow({
+            content: "Changing the world, one programmer at a time."
+        });
+
+        // Open the window using our map and marker
+        infowindow.open(map, marker);
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    })();
+        
+
+</script>
 
 
 

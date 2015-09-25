@@ -24,7 +24,7 @@ class CreateEventsTable extends Migration {
 			$table->string('address');
 			$table->string('city');
 			$table->string('state');
-			$table->string('zip');
+			$table->string('zip_code');
 			$table->string('img')->nullable();;
 			$table->string('cover_img')->nullable();
 			$table->timestamps();
