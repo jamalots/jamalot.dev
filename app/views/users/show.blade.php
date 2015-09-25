@@ -9,7 +9,7 @@ body
 
 #prof
 {
-	position:absolute;
+	position:fixed;
 }
 
 .fb-profile img.fb-image-lg{

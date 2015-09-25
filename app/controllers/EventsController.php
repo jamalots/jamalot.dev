@@ -53,17 +53,23 @@ class EventsController extends \BaseController {
             $event->start_time = Input::get('start_time');
             $event->venue = Input::get('venue');
             $event->venue_site = Input::get('venue_site');
+            $event->price = Input::get('price');
             $event->zip_code = Input::get('zip_code');
             $event->city = Input::get('city');
-            $event->user_id = 1;
+            $event->address = Input::get('address');
+            $event->state = Input::get('state');
+            $event->description = Input::get('description');
+            $image = Input::file('img');
+            $image = Input::file('cover_img');
+            $event->user_id = Auth::id();
             
-            // if (Input::hasFile('img')) {
-            //     $event->img = $image->move($directory);
-            // }
+            if (Input::hasFile('img')) {
+                $event->img = $image->move($directory);
+            }
             $event->save();
             Log::info("Event successfully saved.", Input::all());
             Session::flash('successMessage', 'You created ' . $event->title . ' event successfully');
-            return Redirect::action('hello');
+            return Redirect::action('events');
 	}
 
 	

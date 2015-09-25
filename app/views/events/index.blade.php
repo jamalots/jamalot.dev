@@ -64,7 +64,7 @@ a{
                   </tr>
                   <tr>
                     <td>Zip:</td>
-                    <td>{{ $event->zip }}</td>
+                    <td>{{ $event->zip_code }}</td>
                   </tr>
                   <tr>
                     <td>Time:</td>
