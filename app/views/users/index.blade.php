@@ -14,11 +14,13 @@
         @foreach ($chunk as $user)
             <div class="thumbnail"><img src="{{ $user->img }}">
           <div class="overlay">
+
             @if($user->user_type == 'musician')
             <h2>{{ $user->first_name }} {{ $user->last_name}}</h2>
             @else
             <h2>{{ $user->user_name }}</h2>
             @endif
+
             <p>{{ $user->location }}</p><span class="zoom-btn"></span>
             <div id="bandDetails" style="display: none;">
               <p id="location">{{ $user->location }}</p>

@@ -61,7 +61,7 @@ class StatusController extends \BaseController {
 
 		Flash::message('Your Is Status Updated!!');
 
-		return Redirect::refresh();
+		return Redirect::back();
 
 	}
 
