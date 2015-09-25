@@ -6,8 +6,10 @@ $('.zoom-btn').click(function(){
   var level = $(this).closest('.overlay').find('#level').text();
   var genre = $(this).closest('.overlay').find('#genre').text();
   var about = $(this).closest('.overlay').find('#about').text();
+  var userid = $(this).closest('.overlay').find('#userid').text();
   
-  var fullView = '<div class="media-view"> <div class="media-thump"><img src="'+ image +'"/></div> <div class="media-info"><h2>'+ title +'</h2><table class="table"><tr><td>Location:</td><td>' + location + '</td></tr><tr><td>Instrument:</td><td>' + instrument + '</td></tr><tr><td>Playing Level:</td><td>' + level + '</td></tr><tr><td>Genre:</td><td>' + genre + '</td></tr><tr><td>About:</td><td>' + about + '</td></tr><tr><td><btn class="btn btn-primary">View Band Page</btn></td><td><btn class="btn btn-primary">Follow</btn></td></tr></table></div><span class="close">&times</span></div>';
+  
+  var fullView = '<div class="media-view"> <div class="media-thump"><img src="'+ image +'"/></div> <div class="media-info"><h2>'+ title +'</h2><table class="table"><tr><td>Location:</td><td>' + location + '</td></tr><tr><td>Instrument:</td><td>' + instrument + '</td></tr><tr><td>Playing Level:</td><td>' + level + '</td></tr><tr><td>Genre:</td><td>' + genre + '</td></tr><tr><td>About:</td><td>' + about + '</td></tr><tr><td><a class="btn btn-primary" href="http://jamalot.dev/users/' + userid + '" role="button">Visit Band Profile</a></td><td><btn class="btn btn-primary">Follow</btn></td></tr></table></div><span class="close">&times</span></div>';
   
 
   
