@@ -33,7 +33,7 @@ a{
       @foreach($events as $event)
         <dl class="timeline-series">
           <span class="tick tick-before"></span>
-          <dt id="event{{ $event->id }}" class="timeline-event"><a>{{ date('n/d/Y ', strtotime($event->date)) }} {{ date('g:i a ', strtotime($event->start_time)) }} {{ $event->user->first_name }} {{ $event->user->last_name }} at {{ $event->venue }}</a></dt>
+          <dt id="event{{ $event->id }}" class="timeline-event"><a>{{ date('n/d/Y ', strtotime($event->date)) }} {{ date('g:i a ', strtotime($event->start_time)) }} @if($event->user->user_type == 'musician'){{ $event->user->first_name }} {{ $event->user->last_name}}@else{{ $event->user->user_name }}@endif at {{ $event->venue }}</a></dt>
           <span class="tick tick-after"></span>
           <dd class="timeline-event-content" id="event{{ $event->id }}EX">
             <div class="media">
@@ -43,8 +43,12 @@ a{
               <div class="col-md-7 displayTable">
                 <table class="table">
                   <tr>
-                    <td>Band:</td>
+                    <td>Band/Artist:</td>
+                    @if($event->user->user_type == 'musician')
                     <td>{{ $event->user->first_name }} {{ $event->user->last_name }}</td>
+                    @else
+                    <td>{{ $event->user->user_name }}</td>
+                    @endif 
                   </tr>
                   <tr>
                     <td>Location:</td>
