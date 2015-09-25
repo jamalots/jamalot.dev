@@ -76,6 +76,7 @@ class UsersController extends \BaseController {
 	}
 
 
+
 	/**
 	 * Show the form for editing the specified user.
 	 *
