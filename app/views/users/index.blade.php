@@ -185,7 +185,7 @@ body {
         @foreach ($chunk as $user)
             <div class="thumbnail"><img src="{{ $user->img }}">
           <div class="overlay">
-            <h2>{{ $user->user_name }}</h2>
+            <h2>{{ link_to_route('profile_path', $user->user_name, $user->user_name)}}</h2>
             <p>{{ $user->location }}</p><span class="zoom-btn"></span>
             <div id="bandDetails" style="display: none;">
               <p id="location">{{ $user->location }}</p>

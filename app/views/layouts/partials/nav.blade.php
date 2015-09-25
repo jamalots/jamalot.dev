@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="{{ route('home')}}">Jamalot</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -45,9 +45,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+                <!-- fix link -->
+                <li>{{ link_to_route('profile_path', 'Your Profile','$currentUser->user_name') }}</li>
                 <li role="separator" class="divider"></li>
                 <li>{{ link_to_route('logout_path', 'Log Out')}}</li>
               </ul>
