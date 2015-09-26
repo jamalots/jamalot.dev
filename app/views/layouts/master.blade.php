@@ -18,6 +18,7 @@
     <style>
       body{
         padding-top: 85px;
+        background-color: black;
       }
 
       .status-post{

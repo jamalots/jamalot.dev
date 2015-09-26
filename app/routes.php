@@ -72,6 +72,8 @@ Route::delete('follows/{id}', [
 	'uses' => 'FollowsController@destroy'
 ]);
 
+Route::get('events/manage', 'EventsController@getManage');
+Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 
 
 Route::get('users/musicians', 'UsersController@musicians');
