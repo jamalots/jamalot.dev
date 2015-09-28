@@ -82,7 +82,7 @@ Route::delete('follows/{id}', [
 Route::controller('password', 'RemindersController');
 
 Route::get('events/manage', 'EventsController@getManage');
-Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
+// Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 
 
 

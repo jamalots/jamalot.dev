@@ -3,8 +3,11 @@
 table {
     color: rgba(255,255,255,1);
 }
+
+
 .manage{
 	color: rgba(255,255,255,1);
+	background-color: black;
 }
 .modal-body{
 	color: black;
@@ -41,7 +44,7 @@ table {
 </style>
 @section('content')
 
-<div>
+<div class="manage">
 		<div class="container">
 			<h2 class='manage'>Manage Events<h2>
 			<table class='table table-bordered'>
@@ -107,7 +110,7 @@ table {
 
 						            <div class="form-group">
 						                {{ Form::label('date', 'Event Date') }}
-						                {{ Form::date('date') }}
+						                {{ Form::date('date', Input::old('date'), ['class' => 'form-control']) }}
 						            </div>
 
 						            <div class="form-group">
@@ -175,7 +178,25 @@ table {
 				    
 				    {{-- END EDIT MODAL --}}
 				    </td>
-					<td><btn class="btn btn-danger" data-toggle="modal" data-target="">Delete</btn></td>
+					<td>
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm">Delete</button>
+					</td>
+						<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+						  <div class="modal-dialog modal-sm">
+						    <div class="modal-content">
+						    	<div class="modal-body">
+						    		<p>Are you sure you want to delete this event?</p>
+						    	</div>
+						    	<div class="modal-footer">
+								{{ Form::model($event, array('action' => array('EventsController@destroy', $event->id), 'files'=>true, 'class' => 'horizontal', 'method' => 'DELETE')) }}
+								<button class="btn btn-danger">Ok</button>
+								{{ Form::close() }}
+			                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+			                	</div>
+						    </div>
+						  </div>
+						</div>
+
 				</tr>
 				@endforeach
 			</table>

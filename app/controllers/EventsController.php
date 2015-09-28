@@ -69,7 +69,7 @@ class EventsController extends \BaseController {
             $event->save();
             Log::info("Event successfully saved.", Input::all());
             Session::flash('successMessage', 'You created ' . $event->title . ' event successfully');
-            return Redirect::action('events');
+            return Redirect::action('events.manage');
 	}
 
 	
@@ -131,7 +131,6 @@ class EventsController extends \BaseController {
             $event->date = Input::get('date');
             $event->price = Input::get('price');
             $event->start_time = Input::get('start_time');
-            $event->location = Input::get('location');
             $event->address = Input::get('address');
             $event->city = Input::get('city');
             $event->state = Input::get('state');
@@ -156,9 +155,18 @@ class EventsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Event::destroy($id);
+		$event = Event::find($id);
 
-		return Redirect::route('events.index');
+		$event->delete(); 
+
+		return Redirect::action('EventsController@getManage'); 
+		// $event = Event::find($id);
+  //       if(!$event) {
+  //           Session::flash('errorMessage', "Event with id of $id is not found");
+  //           App::abort(404);
+  //       }
+  //       $event->delete();
+  //       return Redirect::action('events.manage');
 	}
 
 	public function getManage()

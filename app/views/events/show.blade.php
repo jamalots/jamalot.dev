@@ -101,36 +101,33 @@ body
             zoom: 10,
         };
         var geocoder = new google.maps.Geocoder();
+
+        var marker;
         // Geocode our address
         geocoder.geocode({ "address": address }, function(results, status) {
         // Check for a successful result
             if (status == google.maps.GeocoderStatus.OK) {
                // Recenter the map over the address
-               map.setCenter(results[0].geometry.location);
-               
+                map.setCenter(results[0].geometry.location);
+                marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map,
+                    // icon: '/img/marker.tiff'
+                });
+               // Create a new infoWindow object with content
+                var infowindow = new google.maps.InfoWindow({
+                    content: " {{{$event->user->user_name}}} at {{{$event->venue}}} "
+                });
+
+                // Open the window using our map and marker
+                infowindow.open(map, marker);
            } else {
                // Show an error message with the status if our request fails
                alert("Geocoding was not successful - STATUS: " + status);
            }
         });
 
-        // var geocoder = new GClientGeocoder();
-
-        // // var address = "Your address";
-        // geocoder.getLatLng(address, function(point) {
-        //          var latitude = point.y;
-        //          var longitude = point.x;  
-
-        //        var venueAddy = { lat: latitue, lng: longitude } ;   
-        // });
-        // var marker = new google.maps.Marker({
-        //     position: venueAddy,
-        //      map: map,
-        //      icon: img/marker.png
-        // });
-        // Create a new infoWindow object with content
         
-        // Open the window using our map and marker
         
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     })();   
