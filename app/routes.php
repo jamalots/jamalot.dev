@@ -55,6 +55,12 @@ Route::post('statuses',[
 	'uses' => 'StatusController@store'
 ]);
 
+Route::post('statuses/{id}/comments', [
+	'as' => 'comment_path',
+	'uses' => 'CommentsController@store'
+
+]);
+
 Route::get('/@{user_name}', [
 	'as' => 'profile_path',
 	'uses' => 'ProfileController@show'
@@ -72,6 +78,7 @@ Route::delete('follows/{id}', [
 	'uses' => 'FollowsController@destroy'
 ]);
 
+Route::controller('password', 'RemindersController');
 
 
 Route::get('users/musicians', 'UsersController@musicians');
