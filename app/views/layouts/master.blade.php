@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/bootstrap-select.css">
 
     <style>
+
       body{
         padding-top: 85px;
       }
@@ -66,6 +67,11 @@
         border: 1px solid azure;
         border-bottom: 1px solid lightgrey;
 
+      }
+
+      .profile-img {
+          height:80px;
+          width:80px;
       }
 
     </style>

@@ -21,5 +21,13 @@ class CommentsController extends \BaseController {
 		return Redirect::back();
 	}
 
+	public function destroy($id)
+	{
+		$status = Comment::find($id);
+		$status->delete();
+
+		return Redirect::back();
+	}
+
 
 }

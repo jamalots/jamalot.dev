@@ -79,22 +79,34 @@ Route::delete('follows/{id}', [
 ]);
 
 
-Route::get('testlogin', 'PagesController@getTest');
-<<<<<<< HEAD
-=======
+Route::delete('deleteStatus/{id}',[
+	'as' => 'deleteStatus_path',
+	'uses' => 'StatusController@destroy'
 
->>>>>>> master
+]);
+
+Route::delete('deleteComment/{id}',[
+	'as' => 'deleteComment_path',
+	'uses' => 'CommentsController@destroy'
+
+]);
+
+
+Route::get('testlogin', 'PagesController@getTest');
+
+
+
+Route::get('testlogin', 'PagesController@getTest');
+
 
 Route::controller('password', 'RemindersController');
 
 Route::get('events/manage', 'EventsController@getManage');
-<<<<<<< HEAD
-=======
+
 // Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 
 
 
->>>>>>> master
 
 Route::get('users/musicians', 'UsersController@musicians');
 
