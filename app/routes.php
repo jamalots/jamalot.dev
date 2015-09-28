@@ -72,11 +72,13 @@ Route::delete('follows/{id}', [
 	'uses' => 'FollowsController@destroy'
 ]);
 
-
+Route::get('testlogin', 'PagesController@getTest');
 
 Route::get('users/musicians', 'UsersController@musicians');
 
 Route::get('users/bands', 'UsersController@bands');
+
+Route::get('users/{id}/photos', 'UsersController@getPhotos');
 
 Route::resource('users', 'UsersController');
 

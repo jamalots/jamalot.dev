@@ -9,5 +9,11 @@ class PagesController extends \BaseController {
 
 	}
 
+	public function getTest() 
+	{
+
+		return View::make('pages.testlogin');
+
+	}
 
 }
