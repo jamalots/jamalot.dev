@@ -10,7 +10,8 @@ class ProfileController extends \BaseController {
 
 	function __construct(UserRepository $userRepository)
 	{
-
+		$this->beforeFilter('auth');
+		
 		$this->userRepository = $userRepository;
 
 

@@ -10,9 +10,9 @@ class StatusRepository {
 
 	public function getAllForUser(User $user)
 	{
-
-		return $user->statuses()->with('user')->latest()->get();
-
+	
+			return $user->statuses()->with('user')->latest()->get();
+		
 	}
 
 	public function save(Status $status, $userId)
@@ -28,7 +28,10 @@ class StatusRepository {
 
 		$userIds[] = $user->id;
 
+		
 		return Status::with('comments')->whereIn('user_id', $userIds)->latest()->get();
+
+
 
 	}
 

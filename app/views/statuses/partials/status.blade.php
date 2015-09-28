@@ -1,8 +1,20 @@
 <article class="media status-media">
 	<div class="pull-left">
-		<p class="media-object">Profile Pic</p>
+		<p class="media-object"><img class="profile-img" src="{{ $status->user->img}}"></p>
 	</div>
-		
+
+<!-- 	Create filter to only delete YOUR statuses
+ -->	
+ 	@if($status->user == Auth::user())
+	<div class="pull-right">
+
+		{{ Form::open([ 'action' => array('StatusController@destroy', $status->id), 'method' => 'delete' ]) }}
+			<button type="submit" class="btn btn-sm btn-danger">Remove</button>
+		{{ Form::close() }}
+
+	</div>
+	@endif
+
 	<div class="media-body">
 		<h4 class="media-heading">{{ link_to_route('profile_path', $status->user->user_name, $status->user->user_name)}}</h4>
 		<p> {{ $status->created_at->diffForHumans() }}</p>
@@ -21,6 +33,7 @@
 
 	{{ Form::open(['route'=> ['comment_path', $status->id], 'class' => 'commentsForm']) }}
 		{{ Form::hidden('status_id', $status->id) }}
+
 
 		<div class="form-group">
 
