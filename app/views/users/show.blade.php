@@ -7,9 +7,30 @@ body
     font-family: 'Open Sans', sans-serif;
 }
 
+#stat
+{
+    padding-top: 500px;
+    padding-left: 100px;
+}
+
+#upevents
+{
+    width: 250px;
+    border-bottom-width: 1px;
+    padding-top: 25px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+.stats
+{
+    padding-top: 550px;
+    left:40px;
+}
+
 #prof
 {
-	position:fixed;
+	position:absolute;
 }
 
 .fb-profile img.fb-image-lg{
@@ -30,8 +51,9 @@ body
 {
 	position: relative;
 	z-index: 15;
-	right:60px;
+	left:50px;
 	top:28px;
+    width:300px;
 }
 
 @media (max-width:768px)
@@ -71,11 +93,78 @@ body
 
 	<div class="col-md-4 col-xs-6"></div>
 		<div class="col-md-8 col-xs-12">
-			{{ $user->music }}
+			<!-- {{ $user->music }} -->
 		</div>
 	
 </div>
 
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="media">
+            <div class="pull-left">
+               <!--  <img src="{{ $user->img }}" alt="Profile pic here"> -->
+            </div>
+        </div>
+
+        <div class="media-body" id="stat">
+
+            <!-- <h1 class="media-heading">{{ $user->user_name}}</h1> -->
+
+            <ul class="list-inline text-muted">
+                <li>{{ $statusCount = $user->statuses->count() }} {{ str_plural('Status', $statusCount) }}</li>
+                <li>{{ $followerCount = $user->followers()->count() }} {{ str_plural('Follower', $followerCount) }} </li>
+            </ul>
+
+            <p class="text-muted"></p>
+
+            @unless($user->is($currentUser))
+                @include('users.follow-form')
+            @endif
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ $user->music }}
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
+                <h3 id="upevents">Upcoming Events</h3>
+                @foreach($user->events as $event)
+                    <a href=" /events/{{{$event->id}}} ">
+                        <p style="width:300px;"><strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+            
+    
+
+
+<!--        show user profile pics of followers
+ -->
+        <!-- @foreach($user->followers as $follower)
+            
+            <img src="{{ $follower->img }}" alt="Profile pic here">
+
+        @endforeach -->
+
+    </div>
+
+    <div class="col-md-6 stats">
+        
+        @if($user->is($currentUser))
+
+            @include('statuses.partials.publish-status-form')
+
+        @endif
+
+
+        @include('statuses.partials.statuses', ['statuses' => $user->statuses])
+    </div>
+</div>
 
 
 

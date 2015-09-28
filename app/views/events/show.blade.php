@@ -67,7 +67,7 @@ body
         <img align="left" class="fb-image-profile thumbnail" src="{{ $event->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
             <h1><strong>{{ $event->user->user_name }}</strong></h1>
-            <p><em>at</em></p>
+            <h3><em>at</em></h3>
             <h1><strong>{{ $event->venue }}</strong></h1>
             <p><strong>price</strong> || {{ $event->price }} </p>
             <p><strong>starting at</strong> || {{ $event->start_time }} </p>
