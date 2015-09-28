@@ -142,4 +142,17 @@ class UsersController extends \BaseController {
 		return Redirect::route('users.index');
 	}
 
+	public function getPhotos($id)
+	{
+		$query = Img::with('user')->where('user_id', $id);
+
+        $images = $query->get();
+
+		return View::make('users.photos')->with(array('images' => $images)); 
+
+
+	}
+
+
+
 }
