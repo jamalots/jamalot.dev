@@ -78,6 +78,7 @@ Route::delete('follows/{id}', [
 	'uses' => 'FollowsController@destroy'
 ]);
 
+
 Route::delete('deleteStatus/{id}',[
 	'as' => 'deleteStatus_path',
 	'uses' => 'StatusController@destroy'
@@ -94,9 +95,14 @@ Route::delete('deleteComment/{id}',[
 Route::get('testlogin', 'PagesController@getTest');
 
 
+
+Route::get('testlogin', 'PagesController@getTest');
+
+
 Route::controller('password', 'RemindersController');
 
 Route::get('events/manage', 'EventsController@getManage');
+
 // Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 
 

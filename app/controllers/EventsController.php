@@ -135,7 +135,7 @@ class EventsController extends \BaseController {
             $event->city = Input::get('city');
             $event->state = Input::get('state');
             $event->zip_code = Input::get('zip_code');
-            $event->user_id = 1;
+            $event->user_id = Auth::id();
             if (Input::hasFile('img')) {
                 $event->img = $image->move($directory);
             }
@@ -144,7 +144,7 @@ class EventsController extends \BaseController {
             }
             $event->save();
             Session::flash('successMessage', 'You updated ' . $event->title . ' event successfully');
-            return Redirect::action('EventsController@index');
+            return Redirect::action('EventsController@getManage');
 	}
 
 	/**

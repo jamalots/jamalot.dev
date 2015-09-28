@@ -101,7 +101,7 @@ class UsersController extends \BaseController {
 	public function update($id)
 	{
 		$user = User::find($id);
-        $directory = 'img/uploads/';
+        $directory = '/img/uploads/';
         $image = Input::file('img');
     
         $user->first_name = Input::get('first_name');
@@ -113,12 +113,14 @@ class UsersController extends \BaseController {
         $user->level = Input::get('level');
         $user->user_type = Input::get('user_type');
         if (Input::hasFile('img')) {
-            $user->img = $image->move($directory);
-        } else {
-        	$user->img = '/img/monty.jpg';
-        }
+        	$file = Input::file('img');
+ 			$filename = $user->id . $file->getClientOriginalName();
+            $file = $file->move(public_path() . $directory, $filename);
+			$user->img = $directory . $filename; 
+        } 
         $user->cover_img = '/img/table.jpg';
         if ($user->save()) {
+        	// dd($user);
             Session::flash('successMessage', 'You edited ' . $user->user_name . '\'s account successfully');
             return Redirect::action('UsersController@show', $id);
         } else {

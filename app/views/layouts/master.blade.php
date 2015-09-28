@@ -13,7 +13,8 @@
 
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-select.css">
 
     <style>
 
@@ -76,9 +77,9 @@
     </style>
     @yield('styles')
     <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-select.js"></script>
     @yield('scripts')
     
 </head>
@@ -88,8 +89,27 @@
   @include('layouts.partials.nav')
     
     <div class="container">
+
       @include('flash::message')
+
+      @if (Session::has('successMessage'))
+          <div class="alert alert-success">{{{ Session::get('successMessage') }}}</div>
+      @endif
+      @if (Session::has('errorMessage'))
+          <div class="alert alert-danger">{{{ Session::get('errorMessage') }}}</div>
+      @endif
+      @if($errors->has())
+          <div class="alert alert-danger" role="alert">
+              <ul>
+                  @foreach($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
+      
       @yield('content')
+      
     </div>
 
     <script>
