@@ -69,7 +69,7 @@ class EventsController extends \BaseController {
             $event->save();
             Log::info("Event successfully saved.", Input::all());
             Session::flash('successMessage', 'You created ' . $event->title . ' event successfully');
-            return Redirect::action('events');
+            return Redirect::action('events.manage');
 	}
 
 	
@@ -82,9 +82,22 @@ class EventsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$event = Event::findOrFail($id);
+		// $event = Event::findOrFail($id);
 
-		return View::make('events.show', compact('event'));
+		// return View::make('events.show', compact('event'));
+
+
+        $event = Event::find($id);
+        if(!$event) {
+            Session::flash('errorMessage', "Post with id of $id is not found");
+            App::abort(404);
+        }
+        Log::info("Event of id $id found");
+        if (Request::wantsJson()) {
+            return Response::json($event);
+        } 
+        return View::make('events.show')->with(array('event' => $event));
+        
 	}
 
 	/**
@@ -108,18 +121,30 @@ class EventsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$event = Event::findOrFail($id);
-
-		$validator = Validator::make($data = Input::all(), Event::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-
-		$event->update($data);
-
-		return Redirect::route('events.index');
+		$event = Event::find($id);
+            $directory = 'img/uploads/';
+            $image = Input::file('img');
+    
+            $event->venue = Input::get('venue');
+            $event->venue_site = Input::get('venue_site');
+            $event->description = Input::get('description');
+            $event->date = Input::get('date');
+            $event->price = Input::get('price');
+            $event->start_time = Input::get('start_time');
+            $event->address = Input::get('address');
+            $event->city = Input::get('city');
+            $event->state = Input::get('state');
+            $event->zip_code = Input::get('zip_code');
+            $event->user_id = 1;
+            if (Input::hasFile('img')) {
+                $event->img = $image->move($directory);
+            }
+            if (Input::hasFile('cover_img')) {
+                $event->img = $image->move($directory);
+            }
+            $event->save();
+            Session::flash('successMessage', 'You updated ' . $event->title . ' event successfully');
+            return Redirect::action('EventsController@index');
 	}
 
 	/**
@@ -130,9 +155,40 @@ class EventsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Event::destroy($id);
+		$event = Event::find($id);
 
-		return Redirect::route('events.index');
+		$event->delete(); 
+
+		return Redirect::action('EventsController@getManage'); 
+		// $event = Event::find($id);
+  //       if(!$event) {
+  //           Session::flash('errorMessage', "Event with id of $id is not found");
+  //           App::abort(404);
+  //       }
+  //       $event->delete();
+  //       return Redirect::action('events.manage');
 	}
+
+	public function getManage()
+    {
+        $query = Event::with('user')->where('user_id', Auth::id());
+        
+        $events = $query->get();
+        
+		return View::make('events.manage')->with(array('events' => $events)); 
+	   }
+
+    public function getList()
+    {
+        $query = Event::with('user');
+        $events = $query->get();
+        return Response::json($events);
+    }
+
+    public function getEvent($id)
+    {
+        $event = Event::find($id);
+        return Response::json($event);
+    }
 
 }

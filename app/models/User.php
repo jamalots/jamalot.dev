@@ -55,7 +55,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function statuses()
 	{
-		return $this->hasMany('Status');
+		return $this->hasMany('Status')->latest();
 
 
 	}
@@ -76,17 +76,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	}
 
-	public function follows()
+	public function followedUsers()
 	{
 
 
 		return $this->belongsToMany(self::class,'follows', 'follower_id', 'followed_id')->withTimestamps();
 	}
+	public function followers()
+	{
+		return $this->belongsToMany(self::class,'follows', 'followed_id', 'follower_id')->withTimestamps();
+	}
+
+
 	public function isFollowedBy(User $otherUser)
 	{
-		$idsOfFollowers = $otherUser->follows()->lists('followed_id');
+		$idsOfFollowers = $otherUser->followedUsers()->lists('followed_id');
 
 		return in_array($this->id, $idsOfFollowers);
+
+	}
+
+	public function comments()
+	{
+		return $this->hasMany('Comment');
+
 
 	}
 

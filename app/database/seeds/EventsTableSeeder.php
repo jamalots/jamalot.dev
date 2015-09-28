@@ -24,7 +24,7 @@ class EventsTableSeeder extends Seeder {
     public function run()
     {
         $faker = Faker::create();
-        for($i=1; $i<=20; $i++)
+        for($i=1; $i<=100; $i++)
         {
             $event = new Event();
             $event->date = $faker->dateTimeBetween($startDate = 'now', $endDate = '3 months');
