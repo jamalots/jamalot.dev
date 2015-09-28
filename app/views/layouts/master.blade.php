@@ -46,7 +46,26 @@
         border: 1px solid lightgrey;
         background: white;
         padding: 20px;
-        margin-bottom: 25px;
+        border-bottom: none;
+      }
+      .commentsForm textarea {
+        border: 1px solid lightgrey;
+        border-top:none;
+        border-radius: 0;
+
+      }
+
+      .comments {
+
+        margin-bottom: 5em;
+      }
+
+      .comments_comment {
+        background:whitesmoke;
+        margin-top: 0;
+        border: 1px solid azure;
+        border-bottom: 1px solid lightgrey;
+
       }
 
     </style>
@@ -67,7 +86,23 @@
       @yield('content')
     </div>
 
-    <script>$('#flash-overlay-modal').modal();</script>
+    <script>
+
+      $('#flash-overlay-modal').modal();
+
+
+      $('.commentsForm').on('keydown', function(e){
+          if(e.keyCode == 13){
+
+            e.preventDefault();
+
+            $(this).submit();
+
+          }
+
+      });
+
+    </script>
 </body>
 
 </html>

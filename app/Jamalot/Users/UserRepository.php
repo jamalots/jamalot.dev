@@ -24,11 +24,7 @@ class UserRepository {
 	public function findByUsername($user_name)
 	{
 
-		return User::with(['statuses' => function($query)
-		{
-				$query->latest();
-
-		}])->whereUser_name($user_name)->first();
+		return User::with('statuses')->whereUser_name($user_name)->first();
 	}
 
 	public function findById($id)
@@ -40,13 +36,13 @@ class UserRepository {
 
 	public function follow($userIdToFollow, User $user)
 	{
-		return $user->follows()->attach($userIdToFollow);
+		return $user->followedUsers()->attach($userIdToFollow);
 
 	}
 
 	public function unfollow($userIdToUnfollow, User $user)
 	{
-		return $user->follows()->detach($userIdToUnfollow);
+		return $user->followedUsers()->detach($userIdToUnfollow);
 
 	}
 

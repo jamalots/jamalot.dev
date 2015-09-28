@@ -125,7 +125,8 @@ return array(
 		'Laracasts\Commander\CommanderServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Smalldogs\Html5inputs\Html5InputsServiceProvider',
-		'Laracasts\Flash\FlashServiceProvider'
+		'Laracasts\Flash\FlashServiceProvider',
+		'Jamalot\Providers\EventServiceProvider'
 
 	),
 
