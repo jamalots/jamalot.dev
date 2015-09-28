@@ -78,17 +78,12 @@ Route::delete('follows/{id}', [
 	'uses' => 'FollowsController@destroy'
 ]);
 
-<<<<<<< HEAD
+
 Route::get('testlogin', 'PagesController@getTest');
-=======
 
 Route::controller('password', 'RemindersController');
 
 Route::get('events/manage', 'EventsController@getManage');
-// Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
-
-
->>>>>>> master
 
 Route::get('users/musicians', 'UsersController@musicians');
 
