@@ -116,4 +116,12 @@ Route::get('users/{id}/photos', 'UsersController@getPhotos');
 
 Route::resource('users', 'UsersController');
 
+Route::get('registration/{id}', 'EventsController@showRegistration');
+Route::get('addRegistration/{id}', 'EventsController@registerUser');
+Route::get('deleteConfirmation/{id}', 'EventsController@showDeleteConfirmation');
+Route::delete('removeRegistration/{id}', [
+	'as' => 'removeRegistration_path',
+	'uses' =>'EventsController@unregisterUser'
+]);
+
 Route::resource('events', 'EventsController');

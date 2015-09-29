@@ -1,10 +1,8 @@
 <article class="media status-media">
 	<div class="pull-left">
-		<p class="media-object"><img class="profile-img" src="{{ $status->user->img}}"></p>
+		<p class="media-object"><img class="profile-img" src="{{ $status->user->img }}"></p>
 	</div>
-
-<!-- 	Create filter to only delete YOUR statuses
- -->	
+	
  	@if($status->user == Auth::user())
 	<div class="pull-right">
 
@@ -37,7 +35,7 @@
 
 		<div class="form-group">
 
-				{{ Form::textarea('body',null, ['class' => 'form-control', 'rows' => 1.5,'placeholder' => 'Write a comment...' ]) }}
+				{{ Form::textarea('body',null, ['class' => 'form-control', 'rows' => 1.5,'placeholder' => 'Create a comment...' ]) }}
 
 		</div>
 

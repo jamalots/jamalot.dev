@@ -190,5 +190,39 @@ class EventsController extends \BaseController {
         $event = Event::find($id);
         return Response::json($event);
     }
+    public function showRegistration($id)
+	{
+		$event = Event::find($id);
+		$users = $event->attendees;
+		return View::make('events.registration', compact('users','event'));
+
+	}
+
+	public function registerUser($id)
+	{
+		$user = Auth::user();
+		$user->eventsAttending()->attach($id);
+		Flash::message('You a now registered for this event');
+		return Redirect::action('EventsController@show', $id);
+	}
+
+	public function showDeleteConfirmation($id) 
+	{
+
+		return View::make('events.deleteConfirmation')->with('id', $id);
+
+	}
+
+	public function unregisterUser($id) 
+	{
+		$user = Auth::user();
+		$user->eventsAttending()->detach($id);
+
+		Flash::message('You are now longer attending this event.');
+
+
+		return Redirect::action('EventsController@show', $id);
+
+	}
 
 }

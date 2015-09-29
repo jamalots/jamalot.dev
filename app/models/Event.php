@@ -17,4 +17,14 @@ class Event extends \Eloquent {
 	{
 		return $this->belongsTo('User');
 	}
+
+	public function attendees()
+	{
+		return $this->belongsToMany('User', 'event_user', 'event_id', 'user_id');
+	}
+
+	public function creator()
+	{
+		return $this->belongsTo('User', 'user_id');
+	}
 }
