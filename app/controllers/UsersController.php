@@ -170,6 +170,8 @@ class UsersController extends \BaseController {
             $file = $file->move(public_path() . $directory, $filename);
 			$user->cover_img = $directory . $filename; 
 
+
+        }
         if ($user->save()) {
         	// dd($user);
             Session::flash('successMessage', 'You updated your profile successfully');
