@@ -15,9 +15,10 @@ body
 }
 #upevents
 {
-    width: 250px;
+    top:550;
+    width: 400px;
     border-bottom-width: 1px;
-    padding-top: 25px;
+    padding-top: 150px;
     border-bottom-style: solid;
     border-bottom-color: black;
 }
@@ -159,14 +160,15 @@ body
         <div class="row">
             <div class="col-md-7"></div>
                 <div class="col-md-5">
-                @if(Auth::user_id())
+                
                 <h3 id="upevents">Upcoming Events at {{{$event->venue}}} </h3>
-                @foreach($events as $event)
-                    <a href=" /events/{{{$event->id}}} ">
-                        <p style="width:300px;"><strong> {{{ $event->user->user_name}}} </strong><p>at</p> <strong> {{{ $event->date}}}</strong> 
+                @foreach($venues as $venue)
+                @if($venue->venue)
+                    <a href=" /events/{{{$venue->id}}} ">
+                        <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ $venue->date}}}</strong></p>
                     </a>
-                @endforeach
                 @endif
+                @endforeach
             </div>
         </div>
     </div>
