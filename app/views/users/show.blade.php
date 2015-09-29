@@ -79,8 +79,8 @@ body
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <div class="container">
     <div class="fb-profile" id="prof">
-       <img  align="left" class="fb-image-lg" src="{{ $user->cover_img }}" alt="Profile image example"/>
-        <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
+       <img  width="1129.500" height="372" align="left" class="fb-image-lg" src="{{ $user->cover_img }}" alt="Profile image example"/>
+        <img width="relative" height="185" align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
             <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong></h1>
             <p><strong>location</strong> || {{ $user->location }} </p>
@@ -118,6 +118,42 @@ body
 
             <p class="text-muted"></p>
 
+            @if(Auth::id() == $user->id)
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                  Update Profile Pic
+                </button>            
+            @endif
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Update Your Profile Pic! Woop Woop!</h4>
+                  </div>
+                  <div class="modal-body">
+                    {{ Form::model($user, array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'class' => 'horizontal', 'method' => 'PUT')) }}
+                    <div class="form-group">
+                                        {{-- <div class="col-md-6"> --}}
+                                        {{ Form::label('img', 'Change Profile Pic') }}
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-info btn-file">Browse 
+                                                    {{ Form::file('img') }}
+                                                    </span>
+                                                </span>
+                                                {{ Form::text('img', null, ['class' => 'form-control', 'readonly']) }}
+                                            </div>
+                                        {{-- </div> --}}
+                            </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    {{ Form::close() }}
+                  </div>
+                </div>
+              </div>
+            </div>
             @unless($user->is($currentUser))
                 @include('users.follow-form')
             @endif

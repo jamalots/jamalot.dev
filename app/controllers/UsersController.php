@@ -133,15 +133,31 @@ class UsersController extends \BaseController {
 		$user = User::find($id);
         $directory = '/img/uploads/';
         $image = Input::file('img');
-    
+    	
+    	if(Input::has('first_name')) {
         $user->first_name = Input::get('first_name');
+        }
+        if(Input::has('last_name')) {
         $user->last_name = Input::get('last_name');
+    	}
+        if(Input::has('instrument')) {
         $user->instrument = Input::get('instrument');
+    	}
+    	if(Input::has('location')) {
         $user->location = Input::get('location');
+        }
+        if(Input::has('genre')) {
         $user->genre = Input::get('genre');
+    	}
+    	if(Input::has('about')) {
         $user->about = Input::get('about');
+    	}
+    	if(Input::has('level')) {
         $user->level = Input::get('level');
+    	}
+    	if(Input::has('user_type')) {
         $user->user_type = Input::get('user_type');
+    	}
         if (Input::hasFile('img')) {
         	$file = Input::file('img');
  			$filename = $user->id . $file->getClientOriginalName();
@@ -153,8 +169,6 @@ class UsersController extends \BaseController {
  			$filename = $user->id . $file->getClientOriginalName();
             $file = $file->move(public_path() . $directory, $filename);
 			$user->cover_img = $directory . $filename; 
-        } else {
-        	$user->cover_img = '/img/table.jpg';
         }
         if ($user->save()) {
         	// dd($user);
