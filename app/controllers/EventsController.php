@@ -92,11 +92,10 @@ class EventsController extends \BaseController {
             Session::flash('errorMessage', "Post with id of $id is not found");
             App::abort(404);
         }
-        Log::info("Event of id $id found");
-        if (Request::wantsJson()) {
-            return Response::json($event);
-        } 
-        return View::make('events.show')->with(array('event' => $event));
+        
+        
+        $venues = Event::where('venue', $event->venue)->orderBy('date', 'desc')->get();
+        return View::make('events.show')->with(array('event' => $event))->with(array('venues' => $venues));
         
 	}
 
