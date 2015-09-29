@@ -24,10 +24,11 @@
                 <li><a href="{{ action('UsersController@bands') }}">View Bands</a></li>
                 <li><a href="{{ action('UsersController@musicians') }}">View Musicians</a></li>
                 <li><a href="{{ action('UsersController@index') }}">View All</a></li>
+                @if ($currentUser)
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><a href="{{ action('EventsController@index') }}">View All Events</a></li>
+                <li><a href="{{ action('EventsController@index') }}">View Your Events</a></li>
+                @endif
               </ul>
             </li>
           </ul>

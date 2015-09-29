@@ -179,7 +179,7 @@ class UsersController extends \BaseController {
         } else {
             Session::flash('errorMessage', 'Could not save user.');
             dd($user->getErrors()->toArray());
-            return Redirect::action('UsersController@index')
+            return Redirect::action('PagesController@home')
                     ->withInput()->withErrors($user->getErrors());
         }
 	}
