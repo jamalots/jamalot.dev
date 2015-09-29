@@ -26,6 +26,7 @@ class StatusController extends \BaseController {
 	 */
 	public function index()
 	{
+		
 		$statuses = $this->statusRepository->getFeedForUser(Auth::user());
 
 		return View::make('statuses.index',compact('statuses'));

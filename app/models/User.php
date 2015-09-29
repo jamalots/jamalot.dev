@@ -100,7 +100,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->hasMany('Comment');
 
-
 	}
+
+	public function eventsCreated() 
+	{
+		return $this->hasMany('Event', 'user_id');
+	}
+	public function eventsAttending() 
+	{
+		return $this->belongsToMany('Event', 'event_user', 'user_id', 'event_id');
+	}
+
+	
 
 }

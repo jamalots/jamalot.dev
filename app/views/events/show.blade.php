@@ -72,6 +72,15 @@ body
             <p><strong>price</strong> || {{ $event->price }} </p>
             <p><strong>starting at</strong> || {{ $event->start_time }} </p>
             <p><strong>on</strong> || {{ $event->date }} </p>
+            @if(Auth::check())
+                @if(Auth::user()->eventsAttending->contains($event->id))
+                    <a href="{{ action('EventsController@showDeleteConfirmation', $event->id)}}" class="btn btn-danger">Unregister</a>
+                @else
+                    <a href="{{ action('EventsController@showRegistration', $event->id) }}" class="btn btn-primary">Register</a>
+                @endif
+            @else
+                <a href="{{{ action('PagesController@home') }}}" class="btn btn-primary">Register</a>
+            @endif
         </div>
     </div>
 </div> <!-- /container -->  
