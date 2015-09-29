@@ -146,20 +146,11 @@ body {
 {{ Form::open(array('action' => array('UsersController@store'), 'files'=>true, 'id' => 'msform')) }}
 	<!-- progressbar -->
 	<ul id="progressbar">
-		<li class="active">Account Setup</li>
-		<li>Basic Information</li>
-		<li>Musical Details</li>
+		<li class="active">Basic Information</li>
+		<li>Style of Play</li>
+		<li>Upload your Stuff</li>
 	</ul>
 	<!-- fieldsets -->
-	<fieldset>
-		<h2 class="fs-title">Create your account</h2>
-		<h3 class="fs-subtitle">Become a knight of Jamalot!</h3>
-		<input type="text" name="user_name" placeholder="Username" required/>
-		<input type="text" name="email" placeholder="Email" required/>
-		<input type="password" name="pass" placeholder="Password" required/>
-		<input type="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required/>
-		<input type="button" name="next" class="next action-button" value="Next" />
-	</fieldset>
 	<fieldset>
 		<h2 class="fs-title">Basic Information</h2>
 		<h3 class="fs-subtitle">Announce thyself to the world!</h3>
@@ -229,18 +220,13 @@ body {
         </select>
         <label for="about">About:</label>
         <textarea name="about" id="about"></textarea>
-		<label for="img">Upload Profile Image:</label>
-        <input type="file" class="filestyle" name="img" data-buttonName="btn-success" data-input="false">
-        <label for="cover_img">Upload Cover Photo Image:</label>
-        <input type="file" class="filestyle" data-input="false" name="cover_img" data-buttonName="btn-success">
-        <br>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
 		<input type="button" name="next" class="next action-button" value="Next" />
 	</fieldset>
-	<fieldset>
-		<h2 class="fs-title">Musical Details</h2>
-		<h3 class="fs-subtitle">Tell us how thee jams</h3>
-		<label for="instrument">Instruments Played (Select Up to 3):</label>
+  <fieldset>
+    <h2 class="fs-title">Style of Play</h2>
+    <h3 class="fs-subtitle">Tell us how thee jams</h3>
+    <label for="instrument">Instruments Played (Select Up to 3):</label>
         <select id="basic" class="selectpicker form-control" multiple data-max-options="3" data-live-search="true" name="instrument">
             <optgroup label="Guitar">
               <option>Acoustic Guitar</option>
@@ -400,7 +386,17 @@ body {
               <option>World Music</option>
             </optgroup>
         </select>
-
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+	<fieldset>
+		<h2 class="fs-title">Upload your stuff</h2>
+		<h3 class="fs-subtitle">Share your mug and your tunes</h3>
+		<label for="img">Upload Profile Image:</label>
+    <input type="file" class="filestyle" name="img" data-buttonName="btn-success" data-input="false">
+    <label for="cover_img">Upload Cover Photo Image:</label>
+    <input type="file" class="filestyle" data-input="false" name="cover_img" data-buttonName="btn-success">
+    <br>
 		<input type="button" name="previous" class="previous action-button" value="Previous" />
 		<input type="submit" name="submit" class="submit action-button" value="Submit" />
 		{{-- <button class="btn btn-primary submit action-button">Update Profile!</button> --}}
