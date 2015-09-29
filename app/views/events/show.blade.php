@@ -13,6 +13,14 @@ body
 {
 	position:absolute;
 }
+#upevents
+{
+    width: 250px;
+    border-bottom-width: 1px;
+    padding-top: 25px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
 
 .fb-profile img.fb-image-lg{
     z-index: 0;
@@ -54,7 +62,9 @@ body
 }
 
 #map-canvas {
-    height: 360px;
+    top:550;
+    height: 300px;
+    width:300px;
 }
 </style>
 @section('content')
@@ -83,57 +93,73 @@ body
 		</div>
 	
 </div> -->
+<div class="col-md-3"></div>
+    <div class="col-md-4 map-canvas">
+        <div id="map-canvas"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhRMZMvQrojZ4l73J2OCrxEuvCjm88l9I"></script>
 
-<div id="map-canvas"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhRMZMvQrojZ4l73J2OCrxEuvCjm88l9I"></script>
+         
 
- <script type="text/javascript">
- <div id="map-canvas"></div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhRMZMvQrojZ4l73J2OCrxEuvCjm88l9I"></script>
+         <script type="text/javascript">
+         (function() {
+                "use strict";
+                // Set our map options
+                var address = "{{$event->address}}, {{$event->city}}, {{$event->state}}, {{$event->zip_code}}";
+                var mapOptions = {
+                    // Set the zoom level
+                    zoom: 10,
+                };
+                var geocoder = new google.maps.Geocoder();
 
- <script type="text/javascript">
- (function() {
-        "use strict";
-        // Set our map options
-        var address = "{{$event->address}}, {{$event->city}}, {{$event->state}}, {{$event->zip_code}}";
-        var mapOptions = {
-            // Set the zoom level
-            zoom: 10,
-        };
-        var geocoder = new google.maps.Geocoder();
+                var marker;
+                // Geocode our address
+                geocoder.geocode({ "address": address }, function(results, status) {
+                // Check for a successful result
+                    if (status == google.maps.GeocoderStatus.OK) {
+                       // Recenter the map over the address
+                        map.setCenter(results[0].geometry.location);
+                        marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: map,
+                            // icon: '/img/marker.tiff'
+                        });
+                       // Create a new infoWindow object with content
+                        var infowindow = new google.maps.InfoWindow({
+                            content: " {{{$event->user->user_name}}} at {{{$event->venue}}} "
+                        });
 
-        var marker;
-        // Geocode our address
-        geocoder.geocode({ "address": address }, function(results, status) {
-        // Check for a successful result
-            if (status == google.maps.GeocoderStatus.OK) {
-               // Recenter the map over the address
-                map.setCenter(results[0].geometry.location);
-                marker = new google.maps.Marker({
-                    position: results[0].geometry.location,
-                    map: map,
-                    // icon: '/img/marker.tiff'
+                        // Open the window using our map and marker
+                        infowindow.open(map, marker);
+                   } else {
+                       // Show an error message with the status if our request fails
+                       alert("Geocoding was not successful - STATUS: " + status);
+                   }
                 });
-               // Create a new infoWindow object with content
-                var infowindow = new google.maps.InfoWindow({
-                    content: " {{{$event->user->user_name}}} at {{{$event->venue}}} "
-                });
 
-                // Open the window using our map and marker
-                infowindow.open(map, marker);
-           } else {
-               // Show an error message with the status if our request fails
-               alert("Geocoding was not successful - STATUS: " + status);
-           }
-        });
-
-        
-        
-        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    })();   
-
-</script>
+                
+                
+                var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            })();   
 
 
+
+        </script>
+
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-7"></div>
+                <div class="col-md-5">
+                @if(Auth::user_id())
+                <h3 id="upevents">Upcoming Events at {{{$event->venue}}} </h3>
+                @foreach($events as $event)
+                    <a href=" /events/{{{$event->id}}} ">
+                        <p style="width:300px;"><strong> {{{ $event->user->user_name}}} </strong><p>at</p> <strong> {{{ $event->date}}}</strong> 
+                    </a>
+                @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
 
 @stop
