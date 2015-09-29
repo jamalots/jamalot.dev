@@ -25,7 +25,7 @@ Route::get('register', [
 
 Route::post('register', [
 	'as' => 'register_path',
-	'uses' => 'UsersController@store'
+	'uses' => 'RegistrationController@store'
 
 ]);
 
