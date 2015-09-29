@@ -153,9 +153,7 @@ class UsersController extends \BaseController {
  			$filename = $user->id . $file->getClientOriginalName();
             $file = $file->move(public_path() . $directory, $filename);
 			$user->cover_img = $directory . $filename; 
-        } else {
-        	$user->cover_img = '/img/table.jpg';
-        }
+        } 
         if ($user->save()) {
         	// dd($user);
             Session::flash('successMessage', 'You updated your profile successfully');

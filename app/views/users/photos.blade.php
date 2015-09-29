@@ -79,10 +79,11 @@ body{
   color: white;
   font-size: 30px;
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 84px;
+  right: 180px;
   float: right;
   cursor: zoom-out;
+  opacity: .6;
 }
 
 [class*='thumbnail-']{
@@ -127,96 +128,51 @@ body{
 @section('content')
 
 <div class="gallery">
-  <div class="thumbnail-1 wow fadeInLeft">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-9.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">San Francisco</h3>
-    </div>  
-  </div>
-  <div class="large-1 wow bounceInLeft">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-9.jpg" alt="" />
-    <span class="close">X</span>
-  </div>
-  <div class="thumbnail-2 wow fadeInDown">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-6.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">Paris</h3>  
-    </div> 
-  </div>
-  <div class="large-2 wow bounceInDown">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-6.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div>
-  <div class="thumbnail-3 wow fadeInRight">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-7.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">Sydney</h3>  
-    </div> 
-  </div>
-  <div class="large-3 wow bounceInRight">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-7.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div>
-  <div class="thumbnail-4 wow fadeInLeft">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-5.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">Tokyo</h3>  
-    </div> 
-  </div>
-  <div class="large-4 wow bounceInLeft">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-5.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div>  
-  <div class="thumbnail-5 wow flipInX">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-1.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">Berlin</h3>  
-    </div> 
-  </div>
-  <div class="large-5 wow bounceIn">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-1.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div> 
-  <div class="thumbnail-6 wow fadeInRight">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-4.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">New York</h3>  
-    </div> 
-  </div>
-  <div class="large-6 wow bounceInRight">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-4.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div> 
-  <div class="thumbnail-7 wow fadeInLeft">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-3.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">New York</h3>  
-    </div> 
-  </div>
-  <div class="large-7 wow bounceInLeft">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-3.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div> 
-  <div class="thumbnail-8 wow fadeInUp">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-2.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">New York</h3>  
-    </div> 
-  </div>
-  <div class="large-8 wow bounceInUp">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-2.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div> 
-  <div class="thumbnail-9 wow fadeInRight">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-8.jpg" alt="" />
-    <div class="caption">
-      <h3 class="wow fadeInUp">Brisbane</h3>  
-    </div> 
-  </div>
-  <div class="large-9 wow bounceInRight">
-    <img src="http://lorempixel.com/output/city-q-c-640-480-8.jpg" alt="" />
-    <span class="close">&#x2715;</span>
-  </div>   
+  <?php 
+      $count = 1;
+      foreach ($images as $image)
+      { //foreach as shown in question
+
+          if($count==1){ ?>
+              <div class="thumbnail-{{ $image->id }} wow fadeInLeft">
+            <img src="{{ $image->img }}" alt="" />
+            <div class="caption">
+              <h3 class="wow fadeInUp">{{ $image->description }}</h3>
+            </div>  
+        </div>
+        <div class="large-{{ $image->id }} wow bounceInLeft">
+            <img src="{{ $image->img }}" alt="" />
+            <span class="close">X</span>
+        </div>
+          <?php } elseif($count==2){ ?>
+              <div class="thumbnail-{{ $image->id }} wow fadeInDown">
+            <img src="{{ $image->img }}" alt="" />
+            <div class="caption">
+              <h3 class="wow fadeInUp">{{ $image->description }}</h3>
+            </div>  
+        </div>
+        <div class="large-{{ $image->id }} wow bounceInDown">
+            <img src="{{ $image->img }}" alt="" />
+            <span class="close">X</span>
+        </div>
+          <?php } elseif($count==3){ ?>
+            <div class="thumbnail-{{ $image->id }} wow fadeInRight">
+            <img src="{{ $image->img }}" alt="" />
+            <div class="caption">
+              <h3 class="wow fadeInUp">{{ $image->description }}</h3>
+            </div>  
+        </div>
+        <div class="large-{{ $image->id }} wow bounceInRight">
+            <img src="{{ $image->img }}" alt="" />
+            <span class="close">X</span>
+        </div>
+          <?php 
+            $count = 0; 
+        }
+
+          $count++;
+      } //end foreach
+  ?>
 </div>
 
 
