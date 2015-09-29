@@ -52,16 +52,46 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		$validator = Validator::make($data = Input::all(), User::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-
-		User::create($data);
-
-		return Redirect::route('users.index');
+		$directory = '/img/uploads/';
+        $image = Input::file('img');
+        $user = new User;
+        $user->user_name = Input::get('user_name');
+        $user->email = Input::get('email');
+        $user->password = Input::get('password');
+        $user->password_confirmation = Input::get('password_confirmation');
+        $user->first_name = Input::get('first_name');
+        $user->last_name = Input::get('last_name');
+        $user->instrument = Input::get('instrument');
+        $user->location = Input::get('location');
+        $user->genre = Input::get('genre');
+        $user->about = Input::get('about');
+        $user->level = Input::get('level');
+        $user->user_type = Input::get('user_type');
+        if (Input::hasFile('img')) {
+        	$file = Input::file('img');
+ 			$filename = $user->id . $file->getClientOriginalName();
+            $file = $file->move(public_path() . $directory, $filename);
+			$user->img = $directory . $filename; 
+        } 
+        if (Input::hasFile('cover_img')) {
+        	$file = Input::file('cover_img');
+ 			$filename = $user->id . $file->getClientOriginalName();
+            $file = $file->move(public_path() . $directory, $filename);
+			$user->cover_img = $directory . $filename; 
+        } else {
+        	$user->cover_img = '/img/table.jpg';
+        }
+        if ($user->save()) {
+        	// dd($user);
+        	Auth::login($user);
+            Session::flash('successMessage', 'You created ' . $user->id . '\'s profile successfully');
+            return Redirect::action('UsersController@show', $user->id);
+        } else {
+            Session::flash('errorMessage', 'Could not save user.');
+            dd($user->getErrors()->toArray());
+            return Redirect::action('UsersController@index')
+                    ->withInput()->withErrors($user->getErrors());
+        }
 	}
 
 	/**
@@ -118,10 +148,17 @@ class UsersController extends \BaseController {
             $file = $file->move(public_path() . $directory, $filename);
 			$user->img = $directory . $filename; 
         } 
-        $user->cover_img = '/img/table.jpg';
+        if (Input::hasFile('cover_img')) {
+        	$file = Input::file('cover_img');
+ 			$filename = $user->id . $file->getClientOriginalName();
+            $file = $file->move(public_path() . $directory, $filename);
+			$user->cover_img = $directory . $filename; 
+        } else {
+        	$user->cover_img = '/img/table.jpg';
+        }
         if ($user->save()) {
         	// dd($user);
-            Session::flash('successMessage', 'You edited ' . $user->user_name . '\'s account successfully');
+            Session::flash('successMessage', 'You updated your profile successfully');
             return Redirect::action('UsersController@show', $id);
         } else {
             Session::flash('errorMessage', 'Could not save user.');

@@ -182,7 +182,7 @@
             </div>
 
             <div class="form-group">
-                <label for="original">Playing Level:</label>
+                <label for="original">Song Preference:</label>
                 <select id="original" class="selectpicker show-tick form-control" data-live-search="true" name="original">
                   <option>Originals</option>
                   <option>Covers</option>
