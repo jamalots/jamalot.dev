@@ -62,10 +62,12 @@
       }
 
       .comments_comment {
+
         background:whitesmoke;
         margin-top: 0;
         border: 1px solid azure;
         border-bottom: 1px solid lightgrey;
+        padding: 10px;
 
       }
 
@@ -73,6 +75,7 @@
           height:80px;
           width:80px;
       }
+    
 
     </style>
     @yield('styles')

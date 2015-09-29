@@ -41,12 +41,11 @@
           <ul class="nav navbar-nav navbar-right">
             
             @if ($currentUser)
-              <!-- change css for gravatar -->
-              <!-- <img class="nav-gravatar" src="//www.gravatar.com/avatar {{ md5($currentUser->emai) }}?s=30" alt=" {{$currentUser->user_name}} "> -->
-            <li class="dropdown">
+              <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li>{{ link_to_route('profile_path', 'Your Profile',$currentUser->user_name) }}</li>
+<!--                 <li>{{ link_to_route('profile_path', 'Your Profile',$currentUser->user_name) }}</li>
+ -->                <li><a href="{{ action('UsersController@show', Auth::id()) }}">Your Profile</a></li>
                 <li role="separator" class="divider"></li>
                 <li>{{ link_to_route('logout_path', 'Log Out')}}</li>
               </ul>
