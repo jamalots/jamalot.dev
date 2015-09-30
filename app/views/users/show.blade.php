@@ -83,9 +83,9 @@ body
         <img width="relative" height="185" align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
             <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong> <small>{{ $currentUser->user_name}}</small></h1>
-            <p><strong>location</strong> || {{ $user->location }} </p>
-            <p><strong>main instrument</strong> || {{ $user->instrument }} </p>
-            <p><strong>industry role</strong> || {{ $user->industry_role }} </p>
+            <p><strong>Location</strong> || {{ $user->location }} </p>
+            <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
+            <p><strong>Genre</strong> || {{ $user->genre }} </p>
         </div>
     </div>
 </div> <!-- /container -->  
@@ -133,18 +133,9 @@ body
                   <div class="modal-body">
                     {{ Form::model($user, array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'class' => 'horizontal', 'method' => 'PUT')) }}
                     <div class="form-group">
-                                        {{-- <div class="col-md-6"> --}}
-                                        {{ Form::label('img', 'Change Profile Pic') }}
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <span class="btn btn-info btn-file">Browse 
-                                                    {{ Form::file('img') }}
-                                                    </span>
-                                                </span>
-                                                {{ Form::text('img', null, ['class' => 'form-control', 'readonly']) }}
-                                            </div>
-                                        {{-- </div> --}}
-                            </div>
+                        <label for="img">Upload Profile Image:</label>
+                        <input type="file" class="filestyle" name="img" data-buttonName="btn-primary" data-buttonBefore="true">               
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -202,6 +193,9 @@ body
     </div>
 </div>
 
+<script type="text/javascript">
+$(":file").filestyle({buttonName: "btn-primary", buttonBefore: true, });
+</script>
 
 
 @stop
