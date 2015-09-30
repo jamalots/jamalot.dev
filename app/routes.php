@@ -114,6 +114,8 @@ Route::get('users/bands', 'UsersController@bands');
 
 Route::get('users/{id}/photos', 'UsersController@getPhotos');
 
+Route::get('users/{id}/following', 'UsersController@getFollowers');
+
 Route::resource('users', 'UsersController');
 
 Route::get('registration/{id}', 'EventsController@showRegistration');
@@ -123,5 +125,8 @@ Route::delete('removeRegistration/{id}', [
 	'as' => 'removeRegistration_path',
 	'uses' =>'EventsController@unregisterUser'
 ]);
+
+Route::get('users/{id}/followers', 'FollowsController@showFollowers');
+Route::get('users/{id}/followedUsers','FollowsController@showFollowedUsers');
 
 Route::resource('events', 'EventsController');

@@ -143,7 +143,7 @@ body {
 @section('content')
 
 <!-- multistep form -->
-{{ Form::open(array('action' => array('UsersController@store'), 'files'=>true, 'id' => 'msform')) }}
+{{ Form::open(array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'id' => 'msform')) }}
 	<!-- progressbar -->
 	<ul id="progressbar">
 		<li class="active">Basic Information</li>
@@ -157,14 +157,14 @@ body {
 		<label for="first_name">First Name:</label>
 		<input type="text" name="first_name" class = "form-control" id="first_name">
 		<label for="last_name">Last Name:</label>
-		<input type="text" name="last_name" class = "form-control" id="first_name">
+		<input type="text" name="last_name" class = "form-control" id="last_name">
 		<label for="user_type">Type of Artist:</label>
 		<select id="user_type" class="selectpicker form-control" data-live-search="true" name="user_type">
           <option>Musician</option>
           <option>Band</option>
         </select>
         <label for="location">Location:</label>
-        <select id="location" class="selectpicker show-tick form-control" data-live-search="true" name="location">
+        <select id="location" class="selectpicker form-control" data-live-search="true" name="location">
             <option>Alaska</option>
             <option>Alabama</option>
             <option>Arkansas</option>
@@ -292,13 +292,13 @@ body {
             <option>Professional</option>
         </select>
         <label for="original">Song Preference:</label>
-        <select id="original" class="selectpicker show-tick form-control" data-live-search="true" name="original">
+        <select id="original" class="selectpicker form-control" data-live-search="true" name="original">
             <option>Originals</option>
             <option>Covers</option>
             <option>Both</option>
         </select>
         <label for="genre">Genre (Select up to 5):</label>
-        <select id="basic" class="selectpicker show-tick form-control" multiple data-max-options="5" data-live-search="true" name="genre">
+        <select id="basic" class="selectpicker form-control" multiple data-max-options="5" data-live-search="true" name="genre">
             <optgroup label="Blues">
               <option>Acoustic Blues</option>
               <option>Electric Blues</option>

@@ -67,6 +67,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	}
 
+	public function ads()
+	{
+		return $this->hasMany('Ad');
+
+	}
+
 	public function is($user)
 	{
 
@@ -78,7 +84,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function followedUsers()
 	{
-
 
 		return $this->belongsToMany(self::class,'follows', 'follower_id', 'followed_id')->withTimestamps();
 	}

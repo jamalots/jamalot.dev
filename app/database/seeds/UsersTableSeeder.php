@@ -85,6 +85,11 @@ class UsersTableSeeder extends Seeder {
 			}else{
 				$user->user_type = 'musician';
 			}
+			if($i%7 == 0){
+				$user->teacher = true;
+			} else {
+				$user->teacher = false; 
+			}
 			$user->genre = $faker->word;
 			$user->music = '<iframe class="player" width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/147853477&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe><script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>';
 			$user->cover_img = $faker->imageUrl($width = 1103, $height = 363, $category = 'nightlife');

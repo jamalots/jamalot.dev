@@ -1,0 +1,1 @@
+/vagrant/sites/jamalot.dev/app/views/ads/index.blade.php
