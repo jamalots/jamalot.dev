@@ -52,7 +52,7 @@ class StatusController extends \BaseController {
 
 		$this->execute(PublishStatusCommand::class, $input);
 
-		Flash::message('Your Is Status Updated!!');
+		Flash::message('Your status has been updated.');
 
 		return Redirect::back();
 
@@ -69,6 +69,9 @@ class StatusController extends \BaseController {
 	{
 		$status = Status::find($id);
 		$status->delete();
+
+		Flash::message('Your status has been removed.');
+
 
 		return Redirect::back();
 	}

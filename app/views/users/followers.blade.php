@@ -9,8 +9,8 @@
 
 {{-- alternate solution --}}
 <div class="media">
-  <h1>View All</h1>
-  @foreach ($users->chunk(4) as $chunk)
+  <h1>Followers</h1>
+  @foreach ($user->followers->chunk(4) as $chunk)
     <div class="media-row">
         @foreach ($chunk as $user)
             <div class="thumbnail"><img src="{{ $user->img }}">

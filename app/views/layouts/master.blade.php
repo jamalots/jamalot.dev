@@ -75,6 +75,10 @@
           height:80px;
           width:80px;
       }
+      .scroller {
+        overflow-y:auto;
+        height:100px;
+      }
     
 
     </style>
