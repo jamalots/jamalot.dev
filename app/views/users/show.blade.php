@@ -84,11 +84,15 @@ body
         <div class="fb-profile-text">
 <<<<<<< HEAD
             <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong> <small>{{ $user->user_name}}</small></h1>
+=======
+<<<<<<< HEAD
+            <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong> <small>{{ $user->user_name}}</small></h1>
             <p><strong>Location</strong> || {{ $user->location }} </p>
             <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
             <p><strong>Genre</strong> || {{ $user->genre }} </p>
 =======
             <h1><strong>{{ $user->first_name or $user->user_name }} {{$user->last_name}}</strong> <small>{{ $user->user_type }}</small></h1>
+>>>>>>> 517231ffb5ab02b3b3e7a28783d6ffd0b13bc1f5
             <p><strong>location</strong> || {{ $user->location }} </p>
             <p><strong>main instrument</strong> || {{ $user->instrument }} </p>
             <p><strong>industry role</strong> || {{ $user->industry_role }} </p>

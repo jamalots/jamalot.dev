@@ -15,12 +15,19 @@ body
 }
 #upevents
 {
-    top:550;
+    top:1500px;
     width: 400px;
     border-bottom-width: 1px;
-    padding-top: 150px;
+    padding-top:175px;
     border-bottom-style: solid;
     border-bottom-color: black;
+
+}
+
+.scroller
+{
+   overflow-y: auto; 
+    height:200px; 
 }
 
 .fb-profile img.fb-image-lg{
@@ -66,6 +73,7 @@ body
     top:550;
     height: 300px;
     width:300px;
+    
 }
 </style>
 @section('content')
@@ -106,11 +114,13 @@ body
 <div class="col-md-3"></div>
     <div class="col-md-4 map-canvas">
         <div id="map-canvas"></div>
+        
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhRMZMvQrojZ4l73J2OCrxEuvCjm88l9I"></script>
 
          
 
          <script type="text/javascript">
+         
          (function() {
                 "use strict";
                 // Set our map options
@@ -162,13 +172,15 @@ body
                 <div class="col-md-5">
                 
                 <h3 id="upevents">Upcoming Events at {{{$event->venue}}} </h3>
+                <div class="scroller">
                 @foreach($venues as $venue)
-                @if($venue->venue)
-                    <a href=" /events/{{{$venue->id}}} ">
-                        <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ $venue->date}}}</strong></p>
-                    </a>
-                @endif
+                    @if($venue->venue)
+                        <a href=" /events/{{{$venue->id}}} ">
+                            <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ $venue->date}}}</strong></p>
+                        </a>
+                    @endif
                 @endforeach
+                </div>
             </div>
         </div>
     </div>
