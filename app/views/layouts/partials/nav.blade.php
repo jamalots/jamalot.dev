@@ -23,11 +23,8 @@
               <ul class="dropdown-menu">
                 <li><a href="{{ action('UsersController@bands') }}">View Bands</a></li>
                 <li><a href="{{ action('UsersController@musicians') }}">View Musicians</a></li>
+                <li role="separator" class="divider"></li>
                 <li><a href="{{ action('UsersController@index') }}">View All</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
           </ul>

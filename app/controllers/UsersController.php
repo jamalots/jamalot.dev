@@ -174,7 +174,7 @@ class UsersController extends \BaseController {
         }
         if ($user->save()) {
         	// dd($user);
-            Session::flash('successMessage', 'You updated your profile successfully');
+            Flash::message('successMessage', 'You updated your profile successfully');
             return Redirect::action('UsersController@show', $id);
         } else {
             Session::flash('errorMessage', 'Could not save user.');
