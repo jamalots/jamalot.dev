@@ -9,6 +9,7 @@
 
 {{-- alternate solution --}}
 <div class="media">
+	<h1>Bands</h1>
 	@foreach ($users->chunk(4) as $chunk)
     <div class="media-row">
         @foreach ($chunk as $user)

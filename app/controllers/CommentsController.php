@@ -26,6 +26,8 @@ class CommentsController extends \BaseController {
 		$status = Comment::find($id);
 		$status->delete();
 
+		Flash::message('Your comment has been deleted.');
+
 		return Redirect::back();
 	}
 

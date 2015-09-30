@@ -44,5 +44,24 @@ class FollowsController extends \BaseController {
 		Return Redirect::back();
 	}
 
+	public function showFollowers($id)
+	{
+		$user = User::find($id);
+
+
+		return View::make('users.followers',compact('user'));
+	
+		
+	}
+
+	public function showFollowedUsers($id)
+	{
+		$user = User::find($id);
+
+
+		return View::make('users.followedUsers',compact('user'));
+
+	}
+
 
 }

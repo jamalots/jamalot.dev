@@ -79,13 +79,20 @@ body
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <div class="container">
     <div class="fb-profile" id="prof">
-       <img  width="1129.500" height="372" align="left" class="fb-image-lg" src="{{ $user->cover_img }}" alt="Profile image example"/>
-        <img width="relative" height="185" align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
+       <img  width="1129.500" height="372" align="left" class="fb-image-lg" src="{{ $user->cover_img or '/img/castle.jpg' }}" alt="Profile image example"/>
+        <img width="relative" height="185" align="left" class="fb-image-profile thumbnail" src="{{ $user->img or '/img/castle2.jpg' }}" alt="Profile image example"/>
         <div class="fb-profile-text">
+<<<<<<< HEAD
             <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong> <small>{{ $user->user_name}}</small></h1>
             <p><strong>Location</strong> || {{ $user->location }} </p>
             <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
             <p><strong>Genre</strong> || {{ $user->genre }} </p>
+=======
+            <h1><strong>{{ $user->first_name or $user->user_name }} {{$user->last_name}}</strong> <small>{{ $user->user_type }}</small></h1>
+            <p><strong>location</strong> || {{ $user->location }} </p>
+            <p><strong>main instrument</strong> || {{ $user->instrument }} </p>
+            <p><strong>industry role</strong> || {{ $user->industry_role }} </p>
+>>>>>>> master
         </div>
     </div>
 </div> <!-- /container -->  
@@ -155,28 +162,59 @@ body
             </div>
         </div>
 
-         <div class="row">
+        <div class="row">
             <div class="col-md-2"></div>
                 <div class="col-md-6">
                 <h3 id="upevents">Upcoming Events</h3>
-                @foreach($user->events as $event)
-                    <a href=" /events/{{{$event->id}}} ">
-                        <p style="width:300px;"><strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
-                    </a>
-                @endforeach
+                @if(!$user->events()->count() == 0)
+                    @foreach($user->events as $event)
+                        <a href=" /events/{{{$event->id}}} ">
+                            <p style="width:300px;"><strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user is not attending any upcoming events.</p>
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
+                <h3 id="upevents">Followers</h3>
+                    @if(!$followerCount == 0)
+                        @foreach($user->followers as $follower)
+                            <a href="{{ action('UsersController@show', $follower->id) }}"><p>{{$follower->user_name}}</p></a>
+
+                        @endforeach 
+                        <a href="{{ action('FollowsController@showFollowers', $user->id) }}"><p>View All</p></a> 
+                    @else
+                        <p>This user does not have any followers.</p> 
+                    @endif           
+            </div>              
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
+                <h3 id="upevents">Following</h3>
+                    @if(!$user->followedUsers()->count() == 0)
+                        @foreach($user->followedUsers as $followed)
+                            <a href="{{ action('UsersController@show', $followed->id) }}"><p>{{$followed->user_name}}</p></a>
+                            
+                        @endforeach
+                        <a href="{{ action('FollowsController@showFollowedUsers', $user->id) }}"><p>View All</p></a>
+                    @else
+                     <p>This user is not following anyone.</p> 
+                    @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
+                <h3 id="upevents">My Photos</h3>
+                    <a href="{{ action('UsersController@getPhotos', $user->id) }}"><p>View All</p></a>
             </div>
         </div>
             
-    
-
-
-<!--        show user profile pics of followers
- -->
-        <!-- @foreach($user->followers as $follower)
-            
-            <img src="{{ $follower->img }}" alt="Profile pic here">
-
-        @endforeach -->
 
     </div>
 
