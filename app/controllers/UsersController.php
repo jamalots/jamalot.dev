@@ -78,9 +78,7 @@ class UsersController extends \BaseController {
  			$filename = $user->id . $file->getClientOriginalName();
             $file = $file->move(public_path() . $directory, $filename);
 			$user->cover_img = $directory . $filename; 
-        } else {
-        	$user->cover_img = '/img/table.jpg';
-        }
+        } 
         if ($user->save()) {
         	// dd($user);
         	Auth::login($user);
@@ -158,6 +156,9 @@ class UsersController extends \BaseController {
     	if(Input::has('user_type')) {
         $user->user_type = Input::get('user_type');
     	}
+    	if(Input::has('teacher')) {
+        $user->teacher = Input::get('teacher');
+    	}
         if (Input::hasFile('img')) {
         	$file = Input::file('img');
  			$filename = $user->id . $file->getClientOriginalName();
@@ -205,6 +206,14 @@ class UsersController extends \BaseController {
 
 		return View::make('users.photos')->with(array('images' => $images)); 
 
+
+	}
+
+	public function getFollowers($id)
+	{
+		$followers = User::find($id)->followedUsers();
+
+		return View::make('users.following')->with(array('followers' => $followers));
 
 	}
 

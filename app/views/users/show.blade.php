@@ -82,7 +82,7 @@ body
        <img  width="1129.500" height="372" align="left" class="fb-image-lg" src="{{ $user->cover_img }}" alt="Profile image example"/>
         <img width="relative" height="185" align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
-            <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong> <small>{{ $currentUser->user_name}}</small></h1>
+            <h1><strong>{{ $user->first_name }} {{$user->last_name}}</strong> <small>{{ $user->user_name}}</small></h1>
             <p><strong>Location</strong> || {{ $user->location }} </p>
             <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
             <p><strong>Genre</strong> || {{ $user->genre }} </p>

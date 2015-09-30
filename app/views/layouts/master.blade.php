@@ -14,7 +14,10 @@
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap-select.css">
+    <link rel="stylesheet" href="/css/build.css">
+
 
     <style>
 
@@ -83,7 +86,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap-select.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-filestyle.js"> </script>
+    <script src="/js/bootstrap-filestyle.js"> </script>
+    
     @yield('scripts')
     
 </head>
