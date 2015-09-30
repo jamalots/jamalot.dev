@@ -126,7 +126,8 @@ return array(
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Smalldogs\Html5inputs\Html5InputsServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
-		'Jamalot\Providers\EventServiceProvider'
+		'Jamalot\Providers\EventServiceProvider',
+		'Intervention\Image\ImageServiceProvider'
 
 	),
 
@@ -196,6 +197,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Flash' 			=> 'Laracasts\Flash\Flash',
+		'Image' 			=> 'Intervention\Image\Facades\Image'
 
 	),
 
