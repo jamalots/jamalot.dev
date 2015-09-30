@@ -143,7 +143,7 @@ body {
 @section('content')
 
 <!-- multistep form -->
-{{ Form::open(array('action' => array('UsersController@store'), 'files'=>true, 'id' => 'msform')) }}
+{{ Form::open(array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'id' => 'msform', 'method' => 'PUT')) }}
   <!-- progressbar -->
   <ul id="progressbar">
     <li class="active">Basic Information</li>
@@ -157,14 +157,14 @@ body {
     <label for="first_name">First Name:</label>
     <input type="text" name="first_name" class = "form-control" id="first_name">
     <label for="last_name">Last Name:</label>
-    <input type="text" name="last_name" class = "form-control" id="first_name">
+    <input type="text" name="last_name" class = "form-control" id="last_name">
     <label for="user_type">Type of Artist:</label>
     <select id="user_type" class="selectpicker form-control" data-live-search="true" name="user_type">
           <option>Musician</option>
           <option>Band</option>
         </select>
         <label for="location">Location:</label>
-        <select id="location" class="selectpicker show-tick form-control" data-live-search="true" name="location">
+        <select id="location" class="selectpicker form-control" data-live-search="true" name="location">
             <option>Alaska</option>
             <option>Alabama</option>
             <option>Arkansas</option>
@@ -227,165 +227,169 @@ body {
     <h2 class="fs-title">Style of Play</h2>
     <h3 class="fs-subtitle">Tell us how thee jams</h3>
     <label for="instrument">Instruments Played (Select Up to 3):</label>
-        <select id="basic" class="selectpicker form-control" multiple data-max-options="3" data-live-search="true" name="instrument">
-            <optgroup label="Guitar">
-              <option>Acoustic Guitar</option>
-              <option>Classical Guitar</option>
-              <option>Electric Guitar</option>
-              <option>Steel Guitar</option>
-              <option>Electric Bass</option>
-              <option>Double Bass</option>
-              <option>Ukelele</option>
-            </optgroup>
-            <optgroup label="Keys">
-              <option>Piano</option>
-              <option>Keyboard</option>
-              <option>Organ</option>
-              <option>Accordion</option>
-            </optgroup>
-            <optgroup label="Percussion">
-              <option>Drums</option>
-              <option>Other Percussion</option>
-            </optgroup>
-            <optgroup label="Vocals">
-              <option>Lead Rock/Pop</option>
-              <option>Lead Jazz</option>
-              <option>Bass</option>
-              <option>Baritone</option>
-              <option>Tenor</option>
-              <option>Alto</option>
-              <option>Mezzo-Soprano</option>
-              <option>Soprano</option>
-            </optgroup>
-            <optgroup label="Strings">
-              <option>Cello</option>
-              <option>Double Bass</option>
-              <option>Viola</option>
-              <option>Violin</option>
-              <option>Fiddle</option>
-              <option>Banjo</option>
-              <option>Harp</option>
-              <option>Mandolin</option>
-            </optgroup>
-            <optgroup label="Brass">
-              <option>Trumpet</option>
-              <option>Trombone</option>
-              <option>Tuba</option>
-              <option>French Horn</option>
-            </optgroup>
-            <optgroup label="Winds">
-              <option>Alto Sax</option>
-              <option>Tenor Sax</option>
-              <option>Flute</option>
-              <option>Oboe</option>
-              <option>Clarinet</option>
-              <option>Harmonica</option>
-              <option>Piccolo</option>
-              <option>Bassoon</option>
-            </optgroup>
-        </select>
-        <label for="level">Playing Level:</label>
-        <select id="location" class="selectpicker form-control" data-live-search="true" name="level">
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Semi-Pro</option>
-            <option>Professional</option>
-        </select>
-        <label for="original">Song Preference:</label>
-        <select id="original" class="selectpicker show-tick form-control" data-live-search="true" name="original">
-            <option>Originals</option>
-            <option>Covers</option>
-            <option>Both</option>
-        </select>
-        <label for="genre">Genre (Select up to 5):</label>
-        <select id="basic" class="selectpicker show-tick form-control" multiple data-max-options="5" data-live-search="true" name="genre">
-            <optgroup label="Blues">
-              <option>Acoustic Blues</option>
-              <option>Electric Blues</option>
-            </optgroup>
-            <optgroup label="Bluegrass">
-              <option>Bluegrass</option>
-            </optgroup>
-            <optgroup label="Classical">
-              <option>Classical</option>
-            </optgroup>
-            <optgroup label="Country">
-              <option>Pop Country</option>
-              <option>Traditional Country</option>
-            </optgroup>
-            <optgroup label="Electronic">
-              <option>House</option>
-              <option>Deep House</option>
-              <option>Dubstep</option>
-              <option>Trap</option>
-              <option>Techno</option>
-              <option>Downtempo</option>
-              <option>Ambient</option>
-              <option>Drums & Bass</option>
-              <option>Video Game</option>
-            </optgroup>
-            <optgroup label="Folk">
-              <option>Americana</option>
-              <option>Acoustic Folk</option>
-              <option>Cajun Folk</option>
-              <option>Celtic Folk</option>
-              <option>Singer/Songwriter Folk</option>
-            </optgroup>
-            <optgroup label="Jazz">
-              <option>Combo Jazz</option>
-              <option>Dixieland Jazz</option>
-              <option>Ensemble Jazz</option>
-              <option>Fusion Jazz</option>
-              <option>Latin Jazz</option>
-              <option>Standards</option>
-              <option>Acid Jazz</option>
-            </optgroup>
-            <optgroup label="Latin">
-              <option>Latin</option>
-            </optgroup>
-            <optgroup label="New Age">
-              <option>New Age</option>
-            </optgroup>
-            <optgroup label="Rock/Pop">
-              <option>Ambient</option>
-              <option>Christian</option>
-              <option>Classic Rock</option>
-              <option>Dance</option>
-              <option>Hard Rock</option>
-              <option>Heavy Metal</option>
-              <option>Indie Rock</option>
-              <option>Latin Rock</option>
-              <option>New Wave</option>
-              <option>Pop</option>
-              <option>Psychedelic</option>
-              <option>Punk Rock</option>
-              <option>Rock & Roll</option>
-              <option>Rockabilly</option>
-              <option>Singer/Songwriter</option>
-              <option>Ska</option>
-              <option>Soft Rock</option>
-              <option>Southern Rock</option>
-              <option>Top 40</option>
-            </optgroup>
-            <optgroup label="Hip Hop/Rap">
-              <option>Hip Hop/Rap</option>
-            </optgroup>
-            <optgroup label="R&B/Soul">
-              <option>Classic Soul</option>
-              <option>Neo-Soul</option>
-              <option>Gospel</option>
-              <option>Contemporary R&B</option>
-            </optgroup>
-            <optgroup label="Reggae">
-              <option>Reggae</option>
-            </optgroup>
-            <optgroup label="Soundtrack">
-              <option>Soundtrack</option>
-            </optgroup>
-            <optgroup label="World Music">
-              <option>World Music</option>
-            </optgroup>
-        </select>
+    <select id="basic" class="selectpicker form-control" multiple data-max-options="3" data-live-search="true" name="instrument">
+        <optgroup label="Guitar">
+          <option>Acoustic Guitar</option>
+          <option>Classical Guitar</option>
+          <option>Electric Guitar</option>
+          <option>Steel Guitar</option>
+          <option>Electric Bass</option>
+          <option>Double Bass</option>
+          <option>Ukelele</option>
+        </optgroup>
+        <optgroup label="Keys">
+          <option>Piano</option>
+          <option>Keyboard</option>
+          <option>Organ</option>
+          <option>Accordion</option>
+        </optgroup>
+        <optgroup label="Percussion">
+          <option>Drums</option>
+          <option>Other Percussion</option>
+        </optgroup>
+        <optgroup label="Vocals">
+          <option>Lead Rock/Pop</option>
+          <option>Lead Jazz</option>
+          <option>Bass</option>
+          <option>Baritone</option>
+          <option>Tenor</option>
+          <option>Alto</option>
+          <option>Mezzo-Soprano</option>
+          <option>Soprano</option>
+        </optgroup>
+        <optgroup label="Strings">
+          <option>Cello</option>
+          <option>Double Bass</option>
+          <option>Viola</option>
+          <option>Violin</option>
+          <option>Fiddle</option>
+          <option>Banjo</option>
+          <option>Harp</option>
+          <option>Mandolin</option>
+        </optgroup>
+        <optgroup label="Brass">
+          <option>Trumpet</option>
+          <option>Trombone</option>
+          <option>Tuba</option>
+          <option>French Horn</option>
+        </optgroup>
+        <optgroup label="Winds">
+          <option>Alto Sax</option>
+          <option>Tenor Sax</option>
+          <option>Flute</option>
+          <option>Oboe</option>
+          <option>Clarinet</option>
+          <option>Harmonica</option>
+          <option>Piccolo</option>
+          <option>Bassoon</option>
+        </optgroup>
+      </select>
+      <label for="level">Playing Level:</label>
+      <select id="location" class="selectpicker form-control" data-live-search="true" name="level">
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Semi-Pro</option>
+          <option>Professional</option>
+      </select>
+      <label for="original">Song Preference:</label>
+      <select id="original" class="selectpicker form-control" data-live-search="true" name="original">
+          <option>Originals</option>
+          <option>Covers</option>
+          <option>Both</option>
+      </select>
+      <label for="genre">Genre (Select up to 5):</label>
+      <select id="basic" class="selectpicker form-control" multiple data-max-options="5" data-live-search="true" name="genre">
+        <optgroup label="Blues">
+          <option>Acoustic Blues</option>
+          <option>Electric Blues</option>
+        </optgroup>
+        <optgroup label="Bluegrass">
+          <option>Bluegrass</option>
+        </optgroup>
+        <optgroup label="Classical">
+          <option>Classical</option>
+        </optgroup>
+        <optgroup label="Country">
+          <option>Pop Country</option>
+          <option>Traditional Country</option>
+        </optgroup>
+        <optgroup label="Electronic">
+          <option>House</option>
+          <option>Deep House</option>
+          <option>Dubstep</option>
+          <option>Trap</option>
+          <option>Techno</option>
+          <option>Downtempo</option>
+          <option>Ambient</option>
+          <option>Drums & Bass</option>
+          <option>Video Game</option>
+        </optgroup>
+        <optgroup label="Folk">
+          <option>Americana</option>
+          <option>Acoustic Folk</option>
+          <option>Cajun Folk</option>
+          <option>Celtic Folk</option>
+          <option>Singer/Songwriter Folk</option>
+        </optgroup>
+        <optgroup label="Jazz">
+          <option>Combo Jazz</option>
+          <option>Dixieland Jazz</option>
+          <option>Ensemble Jazz</option>
+          <option>Fusion Jazz</option>
+          <option>Latin Jazz</option>
+          <option>Standards</option>
+          <option>Acid Jazz</option>
+        </optgroup>
+        <optgroup label="Latin">
+          <option>Latin</option>
+        </optgroup>
+        <optgroup label="New Age">
+          <option>New Age</option>
+        </optgroup>
+        <optgroup label="Rock/Pop">
+          <option>Ambient</option>
+          <option>Christian</option>
+          <option>Classic Rock</option>
+          <option>Dance</option>
+          <option>Hard Rock</option>
+          <option>Heavy Metal</option>
+          <option>Indie Rock</option>
+          <option>Latin Rock</option>
+          <option>New Wave</option>
+          <option>Pop</option>
+          <option>Psychedelic</option>
+          <option>Punk Rock</option>
+          <option>Rock & Roll</option>
+          <option>Rockabilly</option>
+          <option>Singer/Songwriter</option>
+          <option>Ska</option>
+          <option>Soft Rock</option>
+          <option>Southern Rock</option>
+          <option>Top 40</option>
+        </optgroup>
+        <optgroup label="Hip Hop/Rap">
+          <option>Hip Hop/Rap</option>
+        </optgroup>
+        <optgroup label="R&B/Soul">
+          <option>Classic Soul</option>
+          <option>Neo-Soul</option>
+          <option>Gospel</option>
+          <option>Contemporary R&B</option>
+        </optgroup>
+        <optgroup label="Reggae">
+          <option>Reggae</option>
+        </optgroup>
+        <optgroup label="Soundtrack">
+          <option>Soundtrack</option>
+        </optgroup>
+        <optgroup label="World Music">
+          <option>World Music</option>
+        </optgroup>
+      </select>
+      <div class="checkbox checkbox-success">
+        <input type="checkbox" id="teacher" value="option1" checked="" name="teacher">
+        <label for="teacher"> Do You Offer Lessons? </label>
+      </div>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
@@ -512,6 +516,8 @@ $(document).ready(function () {
 $('.selectpicker').selectpicker();
 
 $(":file").filestyle({buttonName: "btn-success", input: "false"});
+
+
 
 </script>
 

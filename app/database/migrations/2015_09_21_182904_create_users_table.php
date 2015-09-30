@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration {
 			$table->string('cover_img')->nullable();
 			$table->text('music')->nullable();
 			$table->string('about')->nullable();
+			$table->boolean('teacher')->nullable();
 
 
 
