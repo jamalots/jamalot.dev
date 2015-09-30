@@ -40,7 +40,7 @@ class RegistrationController extends BaseController {
 
 		Flash::overlay('Welcome to Jamalot! Where We Jam Lots!');
 
-		return Redirect::home();	
+		return Redirect::action('UsersController@create');	
 	}
 
 
