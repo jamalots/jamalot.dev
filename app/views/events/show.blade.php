@@ -88,7 +88,7 @@ body
             <h1><strong>{{ $event->user->user_name }}</strong></h1>
             <h3><em>at</em></h3>
             <h1><strong>{{ $event->venue }}</strong></h1>
-            <p><strong>price</strong> || {{ $event->price }} </p>
+            <p><strong>price</strong> || ${{ $event->price }} </p>
             <p><strong>starting at</strong> || {{ $event->start_time }} </p>
             <p><strong>on</strong> || {{ $event->date }} </p>
             @if(Auth::check())

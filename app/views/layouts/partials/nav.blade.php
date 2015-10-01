@@ -41,13 +41,13 @@
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            
+              <li><a href="{{ action('PagesController@about')}}">About</a></li>
             @if ($currentUser)
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
 <!--                 <li>{{ link_to_route('profile_path', 'Your Profile',$currentUser->user_name) }}</li>
- -->                <li><a href="{{ action('UsersController@show', Auth::id()) }}">Your Profile</a></li>
+ -->                <li><a href="{{ action('UsersController@show', Auth::id()) }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Your Profile</a></li>
                 <li role="separator" class="divider"></li>
                 <li>{{ link_to_route('logout_path', 'Log Out')}}</li>
               </ul>

@@ -59,6 +59,7 @@ class UsersTableSeeder extends Seeder {
             $user->user_name = $faker->sentence($nbWords = 2) ;
 			$user->first_name = $faker->firstName;
 			$user->last_name = $faker->lastName;
+			$user->band_name = $faker->lastName;
 			$user->email = $faker->email;
 			$user->location = $faker->state;
 			$user->instrument = $faker->word;
