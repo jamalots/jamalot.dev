@@ -128,5 +128,6 @@ Route::delete('removeRegistration/{id}', [
 
 Route::get('users/{id}/followers', 'FollowsController@showFollowers');
 Route::get('users/{id}/followedUsers','FollowsController@showFollowedUsers');
+Route::get('about', 'PagesController@about');
 
 Route::resource('events', 'EventsController');

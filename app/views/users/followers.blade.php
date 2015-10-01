@@ -21,7 +21,7 @@
             @elseif($user->user_type == 'band')
               <h2>{{ $user->user_name }}</h2>
             @else
-              <h2>{{ $user->user_name }}'s profile is not public</h2>
+              <h2>{{ $user->user_name }}</h2>
             @endif
 
             <p>{{ $user->location }}</p><span class="zoom-btn"></span>
