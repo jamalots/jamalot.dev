@@ -18,9 +18,6 @@ class CreateAdsTable extends Migration {
 			$table->string('ad_type');
 			$table->string('ad_need');
 			$table->string('ad_title');
-			$table->string('instrument');
-			$table->integer('min_players')->nullable();
-			$table->integer('max_players')->nullable();
 			$table->string('level')->nullable();
 			$table->integer('comp')->nullable();
 			$table->string('genre')->nullable();

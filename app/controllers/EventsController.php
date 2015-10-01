@@ -34,42 +34,45 @@ class EventsController extends \BaseController {
 	 */
 	public function store()
 	{
-		// $validator = Validator::make($data = Input::all(), Event::$rules);
-
-		// if ($validator->fails())
-		// {
-		// 	return Redirect::back()->withErrors($validator)->withInput();
-		// }
-
-		// Event::create($data);
-
-		// return Redirect::route('events.index');
-
-		 	// $directory = 'img/uploads/';
+	
+		 	$directory = '/img/uploads/';
     //         $image = Input::file('img');
             $event = new Event;
             
+            $event->event_title = Input::get('event_title');
+            $event->description = Input::get('description');
             $event->date = Input::get('date');
             $event->start_time = Input::get('start_time');
             $event->venue = Input::get('venue');
-            $event->venue_site = Input::get('venue_site');
-            $event->price = Input::get('price');
+            if (Input::has('venue_site')){
+            	$event->venue_site = Input::get('venue_site');
+            }
+            if (Input::has('price')){
+            	$event->price = Input::get('price');
+            } else {
+            	$event->price = 0;
+            }
             $event->zip_code = Input::get('zip_code');
             $event->city = Input::get('city');
             $event->address = Input::get('address');
             $event->state = Input::get('state');
-            $event->description = Input::get('description');
-            $image = Input::file('img');
-            $image = Input::file('cover_img');
-            $event->user_id = Auth::id();
-            
             if (Input::hasFile('img')) {
-                $event->img = $image->move($directory);
-            }
+	        	$file = Input::file('img');
+	 			$filename = Auth::id() . $file->getClientOriginalName();
+	            $file = $file->move(public_path() . $directory, $filename);
+				$event->img = $directory . $filename; 
+	        }
+	        if (Input::hasFile('cover_img')) {
+	        	$file = Input::file('cover_img');
+	 			$filename = Auth::id() . $file->getClientOriginalName();
+	            $file = $file->move(public_path() . $directory, $filename);
+				$event->cover_img = $directory . $filename; 
+	        }
+	        $event->user_id = Auth::id();
             $event->save();
             Log::info("Event successfully saved.", Input::all());
-            Session::flash('successMessage', 'You created ' . $event->title . ' event successfully');
-            return Redirect::action('events.manage');
+            Session::flash('successMessage', 'You created ' . $event->title . ' successfully');
+            return Redirect::action('events.show', $event->id);
 	}
 
 	
@@ -82,10 +85,6 @@ class EventsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		// $event = Event::findOrFail($id);
-
-		// return View::make('events.show', compact('event'));
-
 
         $event = Event::find($id);
         if(!$event) {

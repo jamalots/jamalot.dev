@@ -47,7 +47,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
 <!--                 <li>{{ link_to_route('profile_path', 'Your Profile',$currentUser->user_name) }}</li>
- -->                <li><a href="{{ action('UsersController@show', Auth::id()) }}">Your Profile</a></li>
+ -->            <li><a href="{{ action('UsersController@show', Auth::id()) }}">Your Profile</a></li>
+                <li><a href="{{ action('EventsController@create') }}">Create an Event</a></li>
+                <li><a href="{{ action('AdsController@create') }}">Create a Jam/Gig/Lesson</a></li>
+
+
                 <li role="separator" class="divider"></li>
                 <li>{{ link_to_route('logout_path', 'Log Out')}}</li>
               </ul>

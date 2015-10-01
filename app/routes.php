@@ -106,7 +106,7 @@ Route::get('events/manage', 'EventsController@getManage');
 // Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 
 
-
+Route::resource('ads', 'AdsController');
 
 Route::get('users/musicians', 'UsersController@musicians');
 
