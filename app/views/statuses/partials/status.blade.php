@@ -14,7 +14,15 @@
 	@endif
 
 	<div class="media-body">
-		<h4 class="media-heading">{{ link_to_route('profile_path', $status->user->user_name, $status->user->user_name)}}</h4>
+		<a href="{{ action('UsersController@show', $status->user->id) }}">
+		@if($status->user->user_type == 'band')
+				<h4 class="media-heading">{{ $status->user->band_name }}</h4>
+            @elseif($status->user->user_type == 'musician')
+				<h4 class="media-heading">{{ $status->user->first_name }} {{ $status->user->last_name }}</h4>
+            @else
+				<h4 class="media-heading">{{ $status->user->user_name }}</h4>
+            @endif
+		</a>
 		<p> {{ $status->created_at->diffForHumans() }}</p>
 
 		{{ $status->body }}

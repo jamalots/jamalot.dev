@@ -18,6 +18,9 @@ class CommentsController extends \BaseController {
 
 		$this->execute(LeaveCommentOnStatusCommand::class, $input);
 
+		Flash::message('Your comment has been successfully added.');
+		
+
 		return Redirect::back();
 	}
 
