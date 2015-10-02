@@ -130,8 +130,9 @@ class UsersController extends \BaseController {
 	public function edit($id)
 	{
 		$user = User::find($id);
+		// return 'test';
 
-		return View::make('users.edit', compact('user'));
+		return View::make('users.edit')->with(array('user' => $user));
 	}
 
 	/**
@@ -231,6 +232,15 @@ class UsersController extends \BaseController {
 
 	}
 
+	public function getEvents($id)
+	{
+		$query = Event::with('user')->where('user_id', $id);
+
+        $events = $query->get();
+
+		return View::make('users.events')->with(array('events' => $events)); 
+
+	}
 
 
 }

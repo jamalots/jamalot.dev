@@ -10,7 +10,7 @@
 	@else
 		{{ Form::open([ 'route' => 'follows_path' ]) }}
 			{{ Form::hidden('userIdToFollow', $user->id) }}
-			<button type="submit" class="btn btn-primary">Follow {{ $user->user_name }}</button>
+			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Follow {{ $user->user_name }}</button>
 
 		{{ Form::close() }}
 	@endif

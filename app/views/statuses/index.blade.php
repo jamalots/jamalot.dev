@@ -85,7 +85,7 @@
 
 <div class="jumbotron">
 	<div class="page-header">
-		<h1>Welcome {{ $currentUser->user_name }} <span class="glyphicon glyphicon-cd" aria-hidden="true"></span></h1>
+		<h1>Under Construction <span class="glyphicon glyphicon-cd" aria-hidden="true"></span></h1>
 	</div>
 
 </div>

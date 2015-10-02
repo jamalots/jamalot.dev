@@ -106,13 +106,15 @@ Route::get('events/manage', 'EventsController@getManage');
 // Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 
 
-
+Route::resource('ads', 'AdsController');
 
 Route::get('users/musicians', 'UsersController@musicians');
 
 Route::get('users/bands', 'UsersController@bands');
 
 Route::get('users/{id}/photos', 'UsersController@getPhotos');
+
+Route::get('users/{id}/events', 'UsersController@getEvents');
 
 Route::get('users/{id}/following', 'UsersController@getFollowers');
 
@@ -128,5 +130,6 @@ Route::delete('removeRegistration/{id}', [
 
 Route::get('users/{id}/followers', 'FollowsController@showFollowers');
 Route::get('users/{id}/followedUsers','FollowsController@showFollowedUsers');
+Route::get('about', 'PagesController@about');
 
 Route::resource('events', 'EventsController');

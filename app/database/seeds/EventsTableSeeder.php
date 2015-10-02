@@ -24,9 +24,10 @@ class EventsTableSeeder extends Seeder {
     public function run()
     {
         $faker = Faker::create();
-        for($i=1; $i<=100; $i++)
+        for($i=1; $i<=200; $i++)
         {
             $event = new Event();
+            $event->event_title = $faker->word;
             $event->date = $faker->dateTimeBetween($startDate = 'now', $endDate = '3 months');
             $event->description = $faker->realText;
             $event->price = $faker->numberBetween($min = 1, $max = 100);

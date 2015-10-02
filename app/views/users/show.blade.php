@@ -97,6 +97,13 @@ body
             <h1><strong>{{ $user->first_name or $user->user_name }} {{$user->last_name}}</strong> <small>{{ $user->user_type }}</small></h1>
             <div class="col-md-7"></div>
             <div class="col-md-5 about">
+            @if($user->user_type == 'band')
+                <h1><strong>{{ $user->band_name }}</strong> <small>{{ $user->user_type }}</small></h1>
+            @elseif($user->user_type == 'musician')
+                <h1><strong>{{ $user->first_name }} {{ $user->last_name }}</strong> <small>{{ $user->user_type }}</small></h1>
+            @else
+                <h1><strong>{{ $user->user_name }}</strong> <small>{{ $user->user_type }}</small></h1>
+            @endif
             <p><strong>Location</strong> || {{ $user->location }} </p>
             <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
             <p><strong>Genre</strong> || {{ $user->genre }} </p>
@@ -128,8 +135,8 @@ body
             <!-- <h1 class="media-heading">{{ $user->user_name}}</h1> -->
 
             <ul class="list-inline text-muted">
-                <li>{{ $statusCount = $user->statuses->count() }} {{ str_plural('Status', $statusCount) }}</li>
-                <li>{{ $followerCount = $user->followers()->count() }} {{ str_plural('Follower', $followerCount) }} </li>
+                <li><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> {{ $statusCount = $user->statuses->count() }} {{ str_plural('Status', $statusCount) }}</li>
+                <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ $followerCount = $user->followers()->count() }} {{ str_plural('Follower', $followerCount) }} </li>
             </ul>
 
             <p class="text-muted"></p>
@@ -137,6 +144,7 @@ body
             <!-- modal button -->
             @if(Auth::id() == $user->id)
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                <span class="glyphicon glyphicon-scissors" aria-hidden="true"></span>
                   Update Profile Pic
                 </button><br>          
             @endif
@@ -237,11 +245,44 @@ body
         <div class="row">
             <div class="col-md-2"></div>
                 <div class="col-md-6">
-                <h3 id="upevents">Upcoming Events</h3>
+                <h3 id="upevents">Your Ads/Jams</h3>
+                @if(!$user->ads()->count() == 0)
+                    @foreach($user->ads as $ad)
+                        <a href=" /ads/{{{$ad->id}}} ">
+
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{{ $ad->title}}} </p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user has not posted any jams or ads.</p>
+                @endif
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
+                <h3 id="upevents">Upcoming Shows</h3>
                 @if(!$user->events()->count() == 0)
                     @foreach($user->events as $event)
                         <a href=" /events/{{{$event->id}}} ">
-                            <p style="width:300px;"><strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
+
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user is not hosting any upcoming events.</p>
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
+                <h3 id="upevents">Events Attending</h3>
+                @if(!$user->eventsAttending()->count() == 0)
+                    @foreach($user->eventsAttending as $attending)
+                        <a href=" /events/{{{$attending->id}}} ">
+                            <p style="width:300px;"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> <strong>At</strong> {{{ $attending->venue}}} <strong>on</strong> {{{ $attending->date}}}</p>
                         </a>
                     @endforeach
                 @else
@@ -255,7 +296,7 @@ body
                 <h3 id="upevents">Followers</h3>
                     @if(!$followerCount == 0)
                         @foreach($user->followers as $follower)
-                            <a href="{{ action('UsersController@show', $follower->id) }}"><p>{{$follower->user_name}}</p></a>
+                            <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->user_name}}</p></a>
 
                         @endforeach 
                         <a href="{{ action('FollowsController@showFollowers', $user->id) }}"><p>View All</p></a> 
@@ -270,7 +311,7 @@ body
                 <h3 id="upevents">Following</h3>
                     @if(!$user->followedUsers()->count() == 0)
                         @foreach($user->followedUsers as $followed)
-                            <a href="{{ action('UsersController@show', $followed->id) }}"><p>{{$followed->user_name}}</p></a>
+                            <a href="{{ action('UsersController@show', $followed->id) }}"><p> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->user_name}}</p></a>
                             
                         @endforeach
                         <a href="{{ action('FollowsController@showFollowedUsers', $user->id) }}"><p>View All</p></a>
@@ -283,7 +324,12 @@ body
             <div class="col-md-2"></div>
                 <div class="col-md-6">
                 <h3 id="upevents">My Photos</h3>
-                    <a href="{{ action('UsersController@getPhotos', $user->id) }}"><p>View All</p></a>
+                    @if(!$user->images->count() == 0)
+                        <a href="{{ action('UsersController@getPhotos', $user->id) }}"><p>View All</p></a>
+                    @else
+                        <p>This user does not have any photos.</p>
+                    @endif
+
             </div>
         </div>
             

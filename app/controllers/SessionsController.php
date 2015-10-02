@@ -42,7 +42,7 @@ class SessionsController extends \BaseController {
 			return Redirect::back()->withInput();
 
 		}
-			Flash::message('You Are Now Signed In. Welcome Back!');
+			Flash::message('You are now signed in. Welcome Back!');
 			return Redirect::intended('statuses');
 	}
 
