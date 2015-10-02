@@ -24,7 +24,6 @@ class CreateAdsTable extends Migration {
 			$table->text('description')->nullable();
 			$table->string('date')->nullable();
 			$table->string('start_time')->nullable();
-			$table->string('end_time')->nullable();
 			$table->string('venue_type');
 			$table->string('venue');
 			$table->string('address');

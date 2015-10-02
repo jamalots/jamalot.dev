@@ -90,9 +90,11 @@ class AdsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$ad = Ad::findOrFail($id);
+		$ad = Ad::find($id);
 
 		return View::make('ads.show', compact('ad'));
+
+
 	}
 
 	/**

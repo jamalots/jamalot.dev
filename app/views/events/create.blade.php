@@ -163,10 +163,10 @@ body {
     <input type="time" name="start_time" class = "form-control" id="start_time">
     <label for="price">Cover:</label>
     <input type="number" name="price" class = "form-control" id="price">
-    <label for="img">Upload Event Image:</label>
+    {{-- <label for="img">Upload Event Image:</label>
     <input type="file" class="filestyle" name="img" data-buttonName="btn-success" data-input="false">
     <label for="cover_img">Upload Event Cover Image:</label>
-    <input type="file" class="filestyle" name="cover_img" data-buttonName="btn-success" data-input="false">
+    <input type="file" class="filestyle" name="cover_img" data-buttonName="btn-success" data-input="false"> --}}
 
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
