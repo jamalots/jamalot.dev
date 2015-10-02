@@ -16,7 +16,15 @@ class CommentsController extends \BaseController {
 	{
 		$input = array_add(Input::get(), 'user_id', Auth::id());
 
-		$this->execute(LeaveCommentOnStatusCommand::class, $input);
+		$comment = $this->execute(LeaveCommentOnStatusCommand::class, $input);
+
+		$notification = new Notification;
+
+		$notification->notification_type = 'comment';
+		$notification->notified_id = $comment->status->user_id;
+		$notification->notifier_id = Auth::id();
+
+		$comment->notification()->save($notification);
 
 		Flash::message('Your comment has been successfully added.');
 		

@@ -199,7 +199,19 @@ class EventsController extends \BaseController {
 	public function registerUser($id)
 	{
 		$user = Auth::user();
-		$user->eventsAttending()->attach($id);
+		if (!$user->eventsAttending->contains($id)) {
+			$user->eventsAttending()->attach($id);
+			$event = Event::find($id);
+
+			$notification = new Notification;
+
+			$notification->notification_type = 'event';
+			$notification->notified_id = $event->user_id;
+			$notification->notifier_id = Auth::id();
+
+			$event->notification()->save($notification);
+		}
+
 		Flash::message('You a now registered for this event');
 		return Redirect::action('EventsController@show', $id);
 	}

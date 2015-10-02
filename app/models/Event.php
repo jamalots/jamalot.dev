@@ -27,4 +27,10 @@ class Event extends \Eloquent {
 	{
 		return $this->belongsTo('User', 'user_id');
 	}
+
+	public function notification()
+	{
+		return $this->morphOne('Notification', 'trigger');
+
+	}
 }
