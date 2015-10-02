@@ -32,4 +32,5 @@ class Status extends \Eloquent {
 		return $this->hasMany('Comment');
 	}
 
+
 }

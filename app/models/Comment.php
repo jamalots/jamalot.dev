@@ -25,4 +25,15 @@ class Comment extends \Eloquent {
 
 	}
 
+	public function notification()
+	{
+		return $this->morphOne('Notification', 'trigger');
+
+	}
+
+	public function status()
+	{
+		return $this->belongsTo('Status');
+	}
+
 }
