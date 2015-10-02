@@ -334,8 +334,6 @@ body {
     <input type="date" name="date" class = "form-control" id="date">
     <label for="start_time">Start Time:</label>
     <input type="time" name="start_time" class = "form-control" id="start_time">
-    <label for="end_time">End Time:</label>
-    <input type="time" name="end_time" class = "form-control" id="end_time">
     <label for="comp">Compensation(if payed gig):</label>
     <input type="number" name="comp" class = "form-control" id="comp">
     <label for="ad_img">Upload Ad Image:</label>

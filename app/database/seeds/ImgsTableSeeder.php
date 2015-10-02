@@ -8,7 +8,7 @@ class ImgsTableSeeder extends Seeder {
 	public function run()
 	{
 		$faker = Faker::create();
-        for($i=1; $i<=100; $i++)
+        for($i=1; $i<=200; $i++)
         {
         	$img = new Img();
         	$img->img = $faker->imageUrl($width = 640, $height = 480, $category = 'animals');

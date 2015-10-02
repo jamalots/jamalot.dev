@@ -102,6 +102,20 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 
+		
+		// open file a image resource
+		// $profile = Image::make(public_path() . $user->img);
+		// // dd($profile);
+		// $profile_cover = Image::make(public_path() . $user->cover_img);
+
+		// // crop the best fitting 5:3 (600x360) ratio and resize to 600x360 pixel
+		// $profile->fit(320, 240)->save(public_path() . $user->img);
+		// $profile_cover->fit(1103, 363)->save(public_path() . $user->cover_img);
+		// // $profile->save($user->img);
+
+
+		// $user->img = '/img/uploads/' . $profile->basename;
+		// $user->cover_img = '/img/uploads/' . $profile_cover->basename;
 		return View::make('users.show', compact('user'));
 	}
 
@@ -116,8 +130,9 @@ class UsersController extends \BaseController {
 	public function edit($id)
 	{
 		$user = User::find($id);
+		// return 'test';
 
-		return View::make('users.edit', compact('user'));
+		return View::make('users.edit')->with(array('user' => $user));
 	}
 
 	/**
@@ -217,6 +232,15 @@ class UsersController extends \BaseController {
 
 	}
 
+	public function getEvents($id)
+	{
+		$query = Event::with('user')->where('user_id', $id);
+
+        $events = $query->get();
+
+		return View::make('users.events')->with(array('events' => $events)); 
+
+	}
 
 
 }

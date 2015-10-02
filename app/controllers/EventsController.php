@@ -1,5 +1,5 @@
 <?php
-
+use Faker\Factory as Faker;
 class EventsController extends \BaseController {
 
 	/**
@@ -34,7 +34,8 @@ class EventsController extends \BaseController {
 	 */
 	public function store()
 	{
-	
+			$faker = Faker::create();
+
 		 	$directory = '/img/uploads/';
     //         $image = Input::file('img');
             $event = new Event;
@@ -62,12 +63,14 @@ class EventsController extends \BaseController {
 	            $file = $file->move(public_path() . $directory, $filename);
 				$event->img = $directory . $filename; 
 	        }
+	        $event->img = $faker->imageUrl($width = 640, $height = 480, $category = 'nightlife');
 	        if (Input::hasFile('cover_img')) {
 	        	$file = Input::file('cover_img');
 	 			$filename = Auth::id() . $file->getClientOriginalName();
 	            $file = $file->move(public_path() . $directory, $filename);
 				$event->cover_img = $directory . $filename; 
 	        }
+	        $event->cover_img = $faker->imageUrl($width = 1103, $height = 363);
 	        $event->user_id = Auth::id();
             $event->save();
             Log::info("Event successfully saved.", Input::all());
