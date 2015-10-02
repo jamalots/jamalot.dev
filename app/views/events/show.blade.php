@@ -24,10 +24,10 @@ body
 
 }
 
-.scroller
+#scroller
 {
    overflow-y: auto; 
-    height:200px; 
+    height:300px; 
 }
 
 .fb-profile img.fb-image-lg{
@@ -88,9 +88,12 @@ body
             <h1><strong>{{ $event->user->user_name }}</strong></h1>
             <h3><em>at</em></h3>
             <h1><strong>{{ $event->venue }}</strong></h1>
-            <p><strong>price</strong> || {{ $event->price }} </p>
+            <div class="col-md-2">
+            <p><strong>price</strong> || ${{ $event->price }} </p>
             <p><strong>starting at</strong> || {{ $event->start_time }} </p>
-            <p><strong>on</strong> || {{ $event->date }} </p>
+            <p><strong>on</strong> || {{ date('n/d/Y ', strtotime($event->date)) }} </p>
+            <p class="textarea"><strong>the skinny ||</strong> <br> {{{ $event->description }}} </p>
+
             @if(Auth::check())
                 @if(Auth::user()->eventsAttending->contains($event->id))
                     <a href="{{ action('EventsController@showDeleteConfirmation', $event->id)}}" class="btn btn-danger">Unregister</a>
@@ -100,6 +103,7 @@ body
             @else
                 <a href="{{{ action('PagesController@home') }}}" class="btn btn-primary">Register</a>
             @endif
+            </div>
         </div>
     </div>
 </div> <!-- /container -->  
@@ -172,11 +176,11 @@ body
                 <div class="col-md-5">
                 
                 <h3 id="upevents">Upcoming Events at {{{$event->venue}}} </h3>
-                <div class="scroller">
+                <div id="scroller">
                 @foreach($venues as $venue)
                     @if($venue->venue)
                         <a href=" /events/{{{$venue->id}}} ">
-                            <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ $venue->date}}}</strong></p>
+                            <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ date('n/d/Y ', strtotime($venue->date))}}}</strong></p>
                         </a>
                     @endif
                 @endforeach

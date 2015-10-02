@@ -22,10 +22,22 @@ body
     border-bottom-color: black;
 }
 
+#coverbtn
+{
+    top:20;
+    left: 500px;
+}
+
+.about
+{
+    left:90;
+}
+
 .stats
 {
     padding-top: 550px;
     left:40px;
+    top:100;
 }
 
 #prof
@@ -79,23 +91,28 @@ body
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <div class="container">
     <div class="fb-profile" id="prof">
-       <img  width="1129.500" height="372" align="left" class="fb-image-lg" src="{{ $user->cover_img or '/img/castle.jpg' }}" alt="Profile image example"/>
-        <img width="relative" height="185" align="left" class="fb-image-profile thumbnail" src="{{ $user->img or '/img/castle2.jpg' }}" alt="Profile image example"/>
+       <img  align="left" class="fb-image-lg" src="{{ $user->cover_img or '/img/castle.jpg' }}" alt="Profile image example"/>
+        <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
             <h1><strong>{{ $user->first_name or $user->user_name }} {{$user->last_name}}</strong> <small>{{ $user->user_type }}</small></h1>
+            <div class="col-md-7"></div>
+            <div class="col-md-5 about">
             <p><strong>Location</strong> || {{ $user->location }} </p>
             <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
             <p><strong>Genre</strong> || {{ $user->genre }} </p>
+            <p><strong>About</strong> || {{ $user->about }} </p>
+            </div>
+            
         </div>
     </div>
 </div> <!-- /container -->  
 <div class="row">
 
-	<div class="col-md-4 col-xs-6"></div>
-		<div class="col-md-8 col-xs-12">
-			<!-- {{ $user->music }} -->
-		</div>
-	
+    <div class="col-md-4 col-xs-6"></div>
+        <div class="col-md-8 col-xs-12">
+            <!-- {{ $user->music }} -->
+        </div>
+    
 </div>
 
 <div class="row">
@@ -103,7 +120,6 @@ body
 
         <div class="media">
             <div class="pull-left">
-               <!--  <img src="{{ $user->img }}" alt="Profile pic here"> -->
             </div>
         </div>
 
@@ -118,11 +134,13 @@ body
 
             <p class="text-muted"></p>
 
+            <!-- modal button -->
             @if(Auth::id() == $user->id)
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                   Update Profile Pic
-                </button>            
+                </button><br>          
             @endif
+            <!-- modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -145,10 +163,71 @@ body
                 </div>
               </div>
             </div>
+            @if(Auth::id() == $user->id)
+               <!--  <div class="col-md-8"></div>
+                <div class="col-md-4"> -->
+                <button id ="coverbtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myCoverModal">
+                  Update Cover Pic
+                </button> 
+                <!-- </div>            -->
+            @endif
+            <div class="modal fade" id="myCoverModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Update Your cover Pic! Woop Woop!</h4>
+                  </div>
+                  <div class="modal-body">
+                    {{ Form::model($user, array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'class' => 'horizontal', 'method' => 'PUT')) }}
+                    <div class="form-group">
+                        <label for="cover_img">Upload Cover Image:</label>
+                        <input type="file" class="filestyle" name="cover_img" data-buttonName="btn-primary" data-buttonBefore="true">               
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    {{ Form::close() }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            @if(Auth::id() == $user->id)
+               <!--  <div class="col-md-8"></div>
+                <div class="col-md-4"> -->
+                <button id ="coverbtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myMusicModal">
+                  Update Your Music
+                </button> 
+                <!-- </div>            -->
+            @endif
+            <div class="modal fade" id="myMusicModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Paste in your Soundcloud link</h4>
+                  </div>
+                  <div class="modal-body">
+                    {{ Form::model($user, array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'class' => 'horizontal', 'method' => 'PUT')) }}
+                    <div class="form-group">
+                        <label for="music">Pasta your link :</label>
+                        <input type="string" class="filestyle" name="music" data-buttonName="btn-primary" data-buttonBefore="true">               
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    {{ Form::close() }}
+                  </div>
+                </div>
+              </div>
+            </div>
             @unless($user->is($currentUser))
                 @include('users.follow-form')
             @endif
         </div>
+            
         <div class="row">
             <div class="col-md-4">
                 {{ $user->music }}
