@@ -10,13 +10,13 @@ class DatabaseSeeder extends Seeder {
 
 	protected $tables = [
 
-		'users', 'statuses', 'events', 'imgs'
+		'users', 'statuses', 'events', 'imgs', 'ads'
 		// 'imgs'
 
 	];
 
 	protected $seeders = [
-		'UsersTableSeeder','StatusesTableSeeder','EventsTableSeeder', 'ImgsTableSeeder'
+		'UsersTableSeeder','StatusesTableSeeder','EventsTableSeeder', 'ImgsTableSeeder', 'AdsTableSeeder'
 		// 'ImgsTableSeeder'
 
 	];

@@ -114,6 +114,8 @@ Route::get('users/bands', 'UsersController@bands');
 
 Route::get('users/{id}/photos', 'UsersController@getPhotos');
 
+Route::get('users/{id}/events', 'UsersController@getEvents');
+
 Route::get('users/{id}/following', 'UsersController@getFollowers');
 
 Route::resource('users', 'UsersController');

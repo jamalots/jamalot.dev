@@ -165,6 +165,23 @@ body
         <div class="row">
             <div class="col-md-2"></div>
                 <div class="col-md-6">
+                <h3 id="upevents">Your Ads/Jams</h3>
+                @if(!$user->ads()->count() == 0)
+                    @foreach($user->ads as $ad)
+                        <a href=" /ads/{{{$ad->id}}} ">
+
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{{ $ad->title}}} </p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user has not posted any jams or ads.</p>
+                @endif
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+                <div class="col-md-6">
                 <h3 id="upevents">Upcoming Shows</h3>
                 @if(!$user->events()->count() == 0)
                     @foreach($user->events as $event)

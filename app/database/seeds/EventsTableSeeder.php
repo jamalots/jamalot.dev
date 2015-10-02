@@ -24,7 +24,7 @@ class EventsTableSeeder extends Seeder {
     public function run()
     {
         $faker = Faker::create();
-        for($i=1; $i<=100; $i++)
+        for($i=1; $i<=200; $i++)
         {
             $event = new Event();
             $event->event_title = $faker->word;
