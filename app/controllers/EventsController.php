@@ -179,18 +179,7 @@ class EventsController extends \BaseController {
 		return View::make('events.manage')->with(array('events' => $events)); 
 	   }
 
-    public function getList()
-    {
-        $query = Event::with('user');
-        $events = $query->get();
-        return Response::json($events);
-    }
-
-    public function getEvent($id)
-    {
-        $event = Event::find($id);
-        return Response::json($event);
-    }
+    
     public function showRegistration($id)
 	{
 		$event = Event::find($id);

@@ -92,7 +92,11 @@ class AdsController extends \BaseController {
 	{
 		$ad = Ad::find($id);
 
-		return View::make('ads.show', compact('ad'));
+		$users = $ad->attendees;
+
+		$requests = AdRequest::where('ad_id', $id)->whereNull('approved')->get();
+
+		return View::make('ads.show', compact('ad', 'users', 'requests'));
 
 
 	}
@@ -143,6 +147,25 @@ class AdsController extends \BaseController {
 		Ad::destroy($id);
 
 		return Redirect::route('ads.index');
+	}
+
+	public function getRequests($id)
+	{
+		$query = Request::with('ad')->where('ad_id', $id);
+
+        $requests = $query->get();
+
+		// return View::make('users.photos')->with(array('requests' => $requests));
+	}
+
+	public function registerUser($userid, $adid)
+	{
+		$user = User::find($userid);
+		$user->adsAttending()->attach($adid);
+			
+
+		Flash::message( $user->user_name . 'is now registered for this event');
+		return Redirect::action('AdsController@show', $adid);
 	}
 
 }
