@@ -87,7 +87,7 @@ class UsersTableSeeder extends Seeder {
 			$user->last_name = $faker->lastName;
 			$user->band_name = $faker->lastName;
 			$user->email = $faker->email;
-			$user->location = $faker->state;
+			$user->location = array_rand(Config::get('states'));
 			$user->instrument = implode(", ", $faker->randomElements($instrument, $count = rand(1,3)));
 			$user->fb_link = $faker->url;
 			$user->level = $faker->randomElement($level);

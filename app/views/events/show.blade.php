@@ -85,6 +85,12 @@ body
        <img  align="left" class="fb-image-lg" src="{{ $event->cover_img }}" alt="Profile image example"/>
         <img align="left" class="fb-image-profile thumbnail" src="{{ $event->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
+
+            @if($event->user->band_name == !null)
+                <h1><strong>{{ $event->user->band_name }}</strong></h1>
+            @else
+                <h1><strong>{{ $event->user->user_name }}</strong></h1>
+
             @if($event->user->user_type == 'Musician')
                 <h1><strong>{{ $event->user->first_name }} {{ $event->user->last_name }}</strong> <small>{{ $event->user->user_type }}</small></h1>
             @elseif($event->user->user_type == 'Band')
@@ -104,13 +110,70 @@ body
 
             @if(Auth::check())
                 @if(Auth::user()->eventsAttending->contains($event->id))
-                    <a href="{{ action('EventsController@showDeleteConfirmation', $event->id)}}" class="btn btn-danger">Unregister</a>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myUnregisterModal">
+                        Unregister
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myUnregisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Not going?! Seriously?</h4>
+                          </div>
+                          <div class="modal-body">
+                          <h1>Are you sure you you're not going?</h1> <br/>
+
+
+                            {{ Form::open([ 'method' => 'DELETE','route' => ['removeRegistration_path',$event->id] ]) }}
+                                <button type="submit" class="btn btn-primary">Yes</button>
+
+                            {{ Form::close() }}
+                            <!-- <a href="{{ URL::previous() }}" class="btn btn-danger">Cancel</a> -->
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                          </div>
+                          <div class="modal-footer">
+                            <!-- <a href="{{ action('EventsController@showDeleteConfirmation', $event->id)}}" class="btn btn-warning">Unregister</a> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 @else
-                    <a href="{{ action('EventsController@showRegistration', $event->id) }}" class="btn btn-primary">Register</a>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myRegisterModal">
+                        Register
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myRegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group ">
+                                <p class="paraFont"><strong>Venue:</strong> {{$event->venue}}</p>
+                            </div>
+                            <div class="form-group ">
+                                <p class="paraFont"><strong>Attendees:</strong>
+                                @foreach($event->attendees as $attendee)
+                                    <p>{{$attendee->user_name}}</p>
+                                @endforeach
+                                </p>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <a href="{{ action('EventsController@registerUser', $event->id)}}" class="btn btn-primary btn-lg btn-block">Register For This Event!</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <a href="{{ action('EventsController@showRegistration', $event->id) }}" class="btn btn-primary">Register</a> -->
                 @endif
             @else
-                <a href="{{{ action('PagesController@home') }}}" class="btn btn-primary">Register</a>
+                <a href="{{{ action('PagesController@login') }}}" class="btn btn-primary">Register</a>
             @endif
+
             </div>
         </div>
     </div>
@@ -187,9 +250,15 @@ body
                 <div id="scroller">
                 @foreach($venues as $venue)
                     @if($venue->venue)
-                        <a href=" /events/{{{$venue->id}}} ">
-                            <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ date('n/d/Y ', strtotime($venue->date))}}}</strong></p>
-                        </a>
+                        @if($venue->user->band_name == !null)
+                            <a href=" /events/{{{$venue->id}}} ">
+                                <p style="width:500px;"><strong> {{{ $venue->user->band_name}}} </strong>on<strong> {{{ date('n/d/Y ', strtotime($venue->date))}}}</strong></p>
+                            </a>
+                        @else
+                            <a href=" /events/{{{$venue->id}}} ">
+                                <p style="width:500px;"><strong> {{{ $venue->user->user_name}}} </strong>on<strong> {{{ date('n/d/Y ', strtotime($venue->date))}}}</strong></p>
+                            </a>
+                        @endif
                     @endif
                 @endforeach
                 </div>
