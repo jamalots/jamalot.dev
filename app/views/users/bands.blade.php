@@ -15,7 +15,7 @@
         @foreach ($chunk as $user)
             <div class="thumbnail"><img src="{{ $user->img }}">
 		      <div class="overlay">
-		        <h2>{{ $user->user_name }}</h2>
+		        <h2>{{ $user->band_name }}</h2>
 		        <p>{{ $user->location }}</p><span class="zoom-btn"></span>
 		        <div id="bandDetails" style="display: none;">
 		        	<p id="location">{{ $user->location }}</p>

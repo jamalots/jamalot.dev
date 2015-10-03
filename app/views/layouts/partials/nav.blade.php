@@ -32,6 +32,7 @@
                 @endif
 
               </ul>
+                <li><a href="{{ action('PagesController@about')}}">About</a></li>
             </li>
           </ul>
           {{-- <form class="navbar-form navbar-left" role="search">
@@ -41,7 +42,10 @@
             <button type="submit" class="btn btn-default">Submit</button>
           </form> --}}
           <ul class="nav navbar-nav navbar-right">
-              {{-- <li><a href="{{ action('PagesController@about')}}">About</a></li> --}}
+          @if ($currentUser)
+                <li><a href="{{ action('UsersController@getNotifications') }}">My Notifications {{ $currentUser->notifications()->where('read','=', 0)->count() }}</a></li>
+           
+          @endif
             @if ($currentUser)
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$currentUser->user_name}} <span class="caret"></span></a>

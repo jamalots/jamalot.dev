@@ -21,7 +21,7 @@ a{
 </style>
 
   <div class="container">
-    <h1>Upcoming Events</h1>
+    <h1>Hosted Events ({{ $currentUser->eventsCreated()->count() }})</h1>
     {{-- BEGIN TIMELINE WRAPPER --}}
     <div id="timeline" class="timeline-container">
 
@@ -43,7 +43,7 @@ a{
                 <table class="table">
                   <tr>
                     <td>Band/Artist:</td>
-                    @if($event->user->user_type == 'musician')
+                    @if($event->user->user_type == 'Musician')
                     <td>{{ $event->user->first_name }} {{ $event->user->last_name }}</td>
                     @else
                     <td>{{ $event->user->user_name }}</td>

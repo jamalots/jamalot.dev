@@ -60,8 +60,7 @@
       }
 
       .comments {
-
-        margin-bottom: 5em;
+        margin-bottom: 3em;
       }
 
       .comments_comment {
@@ -77,6 +76,10 @@
       .profile-img {
           height:80px;
           width:80px;
+      }
+      .comment-img {
+          height:50px;
+          width:50px;
       }
       .scroller {
         overflow-y:auto;
@@ -124,6 +127,7 @@
       
     </div>
 
+
     <script>
 
       $('#flash-overlay-modal').modal();
@@ -132,9 +136,27 @@
       $('.commentsForm').on('keydown', function(e){
           if(e.keyCode == 13){
 
+          var form = $(this);
+          var method = form.find('input[name="_method"]').val() || 'POST';
+          var url = form.prop('action');
+
             e.preventDefault();
 
-            $(this).submit();
+            // $(this).submit();
+
+            $.ajax({
+                type: method,
+                url: url,
+                data: form.serialize()
+
+            }).done(function (data){
+              var commentsDiv = form.next('.comments');
+              commentsDiv.append(data);
+              form.find('textarea[name="body"]').val(null);
+
+            });
+
+
 
           }
 
