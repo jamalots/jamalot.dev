@@ -86,7 +86,7 @@ body
         <img align="left" class="fb-image-profile thumbnail" src="{{ $event->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
 
-        
+
 
             @if($event->user->user_type == 'Musician')
                 <h1><strong>{{ $event->user->first_name }} {{ $event->user->last_name }}</strong> <small>{{ $event->user->user_type }}</small></h1>
@@ -136,9 +136,13 @@ body
                       </div>
                     </div>
                 @else
+
+                
+                <!-- modal button  -->
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myRegisterModal">
                         Register
                     </button>
+               
                     <!-- Modal -->
                     <div class="modal fade" id="myRegisterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                       <div class="modal-dialog" role="document">

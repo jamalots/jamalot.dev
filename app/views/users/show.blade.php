@@ -223,7 +223,7 @@ body
                     {{ Form::model($user, array('action' => array('UsersController@update', Auth::id()), 'files'=>true, 'class' => 'horizontal', 'method' => 'PUT')) }}
                     <div class="form-group">
                         <label for="music">Pasta your link :</label>
-                        <input type="string" class="filestyle" name="music" data-buttonName="btn-primary" data-buttonBefore="true">               
+                        <input type="string" class="filestyle" name="music" data-buttonName="btn-primary" data-buttonBefore="true" value="{{{$user->music}}}">               
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -235,7 +235,8 @@ body
               </div>
             </div><br>
             @if(Auth::id() == $user->id)
-                <a href="{{ action('UsersController@edit', $user->id) }}"> Edit or Complete your Profile </a>
+                <a href="{{ action('UsersController@edit', $user->id) }}"> Edit or Complete your Profile </a><br>
+                <a href="{{ action('AdsController@create', $user->id) }}"> Create an Ad? Or maybe a Jam? </a>
             @endif
             @unless($user->is($currentUser))
                 @include('users.follow-form')
@@ -256,7 +257,7 @@ body
                     @foreach($user->ads as $ad)
                         <a href=" /ads/{{{$ad->id}}} ">
 
-                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{{ $ad->title}}} </p>
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
                         </a>
                     @endforeach
                 @else
@@ -273,7 +274,7 @@ body
                     @foreach($user->events as $event)
                         <a href=" /events/{{{$event->id}}} ">
 
-                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{ date('n/d/Y ', strtotime($event->date)) }} {{{ date('g:i a ', strtotime($event->start_time)) }}}</p>
                         </a>
                     @endforeach
                 @else
@@ -288,7 +289,7 @@ body
                 @if(!$user->eventsAttending()->count() == 0)
                     @foreach($user->eventsAttending as $attending)
                         <a href=" /events/{{{$attending->id}}} ">
-                            <p style="width:300px;"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> <strong>At</strong> {{{ $attending->venue}}} <strong>on</strong> {{{ $attending->date}}}</p>
+                            <p style="width:300px;"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> <strong>At</strong> {{{ $attending->venue}}} <strong>on</strong>  {{ date('n/d/Y ', strtotime($attending->date)) }}</p>
                         </a>
                     @endforeach
                 @else
