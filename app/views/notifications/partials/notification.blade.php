@@ -5,7 +5,6 @@
 	
 
 	<div class="media-body">
-		
 		@if( $notification->source_user->user_type == 'Band')
 			@if( $notification->notification_type == 'following')
 				<p>{{ $notification->source_user->band_name }} is now following you.</p>
