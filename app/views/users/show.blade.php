@@ -239,7 +239,7 @@ body
             @endif
             @unless($user->is($currentUser))
                 @include('users.follow-form')
-            @endif
+            @endunless
         </div>
             
         <div class="row">

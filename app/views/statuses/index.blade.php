@@ -79,24 +79,112 @@
 		text-align: center;
 
 	}
+	.fixing {
+		position:fixed;
+	}
+	
+
 
 </style>
 @section('content')
 
 <div class="jumbotron">
 	<div class="page-header">
-		<h1>Under Construction <span class="glyphicon glyphicon-cd" aria-hidden="true"></span></h1>
+		<h1>Welcome To Jam-A-Lot <span class="glyphicon glyphicon-cd" aria-hidden="true"></span></h1>
 	</div>
 
 </div>
+
 <div class="row">
-	<div class="col-md-6 col-md-offset-3">
-		
-		@include('statuses.partials.publish-status-form')
+    <div class="col-md-3">
 
-		@include('statuses.partials.statuses')
+    	<h3 id="upevents">Followers</h3>
+                    @if(!$currentUser->followers()->count() == 0)
+                        @foreach($currentUser->followers as $follower)
+                            @if($follower->user_type == 'Band')
+                                <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->band_name}}</p></a>
+                            @elseif($follower->user_type == 'Musician')
+                                <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->first_name}} {{$follower->last_name}}</p></a>
+                            @else
+                                <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->user_name}}</p></a>
 
-	</div>
+                            @endif
+                        @endforeach 
+                        <a href="{{ action('FollowsController@showFollowers', $currentUser->id) }}"><p>View All</p></a> 
+                    @else
+                        <p>This user does not have any followers.</p> 
+                    @endif   
+
+                    <h3 id="upevents">Following</h3>
+                    @if(!$currentUser->followedUsers()->count() == 0)
+                        @foreach($currentUser->followedUsers as $followed)
+                            @if($followed->user_type == 'Band')
+                                <a href="{{ action('UsersController@show', $followed->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->band_name}}</p></a>
+                            @elseif($followed->user_type == 'Musician')
+                                <a href="{{ action('UsersController@show', $followed->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->first_name}} {{$followed->last_name}}</p></a>
+                            @else
+                                <a href="{{ action('UsersController@show', $followed->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->user_name}}</p></a>
+
+                            @endif                            
+                        @endforeach
+                        <a href="{{ action('FollowsController@showFollowedUsers', $currentUser->id) }}"><p>View All</p></a>
+                    @else
+                     <p>This user is not following anyone.</p> 
+                    @endif   
+	
+    </div>
+
+
+		<div class="col-md-6 posting">
+			
+			@include('statuses.partials.publish-status-form')
+			<div class="scroller2">
+				@include('statuses.partials.statuses')
+			</div>
+		</div>
+
+
+    <div class="col-md-3">
+
+                <h3 id="upevents">Your Ads/Jams</h3>
+                @if(!$currentUser->ads()->count() == 0)
+                    @foreach($currentUser->ads as $ad)
+                        <a href=" /ads/{{{$ad->id}}} ">
+
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{{ $ad->title}}} </p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user has not posted any jams or ads.</p>
+                @endif
+
+                <h3 id="upevents">Hosted Events</h3>
+                @if(!$currentUser->events()->count() == 0)
+                    @foreach($currentUser->events as $event)
+                        <a href=" /events/{{{$event->id}}} ">
+
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{{ $event->date}}}</p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user is not hosting any upcoming events.</p>
+                @endif
+
+                <h3 id="upevents">Events Attending</h3>
+                @if(!$currentUser->eventsAttending()->count() == 0)
+                    @foreach($currentUser->eventsAttending as $attending)
+                        <a href=" /events/{{{$attending->id}}} ">
+                            <p style="width:300px;"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> <strong>At</strong> {{{ $attending->venue}}} <strong>on</strong> {{{ $attending->date}}}</p>
+                        </a>
+                    @endforeach
+                @else
+                    <p>This user is not attending any upcoming events.</p>
+                @endif
+
+ 	
+    </div>
+
 </div>
+
 
 @stop
