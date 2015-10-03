@@ -104,9 +104,14 @@ body
                 <input type="submit" name="submit" class="btn btn-primary" value="I'm Interested" />
             {{ Form::close()}}
             <p><strong>Title</strong> || {{ $ad->ad_title }} </p>
-            <p><strong>Host</strong> || {{ $ad->user->user_name }} </p>
+            <p><strong>Host</strong> || @if($ad->user->user_type == 'Musician')
+				                {{ $ad->user->first_name }} {{ $ad->user->last_name }}
+				            @elseif($ad->user->user_type == 'Band')
+				                {{ $ad->user->band_name }}
+				            @endif </p>
             <p><strong>Genre</strong> || {{ $ad->genre }} </p>
             <p><strong>Date</strong> || {{ date('n/d/Y ', strtotime($ad->date)) }} </p>
+            <p><strong>Time</strong> || {{ date('g:i a ', strtotime($ad->start_time)) }}
             <p><strong>Equipment Provided</strong> || {{ $ad->equipment }} </p>
             <p class="textarea"><strong>the skinny ||</strong> <br> {{{ $ad->description }}} </p>
             </div>
@@ -176,19 +181,69 @@ body
                 
                 <h3 id="upevents">Requests to Attend</h3>
                 <div>
-                <table>
+                <table class='table table-bordered'>
+                	<tr>
+                		<th>Musician/Band</th>
+                		<th>Instrument</th>
+                		<th>Approve</th>
+                		<th>Deny</th>
+                	</tr>
                 @foreach($requests as $request)
                     <tr>
-                    	<td>{{ $request->user->user_name }}</td>
+                    	<td>
+                    		@if($request->user->user_type == 'Musician')
+				                {{ $request->user->first_name }} {{ $request->user->last_name }}
+				            @elseif($request->user->user_type == 'Band')
+				                {{ $request->user->band_name }}
+				            @endif
+                    	</td>
                     	<td>{{ $request->user->instrument}}</td>
                     	<td>
 							{{ Form::open(array('action' => array('AdsController@registerUser', $request->user_id, $request->ad_id))) }}
-				                <input type="submit" name="submit" class="btn btn-primary" value="Approve" />
+				                <input type="submit" name="submit" class="btn btn-success" value="Approve" />
 				            {{ Form::close()}}
 						</td>
-                    <tr>
+						<td>
+				            {{ Form::open(array('action' => array('RequestsController@destroy', $request->id), 'method' => 'DELETE')) }}
+				            	<input type="text" style="display:none" name="ad_id" class = "form-control" id="ad_id" value="{{ $request->ad_id }}" >
+				                <input type="submit" name="submit" class="btn btn-danger" value="Deny" />
+				            {{ Form::close()}}
+				        </td>
+                    </tr>
                 @endforeach
             	</table>
+            	<h3 id="upevents" style="padding-top: 1px;">Attending</h3>
+            	<table class='table table-bordered'>
+                	<tr>
+                		<th>Musician/Band</th>
+                		<th>Instrument</th>
+                		<th>Unregister</th>
+                    </tr>
+                @foreach($requests as $request)
+                    <tr>
+                    	<td>
+                    		@if($request->user->user_type == 'Musician')
+				                {{ $request->user->first_name }} {{ $request->user->last_name }}
+				            @elseif($request->user->user_type == 'Band')
+				                {{ $request->user->band_name }}
+				            @endif
+                    	</td>
+                    	<td>{{ $request->user->instrument}}</td>
+                    	<td>
+							{{ Form::open(array('action' => array('AdsController@registerUser', $request->user_id, $request->ad_id))) }}
+				                <input type="submit" name="submit" class="btn btn-success" value="Approve" />
+				            {{ Form::close()}}
+						</td>
+						<td>
+				            {{ Form::open(array('action' => array('RequestsController@destroy', $request->id), 'method' => 'DELETE')) }}
+				            	<input type="text" style="display:none" name="ad_id" class = "form-control" id="ad_id" value="{{ $request->ad_id }}" >
+				                <input type="submit" name="submit" class="btn btn-danger" value="Deny" />
+				            {{ Form::close()}}
+				        </td>
+                    </tr>
+                @endforeach
+            	</table>
+
                 </div>
             </div>
         </div>

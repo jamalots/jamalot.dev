@@ -72,7 +72,7 @@ class AdsController extends \BaseController {
         
         if ($user->save()) {
             Session::flash('successMessage', 'You created an ad successfully');
-            return Redirect::action('UsersController@show', Auth::id());
+            return Redirect::action('AdsController@show', Auth::id());
         } else {
             Session::flash('errorMessage', 'Could not save ad.');
             dd($user->getErrors()->toArray());
@@ -145,6 +145,8 @@ class AdsController extends \BaseController {
 	public function destroy($id)
 	{
 		Ad::destroy($id);
+
+		Flash::message( $user->user_name . 'is denied from attending this event');
 
 		return Redirect::route('ads.index');
 	}
