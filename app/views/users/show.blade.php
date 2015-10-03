@@ -37,7 +37,7 @@ body
 {
     padding-top: 550px;
     left:40px;
-    top:100;
+    top:150;
 }
 
 #prof
@@ -92,7 +92,9 @@ body
 <div class="container">
     <div class="fb-profile" id="prof">
        <img  align="left" class="fb-image-lg" src="{{ $user->cover_img or '/img/castle.jpg' }}" alt="Profile image example"/>
-        <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
+        <a href="{{ action('UsersController@getPhotos', $user->id) }}">
+            <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img or '/img/default.png' }}" alt="Profile image example"/>
+        </a>
         <div class="fb-profile-text">
             <h1><strong>{{ $user->first_name or $user->user_name }} {{$user->last_name}}</strong> <small>{{ $user->user_type }}</small></h1>
             <div class="col-md-7"></div>
@@ -101,8 +103,6 @@ body
                 <h1><strong>{{ $user->band_name }}</strong> <small>{{ $user->user_type }}</small></h1>
             @elseif($user->user_type == 'musician')
                 <h1><strong>{{ $user->first_name }} {{ $user->last_name }}</strong> <small>{{ $user->user_type }}</small></h1>
-            @else
-                <h1><strong>{{ $user->user_name }}</strong> <small>{{ $user->user_type }}</small></h1>
             @endif
             <p><strong>Location</strong> || {{ $user->location }} </p>
             <p><strong>Instruments</strong> || {{ $user->instrument }} </p>
@@ -230,7 +230,10 @@ body
                   </div>
                 </div>
               </div>
-            </div>
+            </div><br>
+            @if(Auth::id() == $user->id)
+                <a href="{{ action('UsersController@edit', $user->id) }}"> Edit or Complete your Profile </a>
+            @endif
             @unless($user->is($currentUser))
                 @include('users.follow-form')
             @endif

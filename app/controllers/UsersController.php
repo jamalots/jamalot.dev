@@ -104,18 +104,17 @@ class UsersController extends \BaseController {
 
 		
 		// open file a image resource
-		// $profile = Image::make(public_path() . $user->img);
+		
 		// // dd($profile);
 		// $profile_cover = Image::make(public_path() . $user->cover_img);
 
 		// // crop the best fitting 5:3 (600x360) ratio and resize to 600x360 pixel
-		// $profile->fit(320, 240)->save(public_path() . $user->img);
+		
 		// $profile_cover->fit(1103, 363)->save(public_path() . $user->cover_img);
 		// // $profile->save($user->img);
 
 
-		// $user->img = '/img/uploads/' . $profile->basename;
-		// $user->cover_img = '/img/uploads/' . $profile_cover->basename;
+		
 		return View::make('users.show', compact('user'));
 	}
 
@@ -148,44 +147,53 @@ class UsersController extends \BaseController {
         $image = Input::file('img');
     	
     	if(Input::has('first_name')) {
-        $user->first_name = Input::get('first_name');
+	        $user->first_name = Input::get('first_name');
         }
         if(Input::has('last_name')) {
-        $user->last_name = Input::get('last_name');
+	        $user->last_name = Input::get('last_name');
     	}
         if(Input::has('instrument')) {
-        $user->instrument = Input::get('instrument');
+	        $user->instrument = Input::get('instrument');
     	}
     	if(Input::has('location')) {
-        $user->location = Input::get('location');
+	        $user->location = Input::get('location');
         }
         if(Input::has('genre')) {
-        $user->genre = Input::get('genre');
+	        $user->genre = Input::get('genre');
     	}
     	if(Input::has('about')) {
-        $user->about = Input::get('about');
+	        $user->about = Input::get('about');
     	}
     	if(Input::has('level')) {
-        $user->level = Input::get('level');
+	        $user->level = Input::get('level');
     	}
     	if(Input::has('user_type')) {
-        $user->user_type = Input::get('user_type');
+	        $user->user_type = Input::get('user_type');
     	}
     	if(Input::has('teacher')) {
-        $user->teacher = Input::get('teacher');
+	        $user->teacher = Input::get('teacher');
     	}
         if (Input::hasFile('img')) {
         	$file = Input::file('img');
  			$filename = $user->id . $file->getClientOriginalName();
             $file = $file->move(public_path() . $directory, $filename);
-			$user->img = $directory . $filename; 
+			$imgPath = $directory . $filename;
+
+			$profile = Image::make(public_path() . $imgPath);
+			$profile->fit(320, 240)->save(public_path() . $imgPath);
+
+			$user->img = $imgPath;
         } 
         if (Input::hasFile('cover_img')) {
         	$file = Input::file('cover_img');
  			$filename = $user->id . $file->getClientOriginalName();
             $file = $file->move(public_path() . $directory, $filename);
-			$user->cover_img = $directory . $filename; 
+			$imgPath = $directory . $filename;
 
+			$profile_cover = Image::make(public_path() . $user->cover_img);
+			$profile_cover->fit(1103, 363)->save(public_path() . $imgPath);
+
+			$user->img = $imgPath;
 
         }
         if ($user->save()) {

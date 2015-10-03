@@ -129,5 +129,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	
+	public function getInstrumentArrayAttribute()
+	{
+		return explode(', ', $this->instrument);
+	}
 
+	public function getGenreArrayAttribute()
+	{
+		return explode(', ', $this->genre);
+	}
 }
