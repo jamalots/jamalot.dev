@@ -15,9 +15,9 @@
 
 	<div class="media-body">
 		<a href="{{ action('UsersController@show', $status->user->id) }}">
-		@if($status->user->user_type == 'band')
+		@if($status->user->user_type == 'Band')
 				<h4 class="media-heading">{{ $status->user->band_name }}</h4>
-            @elseif($status->user->user_type == 'musician')
+            @elseif($status->user->user_type == 'Musician')
 				<h4 class="media-heading">{{ $status->user->first_name }} {{ $status->user->last_name }}</h4>
             @else
 				<h4 class="media-heading">{{ $status->user->user_name }}</h4>
@@ -51,11 +51,11 @@
 	{{ Form::close() }}
 @endif
 
+<div class="comments">
 @unless ($status->comments->isEmpty())
-	<div class="comments">
 		@foreach($status->comments as $comment)	
 			@include('statuses.partials.comment')
 
 		@endforeach
-	</div>
 @endunless
+</div>

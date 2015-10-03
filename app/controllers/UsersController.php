@@ -242,5 +242,23 @@ class UsersController extends \BaseController {
 
 	}
 
+	public function getNotifications()
+	{
+		$id = Auth::user()->id;
+
+		$query = Auth::user()->notifications()->with('sourceUser')->where('read',false);
+
+		$notifications = $query->get();
+
+		foreach($notifications as $notification)
+		{
+			$notification->read = '1';
+			$notification->save();
+		}
+
+		return View::make('notifications.index')->with(['notifications' => $notifications]);
+
+	}
+
 
 }

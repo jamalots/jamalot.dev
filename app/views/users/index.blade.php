@@ -16,12 +16,12 @@
             <div class="thumbnail"><img src="{{ $user->img }}">
           <div class="overlay">
 
-            @if($user->user_type == 'musician')
+            @if($user->user_type == 'Musician')
               <h2>{{ $user->first_name }} {{ $user->last_name}}</h2>
-            @elseif($user->user_type == 'band')
-              <h2>{{ $user->user_name }}</h2>
+            @elseif($user->user_type == 'Band')
+              <h2>{{ $user->band_name }}</h2>
             @else
-              <h2>{{ $user->user_name }}'s profile is not public</h2>
+              <h2>{{ $user->user_name }}</h2>
             @endif
 
             <p>{{ $user->location }}</p><span class="zoom-btn"></span>

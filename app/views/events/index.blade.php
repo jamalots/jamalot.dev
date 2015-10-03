@@ -43,8 +43,10 @@ a{
                 <table class="table">
                   <tr>
                     <td>Band/Artist:</td>
-                    @if($event->user->user_type == 'musician')
+                    @if($event->user->user_type == 'Musician')
                     <td>{{ $event->user->first_name }} {{ $event->user->last_name }}</td>
+                    @elseif($event->user->user_type == 'Band')
+                    <td>{{ $event->user->band_name }}</td>
                     @else
                     <td>{{ $event->user->user_name }}</td>
                     @endif 

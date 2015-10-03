@@ -197,7 +197,7 @@ class EventsController extends \BaseController {
 
 			$notification = new Notification;
 
-			$notification->notification_type = 'event';
+			$notification->notification_type = 'registered';
 			$notification->notified_id = $event->user_id;
 			$notification->notifier_id = Auth::id();
 
