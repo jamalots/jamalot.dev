@@ -18,4 +18,14 @@ class Ad extends \Eloquent {
 
 
 	}
+
+	public function requests()
+	{
+		$this->hasMany('AdRequest');
+	}
+
+	public function attendees()
+	{
+		return $this->belongsToMany('User', 'ad_user', 'ad_id', 'user_id');
+	}
 }
