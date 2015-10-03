@@ -18,7 +18,15 @@ class FollowsController extends \BaseController {
 
 		$input['userId'] = Auth::id();
 
-		$this->execute(FollowUserCommand::class, $input);
+		$followed = $this->execute(FollowUserCommand::class, $input);
+
+		$notification = new Notification;
+
+		$notification->notification_type = 'following';
+		$notification->notified_id = Input::get('userIdToFollow');
+		$notification->notifier_id = Auth::id();
+
+		$notification->save();
 
 		Flash::success("You are now following this user.");
 

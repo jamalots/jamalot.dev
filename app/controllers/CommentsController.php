@@ -18,18 +18,22 @@ class CommentsController extends \BaseController {
 
 		$comment = $this->execute(LeaveCommentOnStatusCommand::class, $input);
 
+		$status = $comment->status;
+
 		$notification = new Notification;
 
-		$notification->notification_type = 'comment';
+		$notification->notification_type = 'commented';
 		$notification->notified_id = $comment->status->user_id;
 		$notification->notifier_id = Auth::id();
 
 		$comment->notification()->save($notification);
 
-		Flash::message('Your comment has been successfully added.');
+		// Flash::message('Your comment has been successfully added.');
 		
 
-		return Redirect::back();
+		// return Redirect::back();
+
+		return View::make('statuses.partials.comment')->with(['status' => $status, 'comment' => $comment]);
 	}
 
 	public function destroy($id)

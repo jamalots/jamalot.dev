@@ -85,10 +85,19 @@ body
        <img  align="left" class="fb-image-lg" src="{{ $event->cover_img }}" alt="Profile image example"/>
         <img align="left" class="fb-image-profile thumbnail" src="{{ $event->img }}" alt="Profile image example"/>
         <div class="fb-profile-text">
+
             @if($event->user->band_name == !null)
                 <h1><strong>{{ $event->user->band_name }}</strong></h1>
             @else
                 <h1><strong>{{ $event->user->user_name }}</strong></h1>
+
+            @if($event->user->user_type == 'Musician')
+                <h1><strong>{{ $event->user->first_name }} {{ $event->user->last_name }}</strong> <small>{{ $event->user->user_type }}</small></h1>
+            @elseif($event->user->user_type == 'Band')
+                <h1><strong>{{ $event->user->band_name }}</strong> <small>{{ $event->user->user_type }}</small></h1>
+            @else
+                <h1><strong>{{ $event->user->user_name }}</strong> <small>{{ $event->user->user_type }}</small></h1>
+
             @endif
             <h3><em>at</em></h3>
             <h1><strong>{{ $event->venue }}</strong></h1>

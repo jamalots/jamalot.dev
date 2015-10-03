@@ -92,16 +92,18 @@ body
 <div class="container">
     <div class="fb-profile" id="prof">
        <img  align="left" class="fb-image-lg" src="{{ $user->cover_img or '/img/castle.jpg' }}" alt="Profile image example"/>
+
         <a href="{{ action('UsersController@getPhotos', $user->id) }}">
             <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img or '/img/default.png' }}" alt="Profile image example"/>
         </a>
+        <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img or '/img/default.png' }}" alt="Profile image example"/>
         <div class="fb-profile-text">
             <h1><strong>{{ $user->first_name or $user->user_name }} {{$user->last_name}}</strong> <small>{{ $user->user_type }}</small></h1>
             <div class="col-md-7"></div>
             <div class="col-md-5 about">
-            @if($user->user_type == 'band')
+            @if($user->user_type == 'Band')
                 <h1><strong>{{ $user->band_name }}</strong> <small>{{ $user->user_type }}</small></h1>
-            @elseif($user->user_type == 'musician')
+            @elseif($user->user_type == 'Musician')
                 <h1><strong>{{ $user->first_name }} {{ $user->last_name }}</strong> <small>{{ $user->user_type }}</small></h1>
             @endif
             <p><strong>Location</strong> || {{ $user->location }} </p>
@@ -265,7 +267,7 @@ body
         <div class="row">
             <div class="col-md-2"></div>
                 <div class="col-md-6">
-                <h3 id="upevents">Upcoming Shows</h3>
+                <h3 id="upevents">Hosted Events</h3>
                 @if(!$user->events()->count() == 0)
                     @foreach($user->events as $event)
                         <a href=" /events/{{{$event->id}}} ">
@@ -299,8 +301,14 @@ body
                 <h3 id="upevents">Followers</h3>
                     @if(!$followerCount == 0)
                         @foreach($user->followers as $follower)
-                            <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->user_name}}</p></a>
+                            @if($follower->user_type == 'Band')
+                                <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->band_name}}</p></a>
+                            @elseif($follower->user_type == 'Musician')
+                                <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->first_name}} {{$follower->last_name}}</p></a>
+                            @else
+                                <a href="{{ action('UsersController@show', $follower->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$follower->user_name}}</p></a>
 
+                            @endif
                         @endforeach 
                         <a href="{{ action('FollowsController@showFollowers', $user->id) }}"><p>View All</p></a> 
                     @else
@@ -314,8 +322,14 @@ body
                 <h3 id="upevents">Following</h3>
                     @if(!$user->followedUsers()->count() == 0)
                         @foreach($user->followedUsers as $followed)
-                            <a href="{{ action('UsersController@show', $followed->id) }}"><p> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->user_name}}</p></a>
-                            
+                            @if($followed->user_type == 'Band')
+                                <a href="{{ action('UsersController@show', $followed->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->band_name}}</p></a>
+                            @elseif($followed->user_type == 'Musician')
+                                <a href="{{ action('UsersController@show', $followed->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->first_name}} {{$followed->last_name}}</p></a>
+                            @else
+                                <a href="{{ action('UsersController@show', $followed->id) }}"><p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{$followed->user_name}}</p></a>
+
+                            @endif                            
                         @endforeach
                         <a href="{{ action('FollowsController@showFollowedUsers', $user->id) }}"><p>View All</p></a>
                     @else

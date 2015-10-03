@@ -22,6 +22,7 @@ class CreateNotificationsTable extends Migration {
 			$table->foreign('notifier_id')->references('id')->on('users');
 			$table->integer('trigger_id')->unsigned()->nullable();
 			$table->string('trigger_type')->nullable();
+			$table->boolean('read')->default(false);
 			$table->timestamps();
 
 			$table->index(['trigger_id', 'trigger_type']);
