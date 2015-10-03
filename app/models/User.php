@@ -138,8 +138,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany('Ad', 'ad_user', 'user_id', 'ad_id');
 	}
 	
+	public function getInstrumentArrayAttribute()
+	{
+		return explode(', ', $this->instrument);
+	}
 
 
-	
+	public function getGenreArrayAttribute()
+	{
+		return explode(', ', $this->genre);
+	}
 
 }
