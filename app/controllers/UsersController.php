@@ -128,10 +128,15 @@ class UsersController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		if(Auth::user()){
 		$user = User::find($id);
 		// return 'test';
 
 		return View::make('users.edit')->with(array('user' => $user));
+		}else{
+			
+			return Redirect::action('PagesController@login');
+		}
 	}
 
 	/**
