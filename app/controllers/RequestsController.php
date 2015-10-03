@@ -93,7 +93,15 @@ class RequestsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$adid = Input::get('ad_id');
+
+		$request = AdRequest::find($id);
+
+		$request->delete();
+
+		Session::flash('successMessage', 'Denied');
+		
+        return Redirect::action('AdsController@show', $adid);
 	}
 
 }
