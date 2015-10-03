@@ -85,6 +85,16 @@
         overflow-y:auto;
         height:100px;
       }
+      .scroller2 {
+        overflow-y:auto;
+        height:700px;
+        top: 72px;
+
+      }
+      .posting {
+        top: 72px;
+      }
+
     
 
     </style>

@@ -194,7 +194,7 @@ class EventsController extends \BaseController {
 		if (!$user->eventsAttending->contains($id)) {
 			$user->eventsAttending()->attach($id);
 			$event = Event::find($id);
-
+			
 			$notification = new Notification;
 
 			$notification->notification_type = 'registered';
