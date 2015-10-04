@@ -101,7 +101,8 @@ class UsersController extends \BaseController {
 	public function show($id)
 	{
 		$user = User::find($id);
-
+		$query = Ad::with('user');
+		$opps = $query->get(); 
 		
 		// open file a image resource
 		
@@ -115,7 +116,7 @@ class UsersController extends \BaseController {
 
 
 		
-		return View::make('users.show', compact('user'));
+		return View::make('users.show')->with(array('user' => $user))->with(array('opps' => $opps));
 	}
 
 
