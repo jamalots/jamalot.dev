@@ -171,8 +171,7 @@ body
                     </div>
                     <!-- <a href="{{ action('EventsController@showRegistration', $event->id) }}" class="btn btn-primary">Register</a> -->
                 @endif
-            @else
-                <a href="{{{ action('PagesController@login') }}}" class="btn btn-primary">Register</a>
+           
             @endif
 
             </div>
