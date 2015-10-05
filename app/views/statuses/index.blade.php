@@ -151,7 +151,7 @@
                     @foreach($currentUser->ads as $ad)
                         <a href=" /ads/{{{$ad->id}}} ">
 
-                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>{{{ $ad->title}}} </p>
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>    {{{ $ad->ad_title}}} </p>
                         </a>
                     @endforeach
                 @else

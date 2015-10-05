@@ -248,7 +248,8 @@ body
             </div><br>
             @if(Auth::id() == $user->id)
                 <a href="{{ action('UsersController@edit', $user->id) }}"> Edit or Complete your Profile </a><br>
-                <a href="{{ action('AdsController@create', $user->id) }}"> Create an Ad? Or maybe a Jam? </a>
+                <a href="{{ action('AdsController@create', $user->id) }}"> Create an Ad? Or maybe a Jam? </a><br>
+                <a href="{{ action('EventsController@getManage', $user->id) }}"> Manage Your Events </a>
             @endif
             @unless($user->is($currentUser))
                 @include('users.follow-form')
