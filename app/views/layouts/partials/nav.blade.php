@@ -32,7 +32,7 @@
                 @endif
 
               </ul>
-                <li><a href="{{ action('PagesController@about')}}">About</a></li>
+                <!-- <li><a href="{{ action('PagesController@about')}}">About</a></li> -->
             </li>
           </ul>
           {{-- <form class="navbar-form navbar-left" role="search">
@@ -43,7 +43,7 @@
           </form> --}}
           <ul class="nav navbar-nav navbar-right">
           @if ($currentUser)
-                <li><a href="{{ action('UsersController@getNotifications') }}">My Notifications {{ $currentUser->notifications()->where('read','=', 0)->count() }}</a></li>
+                <li><a href="{{ action('UsersController@getNotifications') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Notifications {{ $currentUser->notifications()->where('read','=', 0)->count() }}</a></li>
            
           @endif
             @if ($currentUser)
