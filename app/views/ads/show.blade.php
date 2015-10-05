@@ -99,8 +99,10 @@ body
                 <h1><strong>{{ $ad->ad_need }}</strong></h1>  
             @endif
             <div class="col-md-2">
+
             @if(Auth::check()) 
               @if(Auth::id() != $ad->user_id)
+
     		  {{ Form::open(array('action' => array('RequestsController@store'))) }}
     		      <input type="text" style="display:none" name="ad_id" class = "form-control" value="{{ $ad->id }}" >
     		      <input type="submit" name="submit" class="btn btn-primary" value="I'm Interested" id="interest"/>
