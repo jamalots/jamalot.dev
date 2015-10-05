@@ -103,10 +103,10 @@ body
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <div class="container">
     <div class="fb-profile" id="prof">
-       <img  align="left" class="fb-image-lg" src="{{ $user->cover_img }}" alt="Profile image example"/>
+       <img  align="left" class="fb-image-lg" src="{{ $user->cover_img or 'http://lorempixel.com/1130/363/nature/'}}" alt="Profile image example"/>
 
         <a href="{{ action('UsersController@getPhotos', $user->id) }}">
-            <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
+            <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img or 'http://lorempixel.com/640/480/sports/' }}" alt="Profile image example"/>
         </a>
         <div class="fb-profile-text">
             <div class="col-md-7"></div>
@@ -116,7 +116,7 @@ body
             @elseif($user->user_type == 'Musician')
                 <h1><strong>{{ $user->first_name }} {{ $user->last_name }}</strong> <small>{{ $user->user_type }}</small></h1>
             @else
-                <h1><strong>{{ $user->user_name }}</strong>
+                <h1><strong>{{ $user->user_name }}</strong></h1>
 
             @endif
             <p><strong>Location</strong> || {{ $user->location }} </p>
