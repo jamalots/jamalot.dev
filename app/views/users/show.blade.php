@@ -13,6 +13,18 @@ body
     padding-left: 100px;
 }
 
+#statuses
+{
+    overflow-y: auto; 
+    height:1000px; 
+}
+
+.opps
+{
+    overflow-y: auto; 
+    height:300px;   
+}
+
 #upevents
 {
     width: 250px;
@@ -236,11 +248,12 @@ body
             </div><br>
             @if(Auth::id() == $user->id)
                 <a href="{{ action('UsersController@edit', $user->id) }}"> Edit or Complete your Profile </a><br>
-                <a href="{{ action('AdsController@create', $user->id) }}"> Create an Ad? Or maybe a Jam? </a>
+                <a href="{{ action('AdsController@create', $user->id) }}"> Create an Ad? Or maybe a Jam? </a><br>
+                <a href="{{ action('EventsController@getManage', $user->id) }}"> Manage Your Events </a>
             @endif
             @unless($user->is($currentUser))
                 @include('users.follow-form')
-            @endunless
+            @endif
         </div>
             
         <div class="row">
@@ -266,6 +279,44 @@ body
             </div>
         </div>
 
+        @if(Auth::id() == $user->id)
+        <div> 
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-6">
+                    <h3 id="upevents">Opportunities to Jam!</h3>
+                    <div class="opps">
+                        @foreach($opps as $ad)
+                        @if($user->level == 'Professional')
+                            <a href=" /ads/{{{$ad->id}}} ">
+                                <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
+                            </a>
+                            
+                            @elseif($user->level == 'Semi-Pro' && $ad->level != 'Professional')
+                                
+                                <a href=" /ads/{{{$ad->id}}} ">
+                                    <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
+                                </a>
+                                
+                            @elseif($user->level == 'Intermediate' && $ad->level != 'Professional' && $ad->level != 'Semi-Pro')
+                                
+                                <a href=" /ads/{{{$ad->id}}} ">
+                                    <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
+                                </a>
+                                
+                            @elseif($user->level == 'Beginner' && $ad->level != 'Professional' && $ad->level != 'Semi-Pro' && $ad->level != 'Intermediate')
+                                
+                                <a href=" /ads/{{{$ad->id}}} ">
+                                    <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
+                                </a>
+                                
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-2"></div>
                 <div class="col-md-6">
@@ -274,7 +325,7 @@ body
                     @foreach($user->events as $event)
                         <a href=" /events/{{{$event->id}}} ">
 
-                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{ date('n/d/Y ', strtotime($event->date)) }} {{{ date('g:i a ', strtotime($event->start_time)) }}}</p>
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <strong>At</strong> {{{ $event->venue}}} <strong>on</strong> {{ date('n/d/Y ', strtotime($event->date)) }} {{{ $event->start_time }}}</p>
                         </a>
                     @endforeach
                 @else
@@ -362,9 +413,10 @@ body
             @include('statuses.partials.publish-status-form')
 
         @endif
-
+    <div id="statuses">
 
         @include('statuses.partials.statuses', ['statuses' => $user->statuses])
+    </div>
     </div>
 </div>
 

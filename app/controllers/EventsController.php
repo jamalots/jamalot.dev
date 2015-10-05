@@ -94,6 +94,9 @@ class EventsController extends \BaseController {
             Session::flash('errorMessage', "Post with id of $id is not found");
             App::abort(404);
         }
+
+        $opps = Ad::all();
+
         
         
         $venues = Event::where('venue', $event->venue)->orderBy('date', 'desc')->get();
