@@ -1,6 +1,6 @@
 <article class="media status-media">
 	<div class="pull-left">
-		<p class="media-object"><img class="profile-img" src="{{ $notification->source_user->img }}"></p>
+		<p class="media-object"><img class="profile-img" src="{{ $notification->source_user->img or 'http://lorempixel.com/80/80/sports/' }}"></p>
 	</div>
 	
 
