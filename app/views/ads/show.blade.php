@@ -100,14 +100,14 @@ body
             @endif
             <div class="col-md-2">
             @if(Auth::check()) 
+              @if(Auth::id() != $ad->user_id)
     		  {{ Form::open(array('action' => array('RequestsController@store'))) }}
     		      <input type="text" style="display:none" name="ad_id" class = "form-control" value="{{ $ad->id }}" >
     		      <input type="submit" name="submit" class="btn btn-primary" value="I'm Interested" id="interest"/>
     		  {{ Form::close()}}
               <input type="submit" name="submit" class="btn btn-success" value="Request Pending" style="display:none" id="pending" disabled="disabled"/>
-              {{ Form::open(array('action' => array('RequestsController@store'))) }}
-                  <input type="submit" name="submit" id="nogo" class="btn btn-primary" value="Unregister" style="display:none" />
-              {{ Form::close()}}
+              @endif
+
                     
             @endif
             <p><strong>Type</strong> || {{ $ad->ad_type }} </p>
@@ -184,7 +184,8 @@ body
 
     </div>
     <div>
-        <div class="row" style="display:none" id="attend">
+        @if(Auth::id() == $ad->user_id)
+        <div class="row" id="attend">
             <div class="col-md-7"></div>
                 <div class="col-md-5">
                 
@@ -256,6 +257,7 @@ body
                 </div>
             </div>
         </div>
+        @endif
     </div>
 <p style="display:none" id="userId">{{Auth::id()}}</p> 
 
@@ -282,8 +284,8 @@ if (el == hideReq){
     pending.style.display = "";
 }
 
-if (userId == idme)
-    attend.style.display = "";
+
+
 });
 
 
