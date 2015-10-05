@@ -95,7 +95,7 @@ class EventsController extends \BaseController {
             App::abort(404);
         }
 
-        $opps = Ad::all();
+        
 
         
         

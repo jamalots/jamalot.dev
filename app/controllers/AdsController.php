@@ -170,4 +170,18 @@ class AdsController extends \BaseController {
 		return Redirect::action('AdsController@show', $adid);
 	}
 
+	public function unregisterUser($userid, $adid) 
+	{
+		$user = User::find($userid);
+		$user->adsAttending()->detach($adid);
+
+
+		Flash::message( $user->user_name . 'is no longer attending this event.');
+
+
+		return Redirect::action('AdsController@show', $adid);
+
+	}
+
+
 }

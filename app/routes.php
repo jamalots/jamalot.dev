@@ -106,6 +106,7 @@ Route::get('events/manage', 'EventsController@getManage');
 Route::get('ads/{id}/requests', 'AdsController@getRequests');
 
 Route::post('register-user/{userid}/{adid}', 'AdsController@registerUser');
+Route::delete('register-user/{userid}/{adid}', 'AdsController@unregisterUser');
 
 // Route::get('events/getEvent/{$id}', 'EventsController@getEvent');
 Route::resource('requests', 'RequestsController');

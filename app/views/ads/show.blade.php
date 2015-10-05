@@ -92,17 +92,25 @@ body
             @elseif($ad->ad_type == 'Offering Lessons')
                 <h1><strong>Offering Lessons</strong></h1>
                 <h3><em>for </em></h3>
-                <h1><strong>{{ $ad->need }}</strong></h1> 
+                <h1><strong>{{ $ad->ad_need }}</strong></h1> 
             @elseif($ad->ad_type == 'Wanting Lessons')
                 <h1><strong>Wanting Lessons</strong></h1>
                 <h3><em>in </em></h3>
-                <h1><strong>{{ $ad->need }}</strong></h1>  
+                <h1><strong>{{ $ad->ad_need }}</strong></h1>  
             @endif
             <div class="col-md-2">
-            {{ Form::open(array('action' => array('RequestsController@store'))) }}
-                <input type="text" style="display:none" name="ad_id" class = "form-control" id="ad_id" value="{{ $ad->id }}" >
-                <input type="submit" name="submit" class="btn btn-primary" value="I'm Interested" />
-            {{ Form::close()}}
+            @if(Auth::check()) 
+    		  {{ Form::open(array('action' => array('RequestsController@store'))) }}
+    		      <input type="text" style="display:none" name="ad_id" class = "form-control" value="{{ $ad->id }}" >
+    		      <input type="submit" name="submit" class="btn btn-primary" value="I'm Interested" id="interest"/>
+    		  {{ Form::close()}}
+              <input type="submit" name="submit" class="btn btn-success" value="Request Pending" style="display:none" id="pending" disabled="disabled"/>
+              {{ Form::open(array('action' => array('RequestsController@store'))) }}
+                  <input type="submit" name="submit" id="nogo" class="btn btn-primary" value="Unregister" style="display:none" />
+              {{ Form::close()}}
+                    
+            @endif
+            <p><strong>Type</strong> || {{ $ad->ad_type }} </p>
             <p><strong>Title</strong> || {{ $ad->ad_title }} </p>
             <p><strong>Host</strong> || @if($ad->user->user_type == 'Musician')
 				                {{ $ad->user->first_name }} {{ $ad->user->last_name }}
@@ -114,6 +122,7 @@ body
             <p><strong>Time</strong> || {{ date('g:i a ', strtotime($ad->start_time)) }}
             <p><strong>Equipment Provided</strong> || {{ $ad->equipment }} </p>
             <p class="textarea"><strong>the skinny ||</strong> <br> {{{ $ad->description }}} </p>
+            <p style="display:none" id="idme">{{ $ad->user_id }}</p>
             </div>
         </div>
     </div>
@@ -175,7 +184,7 @@ body
 
     </div>
     <div>
-        <div class="row">
+        <div class="row" style="display:none" id="attend">
             <div class="col-md-7"></div>
                 <div class="col-md-5">
                 
@@ -189,7 +198,7 @@ body
                 		<th>Deny</th>
                 	</tr>
                 @foreach($requests as $request)
-                    <tr>
+                    <tr id="req{{$request->user->id}}">
                     	<td>
                     		@if($request->user->user_type == 'Musician')
 				                {{ $request->user->first_name }} {{ $request->user->last_name }}
@@ -209,44 +218,75 @@ body
 				                <input type="submit" name="submit" class="btn btn-danger" value="Deny" />
 				            {{ Form::close()}}
 				        </td>
+                        <td style="display:none" id="reqId">{{$request->user_id}}</td>
                     </tr>
                 @endforeach
             	</table>
             	<h3 id="upevents" style="padding-top: 1px;">Attending</h3>
-            	<table class='table table-bordered'>
-                	<tr>
-                		<th>Musician/Band</th>
-                		<th>Instrument</th>
-                		<th>Unregister</th>
-                    </tr>
-                @foreach($requests as $request)
-                    <tr>
-                    	<td>
-                    		@if($request->user->user_type == 'Musician')
-				                {{ $request->user->first_name }} {{ $request->user->last_name }}
-				            @elseif($request->user->user_type == 'Band')
-				                {{ $request->user->band_name }}
-				            @endif
-                    	</td>
-                    	<td>{{ $request->user->instrument}}</td>
-                    	<td>
-							{{ Form::open(array('action' => array('AdsController@registerUser', $request->user_id, $request->ad_id))) }}
-				                <input type="submit" name="submit" class="btn btn-success" value="Approve" />
-				            {{ Form::close()}}
-						</td>
-						<td>
-				            {{ Form::open(array('action' => array('RequestsController@destroy', $request->id), 'method' => 'DELETE')) }}
-				            	<input type="text" style="display:none" name="ad_id" class = "form-control" id="ad_id" value="{{ $request->ad_id }}" >
-				                <input type="submit" name="submit" class="btn btn-danger" value="Deny" />
-				            {{ Form::close()}}
-				        </td>
-                    </tr>
-                @endforeach
-            	</table>
+                @if(!$ad->attendees()->count() == 0)
+                	<table class='table table-bordered'>
+                    	<tr>
+                    		<th>Musician/Band</th>
+                    		<th>Instrument</th>
+                    		<th>Unregister</th>
+                        </tr>
+                    @foreach($ad->attendees as $dee)
+                        <tr>
+                        	<td>
+                        		@if($dee->user_type == 'Musician')
+    				                {{ $dee->first_name }} {{ $dee->last_name }}
+    				            @elseif($dee->user_type == 'Band')
+    				                {{ $dee->band_name }}
+    				            @endif
+                        	</td>
+                        	<td>{{ $dee->instrument}}</td>
+                        	<td>
+    							{{ Form::open(array('action' => array('AdsController@unregisterUser', $dee->id, $ad->id), 'method' => 'DELETE')) }}
+    				                <input type="submit" name="submit" class="btn btn-warning" value="Unregister" />
+    				            {{ Form::close()}}
+    						</td>
+                            <td id="hideReq" style="display:none">{{ $dee->id }}</td> 
+                        </tr>
+                    @endforeach
+                	</table>
+                @else
+                    <p>This event has no attendees currently.</p>
+                @endif
 
                 </div>
             </div>
         </div>
     </div>
+<p style="display:none" id="userId">{{Auth::id()}}</p> 
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+var userId = document.getElementById("userId").innerText;
+var register = document.getElementById("interest");
+var el = document.getElementById("reqId").innerText;
+var nogo = document.getElementById("nogo");
+var pending = document.getElementById("pending");
+var hideReq = document.getElementById("hideReq").innerText;
+var hideRow = document.getElementById("req" + hideReq);
+var attend = document.getElementById("attend");
+var idme = document.getElementById("idme").innerText;
+
+if (el == hideReq){
+    pending.style.display = "none";
+    nogo.style.display = "";
+    hideRow.style.display = "none";
+    register.style.display = "none";
+} else if (el == userId) {
+    register.style.display = "none";
+    pending.style.display = "";
+}
+
+if (userId == idme)
+    attend.style.display = "";
+});
+
+
+</script>
 
 @stop

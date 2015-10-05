@@ -149,4 +149,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return explode(', ', $this->genre);
 	}
 
+	public function adRequests()
+	{
+		return $this->hasMany('User', 'user_id', 'id');
+	}
+
 }
