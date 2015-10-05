@@ -20,7 +20,7 @@ class CommentsController extends \BaseController {
 
 		$status = $comment->status;
 
-		if(!$comment->user_id = Auth::id()) {
+		// if(!$comment->user_id = Auth::id()) {
 			$notification = new Notification;
 
 			$notification->notification_type = 'commented';
@@ -29,7 +29,7 @@ class CommentsController extends \BaseController {
 
 			$comment->notification()->save($notification);
 
-		}
+		// }
 
 		// Flash::message('Your comment has been successfully added.');
 		
