@@ -400,6 +400,8 @@ body {
     <input type="file" class="filestyle" name="img" data-buttonName="btn-success" data-input="false">
     <label for="cover_img">Upload Cover Photo Image:</label>
     <input type="file" class="filestyle" data-input="false" name="cover_img" data-buttonName="btn-success">
+    <label for="music">Pasta in your SoundCloud embedded link </label>
+    <input type="text" name="music" class = "form-control" id="music">
     <br>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="submit" name="submit" class="submit action-button" value="Submit" />
