@@ -103,10 +103,10 @@ body
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <div class="container">
     <div class="fb-profile" id="prof">
-       <img  align="left" class="fb-image-lg" src="{{ $user->cover_img or '/img/castle.jpg' }}" alt="Profile image example"/>
+       <img  align="left" class="fb-image-lg" src="{{ $user->cover_img }}" alt="Profile image example"/>
 
         <a href="{{ action('UsersController@getPhotos', $user->id) }}">
-            <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img or '/img/default.png' }}" alt="Profile image example"/>
+            <img align="left" class="fb-image-profile thumbnail" src="{{ $user->img }}" alt="Profile image example"/>
         </a>
         <div class="fb-profile-text">
             <div class="col-md-7"></div>

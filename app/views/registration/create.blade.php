@@ -159,7 +159,7 @@ body {
     <input type="text" name="user_name" placeholder="Username" required/>
     <input type="text" name="email" placeholder="Email" required/>
     <input type="password" name="password" placeholder="Password" required/>
-    <input type="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required/>
+    <input type="password" name="password_confirmation" placeholder="Confirm Password" required/>
     <input type="submit" name="submit" class="submit action-button" value="Submit" />
     {{-- <button class="btn btn-primary submit action-button">Update Profile!</button> --}}
   </fieldset>

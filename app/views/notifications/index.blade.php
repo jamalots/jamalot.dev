@@ -86,6 +86,7 @@
 <div class="jumbotron">
 	<div class="page-header">
 		<h1>Notifications <span class="glyphicon glyphicon-cd" aria-hidden="true"></span></h1>
+		<p>Regular text. <code>This is code.</code> Regular text.</p>
 	</div>
 
 </div>

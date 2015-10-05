@@ -90,7 +90,15 @@
 
 <div class="jumbotron">
 	<div class="page-header">
-		<h1>Welcome To Jam-A-Lot <span class="glyphicon glyphicon-cd" aria-hidden="true"></span></h1>
+		<h1>Welcome To Jam-A-Lot <span class="glyphicon glyphicon-cd" aria-hidden="true"></span><br><small>
+			@if($currentUser->user_type == 'Band')
+				{{ $currentUser->band_name }}
+			@elseif($currentUser->user_type == 'Musician')
+				{{ $currentUser->first_name }} {{ $currentUser->last_name }}
+			@else
+				{{ $currentUser->user_name }}
+			@endif
+		</small></h1>
 	</div>
 
 </div>
@@ -151,7 +159,9 @@
                     @foreach($currentUser->ads as $ad)
                         <a href=" /ads/{{{$ad->id}}} ">
 
-                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>    {{{ $ad->ad_title}}} </p>
+                            <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
+
+
                         </a>
                     @endforeach
                 @else
