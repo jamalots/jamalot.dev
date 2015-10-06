@@ -88,6 +88,7 @@ a{
                   <tr>
                     <td><a class="btn btn-primary" href="{{{ action('EventsController@show', $event->id) }}}" role="button">Visit Event Page</a></td>
                     <td><a class="btn btn-primary" href="{{{ action('UsersController@show', $event->user->id) }}}" role="button">Visit Band Profile</a></td>
+                    
                   </tr>
                 </table>
               </div>
