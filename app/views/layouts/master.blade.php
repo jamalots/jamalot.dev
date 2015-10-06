@@ -23,7 +23,9 @@
 
       body{
         padding-top: 85px;
+        padding-bottom: 100px;
       }
+
 
       .status-post{
         background: white;
@@ -173,6 +175,8 @@
       });
 
     </script>
+
+   
 </body>
 
 </html>
