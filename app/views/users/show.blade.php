@@ -268,7 +268,7 @@ body
                 <h3 id="upevents">Your Ads/Jams</h3>
                 @if(!$user->ads()->count() == 0)
                     @foreach($user->ads as $ad)
-                        <a href=" /ads/{{{$ad->id}}} ">
+                        <a href="/ads/{{{$ad->id}}} ">
 
                             <p style="width:300px;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{{ $ad->ad_title}}} </p>
                         </a>
